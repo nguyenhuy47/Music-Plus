@@ -39,3 +39,7 @@ class CreateUsersTable extends Migration
     }
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 89806a685ad0f596295d8ca9261858111f4da577
