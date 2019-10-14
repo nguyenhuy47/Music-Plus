@@ -38,3 +38,11 @@ class CreateUsersTable extends Migration
         Schema::dropIfExists('users');
     }
 }
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+=======
+
+>>>>>>> 89806a685ad0f596295d8ca9261858111f4da577
+>>>>>>> 68424c33e51d80668b375ea9bf610891d34eca23
