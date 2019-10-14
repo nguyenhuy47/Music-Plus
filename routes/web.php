@@ -21,3 +21,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
+Route::group(['prefix' => 'songs'], function ()
+{
+    Route::get('/create', 'SongController@create')->name('songs.create');
+    Route::post('/store', 'SongController@store')->name('songs.store');
+
+});
