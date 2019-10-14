@@ -26,5 +26,6 @@ Route::group(['prefix' => 'songs'], function ()
     Route::get('/', 'SongController@index')->name('songs.index');
     Route::get('/create', 'SongController@create')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
+    Route::get('/{id}/detail', 'SongController@show')->name('songs.detail');
 
 });

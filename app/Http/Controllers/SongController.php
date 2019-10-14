@@ -18,6 +18,13 @@ class SongController extends Controller
         return view('songs.create');
     }
 
+    public function show($id)
+    {
+        $songs = Song::all()->sortByDesc('created_at')->take(10);
+        $song = Song::findOrFail($id);
+        return view('welcome', compact('song','songs'));
+    }
+
     public function store(Request $request)
     {
         $song = new Song();
