@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Auth::routes();
 
@@ -23,6 +23,7 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('faceboo
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::group(['prefix' => 'songs'], function ()
 {
+    Route::get('/', 'SongController@index')->name('songs.index');
     Route::get('/create', 'SongController@create')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
 

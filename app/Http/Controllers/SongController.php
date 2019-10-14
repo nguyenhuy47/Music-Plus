@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Session;
 
 class SongController extends Controller
 {
+    public function index()
+    {
+        $songs = Song::all()->sortByDesc('created_at')->take(10);
+        return view('welcome', compact('songs'));
+    }
     public function create()
     {
         return view('songs.create');
