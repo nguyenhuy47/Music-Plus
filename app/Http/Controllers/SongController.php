@@ -10,7 +10,7 @@ class SongController extends Controller
 {
     public function index()
     {
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(10);
         return view('welcome', compact('songs'));
     }
     public function create()

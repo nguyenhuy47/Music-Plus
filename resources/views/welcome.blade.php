@@ -96,12 +96,12 @@
         </div>
 
         <div>
-            <table>
+            <table border="1px">
                 <tr>
                     <th>Ten bai hat  ten ca si</th>
                 </tr>
                 @foreach($songs as $key => $song)
-                    <tr>
+                    <tr >
                         <td><a href="#">{{$song->name}}</a>
                             <a href="#">{{$song->singer->name}}</a></td>
                     </tr>
