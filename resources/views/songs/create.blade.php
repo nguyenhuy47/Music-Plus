@@ -1,11 +1,20 @@
 @extends('layouts.app')
 @section('content')
-    @if (Session::has('success'))
-        <p class="text-success">{{Session::get('success')}}</p>
-    @endif
-    <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
-        @csrf
-        <div class="container">
+    <div class="container">
+        @if (Session::has('success'))
+            <p class="text-success">{{Session::get('success')}}</p>
+        @endif
+        @if (Session::has('errorImageFile'))
+            <p class="text-danger">{{Session::get('errorImageFile')}}</p>
+        @endif
+        @if (Session::has('errorSongFile'))
+            <p class="text-danger">{{Session::get('errorSongFile')}}</p>
+        @endif
+        @if (Session::has('error'))
+            <p class="text-danger">{{Session::get('error')}}</p>
+        @endif
+        <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
+            @csrf
             <div>
                 <div class="form-group">
                     <label>Bài hát</label>
@@ -41,6 +50,6 @@
                 </div>
             </div>
             <button type="submit">Upload</button>
-        </div>
-    </form>
+        </form>
+    </div>
 @endsection
