@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Singer extends Model
 {
-    public function song()
+    public function songs()
     {
-        return $this->hasMany('App\Model\Song');
+        return $this->hasMany('/App/Model/Song');
     }
 }
