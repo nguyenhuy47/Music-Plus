@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
@@ -13,6 +14,7 @@ class SongController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(10);
         return view('welcome', compact('songs'));
     }
+
     public function create()
     {
         return view('songs.create');
@@ -30,8 +32,11 @@ class SongController extends Controller
 
         if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
-            $imageFileName = $imageFile->getClientOriginalName();
             $imageFileExtension = $imageFile->getClientOriginalExtension();
+            $imageFileName = str_replace(".$imageFileExtension", "-" . Str::random(4) . ".$imageFileExtension", $imageFile->getClientOriginalName());
+            while (file_exists('../storage/app/public/upload/images/' . $imageFileName)) {
+                $imageFileName = str_replace(".$imageFileExtension", "-" . Str::random(4) . ".$imageFileExtension", $imageFile->getClientOriginalName());
+            }
             if ($imageFileExtension != 'jpg' && $imageFileExtension != 'png' && $imageFileExtension != 'jpeg') {
                 Session::flash('errorImageFile', 'Bạn đã chọn sai file ảnh, vui lòng chọn lại!');
                 return redirect()->route('songs.create');
@@ -45,8 +50,11 @@ class SongController extends Controller
 
         if ($request->hasFile('song_file')) {
             $songFile = $request->file('song_file');
-            $songFileName = $songFile->getClientOriginalName();
             $songFileExtension = $songFile->getClientOriginalExtension();
+            $songFileName = str_replace(".$songFileExtension", "-" . Str::random(4) . ".$songFileExtension", $songFile->getClientOriginalName());
+            while (file_exists('../storage/app/public/upload/songs/' . $songFileName)) {
+                $songFileName = str_replace(".$songFileExtension", "-" . Str::random(4) . ".$songFileExtension", $songFile->getClientOriginalName());
+            }
             $songFileSize = $songFile->getClientSize();
             $song->file_name = $songFileName;
             $song->size = $songFileSize / 1000;//chuyen doi Byte -> Kilobyte
