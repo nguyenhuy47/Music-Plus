@@ -21,6 +21,10 @@
                     <input type="text" class="form-control" name="name" placeholder="Tên bài hát">
                 </div>
                 <div class="form-group">
+                    <label for="exampleFormControlFile1">Upload bài hát</label>
+                    <input type="file" class="form-control-file" name="song_file">
+                </div>
+                <div class="form-group">
                     <label>Ảnh bài hát</label>
                     <input type="file" class="form-control-file" name="image_file">
                 </div>
@@ -33,16 +37,16 @@
                     <input type="text" class="form-control" name="artist_id" placeholder="Nhạc sĩ">
                 </div>
                 <div class="form-group">
-                    <label>Người đăng</label>
-                    <input type="text" class="form-control" name="user_id" placeholder="Người đăng">
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlFile1">Upload bài hát</label>
-                    <input type="file" class="form-control-file" name="song_file">
-                </div>
-                <div class="form-group">
-                    <label>The Loai</label>
-                    <input type="text" class="form-control" name="category_id" placeholder="the loai">
+                    <label>Thể loại</label>
+                    <select name="category_id" class="custom-select">
+                        @foreach($categories as $groupName => $group)
+                            <optgroup label="{{ $groupName }}">
+                                @foreach($group as $key => $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </optgroup>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>Lời bài hát</label>

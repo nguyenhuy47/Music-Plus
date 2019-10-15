@@ -102,7 +102,7 @@
                 </tr>
                 @foreach($songs as $key => $song)
                     <tr >
-                        <td><a href="#">{{$song->name}}</a>
+                        <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a>
                             <a href="#">{{$song->singer->name}}</a></td>
                     </tr>
                     @endforeach

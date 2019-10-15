@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Category;
 use App\Model\Song;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
@@ -15,20 +17,29 @@ class SongController extends Controller
         return view('welcome', compact('songs'));
     }
 
+    public function show($id)
+    {
+        $song = Song::findOrFail($id);
+        return view('songs.show', compact('song'));
+    }
+
     public function create()
     {
-        return view('songs.create');
+        $categories = Category::all()->groupBy('description');
+        return view('songs.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+        $userId = $user->id;
         $song = new Song();
         $song->name = $request->name;
         $song->category_id = $request->category_id;
         $song->lyric = $request->lyric;
         $song->singer_id = $request->singer_id;
         $song->artist_id = $request->artist_id;
-        $song->user_id = $request->user_id;
+        $song->user_id = $userId;
 
         if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
