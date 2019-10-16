@@ -57,6 +57,3 @@
 <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
 </body>
 </html>
-
-
-

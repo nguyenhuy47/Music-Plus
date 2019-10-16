@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
 <head>
@@ -41,6 +42,9 @@
     @endif
     @if (Session::has('error'))
         <p class="text-danger">{{Session::get('error')}}</p>
+    @endif
+    @if (Session::has('errorSongInfo'))
+        <p class="alert alert-danger">{{Session::get('errorSongInfo')}}</p>
     @endif
     <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
         @csrf
