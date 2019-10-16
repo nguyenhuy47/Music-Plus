@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="alert-primary">
     <div class="panel-footer" style="background-color: #FAFAD2">
         <div class="container">
             <div class="caption">

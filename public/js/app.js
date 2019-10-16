@@ -49494,8 +49494,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/duc/Public/du an/Music-Plus/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/duc/Public/du an/Music-Plus/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/huy/Desktop/Project_Music_Plus/Music-Plus/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/huy/Desktop/Project_Music_Plus/Music-Plus/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -13,8 +13,9 @@ class SongController extends Controller
 {
     public function index()
     {
-        $songs = Song::all()->sortByDesc('created_at')->take(10);
-        return view('welcome', compact('songs'));
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        return view('index', compact('songs', 'STT'));
     }
 
     public function show($id)

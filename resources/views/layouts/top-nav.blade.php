@@ -1,4 +1,4 @@
-<div id="menu">
+<div id="menu" class="alert-primary sticky-top">
     <div class="row">
         <div class="col-md-12">
             <nav class="navbar navbar-expand-lg" role="navigation">
@@ -17,7 +17,7 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ URL::to('home') }}">Trang chủ</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bài hát<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bài hát</a>
                             <ul class="dropdown-menu multi-column columns-2">
                                 <li>
                                     <ul class="multi-column-dropdown col-sm-6">
@@ -43,7 +43,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Playlist<b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Playlist</a>
                             <ul class="dropdown-menu multi-column columns-2">
                                 <li>
                                     <ul class="multi-column-dropdown col-sm-6">
@@ -69,7 +69,7 @@
                             </ul>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề <b class="caret"></b></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề</a>
                             <ul class="dropdown-menu multi-column columns-3">
                                 <li>
                                     <ul class="multi-column-dropdown col-sm-4 col-xs-12">
@@ -114,7 +114,7 @@
                             <li><a href="{{ url('/register') }}">Register</a></li> -->
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quản lý<b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Quản lý</a>
                                 <ul class="dropdown-menu multi-column columns-1">
                                     <li>
                                         <ul class="multi-column-dropdown col-sm-8">
@@ -128,6 +128,7 @@
                                 </ul>
                             </li>
                         @endif
+                        <li><a href="{{ route('songs.create') }}">Upload</a></li>
                     </ul> <!-- END_urQuanLy -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -138,7 +139,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->name }}
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -162,7 +163,7 @@
                         <div class="input-group" style="margin-top: 10px;padding-left: 50px; width: 48em;">
                             <div class="input-group-btn search-panel">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Tìm kiếm theo</span> <span class="caret"></span>
+                                    <span id="search_concept">Tìm kiếm theo</span>
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#contains">Bài hát</a></li>

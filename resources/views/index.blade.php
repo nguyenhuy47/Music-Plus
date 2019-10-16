@@ -28,10 +28,7 @@
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
 </head>
 <body data-vide-bg="video/snow">
-<div class="alert-primary">
     @include(' layouts.top-nav')
-</div>
-
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">
@@ -80,26 +77,27 @@
         </div>
         <div class="col-md-3" id="bxh" style="margin-top: 2px;">
             <div class="thumbnail" style="border-color: blue;">
-                <a href="#"><h3 style="text-align: center;color: blue;">BẢNG XẾP HẠNG</h3></a>
+                <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
                 <hr>
+                @foreach($songs as $key => $song)
                 <div class="caption">
-                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: red;">01.</strong> Lập
-                            trình tình yêu</a></h5>
+                    <h5><a href="{{route('songs.play', $song->id)}}" target="_blank" style="color: black;"><strong style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
                 </div>
-                <div class="caption">
-                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em
-                            ơi</a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi
-                            này có anh</a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>
-                </div>
+                @endforeach
+{{--                <div class="caption">--}}
+{{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
+{{--                            ơi</a></h5>--}}
+{{--                </div>--}}
+{{--                <div class="caption">--}}
+{{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
+{{--                            này có anh</a></h5>--}}
+{{--                </div>--}}
+{{--                <div class="caption">--}}
+{{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
+{{--                </div>--}}
+{{--                <div class="caption">--}}
+{{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
+{{--                </div>--}}
             </div>
         </div>
     </div>
