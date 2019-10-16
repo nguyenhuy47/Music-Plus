@@ -23,7 +23,9 @@ Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('faceboo
 Route::get('/callback/{social}', 'SocialAuthController@callback');
 Route::group(['prefix' => 'songs'], function ()
 {
-    Route::get('/create', 'SongController@create')->name('songs.create');
+    Route::get('/', 'SongController@index')->name('songs.index');
+    Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
+    Route::get('/{id}/play', 'SongController@show')->name('songs.play');
 
 });
