@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Category;
+use App\Model\Singer;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,15 +32,25 @@ class SongController extends Controller
 
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $userId = $user->id;
         $song = new Song();
+        $user = Auth::user();
+        $singerName = $request->singer_name;
+        $artistName = $request->artist_name;
+        $singer = Singer::where('name', $singerName)->get();
+        $artist = Singer::where('name', $artistName)->get();
+        if(count($singer) && count($artist)){
+            $song->singer_id = $singer[0]->id;
+            $song->artist_id = $artist[0]->id;
+        } else {
+            Session::flash('errorSongInfo', 'Nhạc sỹ hoặc ca sỹ bạn vừa nhập không tồn tại trên hệ thống.');
+            return redirect()->route('songs.create');
+        }
+        $userId = $user->id;
         $song->name = $request->name;
         $song->category_id = $request->category_id;
         $song->lyric = $request->lyric;
-        $song->singer_id = $request->singer_id;
-        $song->artist_id = $request->artist_id;
         $song->user_id = $userId;
+
 
         if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
