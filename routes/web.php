@@ -11,7 +11,11 @@
 |
 */
 
-Route::get('/', 'SongController@index');
+
+//Route::get('/', function () {
+//    return view('index');
+//});
+Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes();
 
