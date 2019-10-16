@@ -2,16 +2,19 @@
 @section('content')
     <div class="container">
         @if (Session::has('success'))
-            <p class="text-success">{{Session::get('success')}}</p>
+            <p class="alert alert-success">{{Session::get('success')}}</p>
         @endif
         @if (Session::has('errorImageFile'))
-            <p class="text-danger">{{Session::get('errorImageFile')}}</p>
+            <p class="alert alert-danger">{{Session::get('errorImageFile')}}</p>
         @endif
         @if (Session::has('errorSongFile'))
-            <p class="text-danger">{{Session::get('errorSongFile')}}</p>
+            <p class="alert alert-danger">{{Session::get('errorSongFile')}}</p>
         @endif
         @if (Session::has('error'))
-            <p class="text-danger">{{Session::get('error')}}</p>
+            <p class="alert alert-danger">{{Session::get('error')}}</p>
+        @endif
+        @if (Session::has('errorSongInfo'))
+            <p class="alert alert-danger">{{Session::get('errorSongInfo')}}</p>
         @endif
         <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
             @csrf
@@ -30,11 +33,11 @@
                 </div>
                 <div class="form-group">
                     <label>Ca sĩ</label>
-                    <input type="text" class="form-control" name="singer_id" placeholder="Tên ca sĩ">
+                    <input type="text" class="form-control" name="singer_name" placeholder="Tên ca sĩ">
                 </div>
                 <div class="form-group">
                     <label>Nhạc sĩ</label>
-                    <input type="text" class="form-control" name="artist_id" placeholder="Nhạc sĩ">
+                    <input type="text" class="form-control" name="artist_name" placeholder="Nhạc sĩ">
                 </div>
                 <div class="form-group">
                     <label>Thể loại</label>
