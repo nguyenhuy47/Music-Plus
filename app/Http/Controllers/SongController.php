@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-class SongController extends Controller
+class
+SongController extends Controller
 {
     public function index()
     {
