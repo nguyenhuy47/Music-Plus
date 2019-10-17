@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!doctype html>
 <html lang="en">
 <head>
@@ -63,11 +62,11 @@
             </div>
             <div class="form-group">
                 <label>Ca sĩ</label>
-                <input type="text" class="form-control" name="singer_id" placeholder="Tên ca sĩ">
+                <input type="text" class="form-control" name="singer_name" placeholder="Tên ca sĩ">
             </div>
             <div class="form-group">
                 <label>Nhạc sĩ</label>
-                <input type="text" class="form-control" name="artist_id" placeholder="Nhạc sĩ">
+                <input type="text" class="form-control" name="artist_name" placeholder="Nhạc sĩ">
             </div>
             <div class="form-group">
                 <label>Thể loại</label>
