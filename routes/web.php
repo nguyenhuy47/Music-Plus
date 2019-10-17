@@ -12,9 +12,9 @@
 */
 
 
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/', function () {
+    return view('index');
+});
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes();
