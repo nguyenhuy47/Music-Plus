@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormUploadRequest;
 use App\Model\Category;
 use App\Model\Singer;
 use App\Model\Song;
@@ -31,7 +32,7 @@ class SongController extends Controller
         return view('songs.create', compact('categories'));
     }
 
-    public function store(Request $request)
+    public function store(FormUploadRequest $request)
     {
         $song = new Song();
         $user = Auth::user();
