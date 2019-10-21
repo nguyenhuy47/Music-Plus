@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
 use App\Model\Category;
+use App\Model\Playlist;
 use App\Model\Singer;
 use App\Model\Song;
 use Illuminate\Http\Request;
@@ -22,8 +23,9 @@ class SongController extends Controller
 
     public function show($id)
     {
+        $user = Auth::user();
         $song = Song::findOrFail($id);
-        return view('songs.show', compact('song'));
+        return view('songs.show', compact('song', 'user'));
     }
 
     public function create()
@@ -36,23 +38,15 @@ class SongController extends Controller
     {
         $song = new Song();
         $user = Auth::user();
-        $singerName = $request->singer_name;
-        $artistName = $request->artist_name;
-        $singer = Singer::where('name', $singerName)->get();
-        $artist = Singer::where('name', $artistName)->get();
-        if(count($singer) && count($artist)){
-            $song->singer_id = $singer[0]->id;
-            $song->artist_id = $artist[0]->id;
-        } else {
-            Session::flash('errorSongInfo', 'Nhạc sỹ hoặc ca sỹ bạn vừa nhập không tồn tại trên hệ thống.');
-            return redirect()->route('songs.create');
-        }
+        $singerIdsStr = $request->singer_ids;
+        $artistIdsStr = $request->artist_ids;
+        $singerIds = explode(',', $singerIdsStr);
+        $artistIds = explode(',', $artistIdsStr);
         $userId = $user->id;
         $song->name = $request->name;
         $song->category_id = $request->category_id;
         $song->lyric = $request->lyric;
         $song->user_id = $userId;
-
 
         if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
@@ -90,9 +84,21 @@ class SongController extends Controller
             Session::flash('error', 'Bạn chưa chọn file');
             return redirect()->route('songs.create');
         }
+
         $songFile->storeAs('public/upload/songs', $songFileName);
         $song->save();
+        $song->artists()->attach($artistIds);
+        $song->singers()->attach($singerIds);
         Session::flash('success', 'Tải bài hát thành công');
         return redirect()->route('songs.create');
+    }
+
+    public function addToPlaylist(Request $request)
+    {
+        $playlistId = $request->playlist_id;
+        $songId = $request->song_id;
+        $playlist = Playlist::find($playlistId);
+        $playlist->songs()->attach($songId);
+        return redirect()->route('songs.play', $songId);
     }
 }

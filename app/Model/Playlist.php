@@ -4,7 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Singer extends Model
+class Playlist extends Model
 {
     public function songs()
     {

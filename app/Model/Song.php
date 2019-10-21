@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Song extends Model
 {
-    public function singer()
+    public function singers()
     {
-        return $this->belongsTo('App\Model\Singer');
+        return $this->belongsToMany('App\Model\Singer');
 
     }
 
@@ -18,9 +18,9 @@ class Song extends Model
 
     }
 
-    public function artist()
+    public function artists()
     {
-        return $this->belongsTo('App\Model\Artist');
+        return $this->belongsToMany('App\Model\Artist');
 
     }
 
@@ -28,5 +28,10 @@ class Song extends Model
     {
         return $this->belongsTo('App\User');
 
+    }
+
+    public function playlists()
+    {
+        return $this->belongsToMany('App\Model\Playlist');
     }
 }
