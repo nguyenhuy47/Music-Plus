@@ -12,9 +12,9 @@
 */
 
 
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/', function () {
+    return view('index');
+});
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes();
@@ -29,5 +29,16 @@ Route::group(['prefix' => 'songs'], function ()
     Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
+
+});
+
+Route::group(['prefix' => 'singers'], function ()
+{
+    Route::get('/', 'SingerController@index')->name('singers.index');
+    Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
+    Route::post('/store', 'SingerController@store')->name('singers.store');
+    Route::get('/{id}/show', 'SingerController@show')->name('singers.show');
+    Route::get('/{id}/edit', 'SingerController@edit')->name('singers.edit');
+    Route::post('/{id}/update', 'SingerController@update')->name('singers.update');
 
 });

@@ -120,7 +120,7 @@
                                         <ul class="multi-column-dropdown col-sm-8">
                                             <li><a href="{{ URL::to('musics') }}">Bài hát</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{{ URL::to('singers') }}">Ca sĩ</a></li>
+                                            <li><a href="{{route('singers.index')}}">Ca sĩ</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ URL::to('artists') }}">Nhạc sĩ</a></li>
                                         </ul>
