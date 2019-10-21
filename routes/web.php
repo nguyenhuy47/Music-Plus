@@ -36,9 +36,9 @@ Route::group(['prefix' => 'singers'], function ()
 {
     Route::get('/', 'SingerController@index')->name('singers.index');
     Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
-    Route::post('/store', 'SingerController@store')->name('singers.store');
+    Route::post('/store', 'SingerController@store')->middleware('login')->name('singers.store');
     Route::get('/{id}/show', 'SingerController@show')->name('singers.show');
-    Route::get('/{id}/edit', 'SingerController@edit')->name('singers.edit');
-    Route::post('/{id}/update', 'SingerController@update')->name('singers.update');
+    Route::get('/{id}/edit', 'SingerController@edit')->middleware('login')->name('singers.edit');
+    Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
 
 });
