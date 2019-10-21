@@ -27,8 +27,8 @@ class FormUploadRequest extends FormRequest
             'name' => 'required',
             'song_file' => 'required|file|max:128000',
             'image_file' => 'required|file|max:30000',
-            'singer_name' => 'required',
-            'artist_name' => 'required',
+            'singer_ids' => 'required',
+            'artist_ids' => 'required',
             'category_id' => 'required',
         ];
     }

@@ -16,3 +16,15 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/singers', function (Request $request)
+{
+    $singers = \App\Model\Singer::where('name', 'like', '%' . $request->get('q') . '%')->get();
+    return response()->json($singers);
+});
+
+Route::get('/artists', function (Request $request)
+{
+    $artists = \App\Model\Artist::where('name', 'like', '%' . $request->get('q') . '%')->get();
+    return response()->json($artists);
+});
