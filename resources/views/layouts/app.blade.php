@@ -32,6 +32,34 @@
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{asset('js/jquery-3.4.1.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/token-input.css')}} ">
+    <link rel="stylesheet" href="{{asset('css/token-input-facebook.css')}}">
+    <script src="{{asset('js/jquery.tokeninput.js')}}"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+            $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {
+                hintText: 'Nhập tên ca sỹ',
+                noResultsText: "Không tìm thấy ca sỹ ",
+                searchingText: 'Đang tìm kiếm...',
+                theme: 'facebook',
+                preventDuplicates: true,
+                prePopulate: '',
+            })
+        });
+        jQuery(document).ready(function ($) {
+            $("#list_artist").tokenInput("{{asset('api/artists?q=artist')}}", {
+                hintText: 'Nhập tên ca sỹ',
+                noResultsText: "Không tìm thấy ca sỹ ",
+                searchingText: 'Đang tìm kiếm...',
+                theme: 'facebook',
+                preventDuplicates: true,
+                prePopulate: '',
+            })
+        });
+
+    </script>
 </head>
 <body>
     <div id="app">
@@ -91,5 +119,26 @@
             @yield('content')
         </main>
     </div>
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    console.log(e);
+                    $('#blaha').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                console.log('khong co file');
+            }
+        }
+
+        $("#imgInp").change(function () {
+            readURL(this);
+        });
+    </script>
 </body>
 </html>

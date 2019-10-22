@@ -82,6 +82,7 @@
                 @foreach($songs as $key => $song)
                 <div class="caption">
                     <h5><a href="{{route('songs.play', $song->id)}}" target="_blank" style="color: black;"><strong style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
+                    <td><a href="{{ route('songs.edit', $song->id) }}">sửa</a></td>
                 </div>
                 @endforeach
 {{--                <div class="caption">--}}

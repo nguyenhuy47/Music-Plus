@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
+use App\Model\Artist;
 use App\Model\Category;
 use App\Model\Playlist;
 use App\Model\Singer;
@@ -100,5 +101,38 @@ class SongController extends Controller
         $playlist = Playlist::find($playlistId);
         $playlist->songs()->attach($songId);
         return redirect()->route('songs.play', $songId);
+    }
+
+    public function edit($id)
+    {
+        $categories = Category::all()->groupBy('description');
+        $song = Song::findOrFail($id);
+//        $singer = Singer::all();
+//        $artist = Artist::all();
+        return view('songs.edit', compact('song', 'singer', 'artist','categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $song = Song::findOrFail($id);
+        $songImage = $song->image;
+        $song->name = $request->input('name');
+        $song->file_name = $request->input('song_file');
+
+        if($request->hasFile('image_file')){
+            $imageFile = $request->file('image_file');
+            $imageFileName = $imageFile->getClientOriginalName();
+            $song->image = $imageFileName;
+        }else{
+            $song->image = $songImage;
+        }
+
+        $singerIds = explode(',',$request->input('singer_ids'));
+        $song->singers()->sync($singerIds);
+        $artistIds = explode(',',$request->input('artist_ids'));
+        $song->artists()->sync($artistIds);
+        $song->category_id = $request->input('category_id');
+        $song->lyric = $request->input('lyric');
+        $song->save();
     }
 }

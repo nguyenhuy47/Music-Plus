@@ -30,6 +30,8 @@ Route::group(['prefix' => 'songs'], function ()
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
+    Route::get('/{id}/edit', 'SongController@edit')->name('songs.edit');
+    Route::post('/{id}/edit', 'SongController@update')->name('songs.update');
 
 });
 
