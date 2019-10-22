@@ -12,9 +12,9 @@
 */
 
 
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/', function () {
+    return view('index');
+});
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes();
@@ -33,6 +33,16 @@ Route::group(['prefix' => 'songs'], function ()
 
 });
 
+Route::group(['prefix' => 'singers'], function ()
+{
+    Route::get('/', 'SingerController@index')->name('singers.index');
+    Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
+    Route::post('/store', 'SingerController@store')->middleware('login')->name('singers.store');
+    Route::get('/{id}/show', 'SingerController@show')->name('singers.show');
+    Route::get('/{id}/edit', 'SingerController@edit')->middleware('login')->name('singers.edit');
+    Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
+
+});
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
 {
     Route::group(['prefix' => 'playlist'], function ()
@@ -45,15 +55,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
     });
 });
 
-Route::post('/singers/store', function (\Illuminate\Http\Request $request)
-{
-    $singer = new \App\Model\Singer();
-    $singer->name = $request->name;
-    $singer->dob = $request->dob;
-    $singer->story = $request->story;
-    $singer->save();
-    return redirect()->back();
-})->name('singers.store');
+
 
 Route::post('/artists/store', function (\Illuminate\Http\Request $request)
 {

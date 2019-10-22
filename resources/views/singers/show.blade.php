@@ -1,43 +1,37 @@
 @extends ('layouts.app')
 @section('content')
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="col-md-9">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td colspan="9" style="font-weight: bold; text-align: center;color: blue;"> Thông tin chi tiết ca sĩ - {{ $v_singer ->name }} </td>
-						</tr>
-						<tr>
-							<th>Họ tên </th>
-							<th> Ngày sinh  </th>
-							<th>Chiều cao </th>
-							<th> Cân nặng  </th>
-							<th> Thể loại </th>
-							<th> Quốc tịch </th>
-							<th> Sở thích </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{{ $v_singer ->name }}</td>
-							<td>{{ $v_singer ->birthday }}</td>
-							<td>{{ $v_singer ->height }}</td>
-							<td>{{ $v_singer ->weight }}</td>
-							<td>{{ $v_singer ->type }}</td>
-							<td>{{ $v_singer ->country }}</td>
-							<td>{{ $v_singer ->hoppy }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</body>
-	</html>
-@stop
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Featured
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{$singer->name}}</li>
+            <li class="list-group-item">{{$singer->dob}}</li>
+            <li class="list-group-item">{{$singer->story}}</li>
+        </ul>
+        <td><a href="{{route('singers.edit', $singer->id)}}">Thay đổi hông tin ca sĩ</a></td>
+
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ten bai hat</th>
+            <th scope="col">ten nhac si</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($singer->songs as $key => $song)
+            <tr>
+                <th scope="row">{{$key+1}}</th>
+                <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
+                <td>
+                    @foreach($song->artists as $artist)
+                        <a href="">{{$artist->name}}</a>
+                    @endforeach
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
