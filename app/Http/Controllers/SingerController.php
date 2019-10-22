@@ -29,7 +29,7 @@ class SingerController extends Controller
         $singer->dob = $request->dob;
         $singer->story = $request->story;
         $singer->save();
-        return redirect()->route('singers.index');
+        return redirect()->back();
     }
 
     public function show($id)

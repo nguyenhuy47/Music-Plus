@@ -29,4 +29,9 @@ class Song extends Model
         return $this->belongsTo('App\User');
 
     }
+
+    public function playlists()
+    {
+        return $this->belongsToMany('App\Model\Playlist');
+    }
 }

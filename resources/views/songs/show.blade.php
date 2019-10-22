@@ -61,134 +61,135 @@
             </div>
         </div>
     </div>
-    @yield('content')
-    <div class="row">
-        <div class="col-md-9">
-            <div class="lyric" id="_divLyricHtml">
-                <div class="pd_name_lyric">
-                    <h2 class="name_lyric"><b>Lời bài hát: {{$song->name}}</b></h2>
-                    <p class="name_post">
-                        Nhạc sĩ: {{ $song->artist->name}}
-                    </p>
-                    <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
-                </div>
-                <hr>
-                <p id="divLyric" class="pd_lyric trans" style="height:auto;max-height:none;">
-                    {!! nl2br($song->lyric) !!}
-                </p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail" style="margin-top: 20px;border-color: green;">
-                <h3 align="center"><a href="">CHỦ ĐỀ HOT</a></h3>
-                <hr>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="{{asset('img/cd1.jpg')}}" alt="" width="90%;">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="{{asset('img/cd2.jpg')}}" alt="" width="90%">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="{{asset('img/cd3.jpg')}}" alt="" width="90%">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="{{asset('img/cd4.jpg')}}" alt="" width="90%">
-                    </a>
+
+    <div class="social-plugin">
+        <div>
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
+                Add Playlist
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
+                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        @if($user)
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Chọn Playlist</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="{{ route('songs.addToPlaylist') }}" method="post">
+                                @csrf
+                                <div class="modal-body">
+                                    Bài hát: {{ $song->name }}
+                                    <input type="text" name="song_id" hidden value="{{ $song->id }}"><br><br>
+                                    Playlist:
+                                    <select name="playlist_id">
+                                        @foreach($user->playlists as $playlist)
+                                            <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
+                                </div>
+                            </form>
+                        @else
+                            <div class="card-body">
+                                <form method="POST" action="{{ route('login') }}">
+                                    @csrf
+
+                                    <div class="form-group row">
+                                        <label for="email"
+                                               class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="email" type="email"
+                                                   class="form-control @error('email') is-invalid @enderror"
+                                                   name="email" value="{{ old('email') }}" required autocomplete="email"
+                                                   autofocus>
+
+                                            @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="password"
+                                               class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+
+                                        <div class="col-md-6">
+                                            <input id="password" type="password"
+                                                   class="form-control @error('password') is-invalid @enderror"
+                                                   name="password" required autocomplete="current-password">
+
+                                            @error('password')
+                                            <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <div class="col-md-6 offset-md-4">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="remember"
+                                                       id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                                <label class="form-check-label" for="remember">
+                                                    {{ __('Remember Me') }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-8 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">
+                                                {{ __('Login') }}
+                                            </button>
+                                            <br>
+                                            <br>
+                                            <a class="btn btn-primary" href="{{ route('facebook.login', 'facebook') }}">Đăng
+                                                nhập bằng Facebook</a>
+
+                                            @if (Route::has('password.request'))
+                                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                                    {{ __('Forgot Your Password?') }}
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-9">
-            <hr>
-            <a href="#"><h3 style="color: blue;"> MV HOT</h3></a>
-            <hr>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv1.jpg')}}" alt="mv1">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv2.jpg')}}" alt="mv2">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv3.jpg')}}" alt="mv3">
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv4.jpg')}}" alt="mv4">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv5.jpg')}}" alt="mv5">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="{{asset('img/mv6.jpg')}}" alt="mv6">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3" style="margin-top: 20px;">
-            <div class="thumbnail" style="border-color: #001100;">
-                <a href="#"><h3 style="text-align: center;color: blue;">BÁO ĐIỆN TỬ</h3></a>
-                <hr>
-                <div class="caption">
-                    <h5><a href="https://www.24h.com.vn/" target="_blank" style="color: black;"><strong style="color: red;">Tin tức
-                                24h</strong> </a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="http://vnexpress.net" target="_blank" style="color: black;"><strong style="color: green;">Tin nhanh
-                                VnExpress</strong> </a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="https://dantri.com.vn" target="_blank" style="color: black;"><strong style="color: #FFCC33;">Báo dân
-                                trí</strong> </a></h5>
-                </div>
-                <div class="caption">
-                    <h5><a href="https://vietnamnet.vn/" target="_blank" style="color: black;"><strong style="color: #66CC00;">Báo
-                                VietNamNet</strong> </a></h5>
-                </div>
-            </div>
-            <hr>
+
+    <div class="lyric" id="_divLyricHtml">
+        <div class="pd_name_lyric">
+            <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
+            <p class="name_post">
+                Nhạc sĩ:
+                @foreach($song->artists as $artist)
+                    {{ $artist->name.', ' }}
+                @endforeach
+            </p>
+            <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
         </div>
     </div>
 </div>
-<div id="player">
-    <audio controls autoplay hidden>
-        <source src="{{URL::asset('uploads/music.mp3')}}" type="audio/mpeg">
-        unsupported !!
-    </audio>
-</div>
-@include('layouts.footer')
 <script src="/js/app.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>

@@ -78,7 +78,7 @@
 
 
         @keyframes dot{
-            50%    {transform: translateX(96px)}
+            50%    {transform: translateX(55px)}
         }
 
         @keyframes dots{
@@ -126,7 +126,7 @@
 
                             Đăng nhập thành công!
                         </div>
-                        <div id="count-down" style="display: block"></div>
+                        <div id="count-down" class="card-body" style="display: block"></div>
                         <div id="loading" class="gooey" style="display: none">
                             <span class="my-dot dot"></span>
                             <div class="dots">

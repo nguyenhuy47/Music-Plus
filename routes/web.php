@@ -29,6 +29,7 @@ Route::group(['prefix' => 'songs'], function ()
     Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
+    Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
 
 });
 
@@ -42,3 +43,24 @@ Route::group(['prefix' => 'singers'], function ()
     Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
 
 });
+Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
+{
+    Route::group(['prefix' => 'playlist'], function ()
+    {
+        Route::get('/', 'PlaylistController@index')->name('playlists.index');
+        Route::get('/{playlistId}/show', 'PlaylistController@show')->name('playlists.show');
+        Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
+    });
+});
+
+
+
+Route::post('/artists/store', function (\Illuminate\Http\Request $request)
+{
+    $artists = new \App\Model\Artist();
+    $artists->name = $request->name;
+    $artists->dob = $request->dob;
+    $artists->story = $request->story;
+    $artists->save();
+    return redirect()->back();
+})->name('artists.store');
