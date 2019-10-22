@@ -40,6 +40,8 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
         Route::get('/', 'PlaylistController@index')->name('playlists.index');
         Route::get('/{playlistId}/show', 'PlaylistController@show')->name('playlists.show');
         Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
+        Route::post('/', 'PlaylistController@store')->name('playlists.store');
+        Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
     });
 });
 
