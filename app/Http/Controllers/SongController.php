@@ -111,8 +111,6 @@ class SongController extends Controller
     {
         $categories = Category::all()->groupBy('description');
         $song = Song::findOrFail($id);
-//        $singer = Singer::all();
-//        $artist = Artist::all();
         return view('manager.songs.edit', compact('song','categories'));
     }
 
@@ -138,6 +136,7 @@ class SongController extends Controller
         $song->category_id = $request->input('category_id');
         $song->lyric = $request->input('lyric');
         $song->save();
+        return redirect()->back();
     }
     public function songManager(){
         $STT = 0;

@@ -18,7 +18,6 @@
 
             </tr>
             <tr>
-
                 <td>Tiểu sử</td>
                 <td>{{$singer->story}}</td>
             </tr>

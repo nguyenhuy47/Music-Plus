@@ -18,7 +18,6 @@
                 <tr>
                     <td>{{++$STT}}</td>
                     <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
-
                     <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
                     <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
                     <td><a href="{{ route('songs.edit', $song->id) }}">sửa</a>

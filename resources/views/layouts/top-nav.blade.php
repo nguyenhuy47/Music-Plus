@@ -125,7 +125,7 @@
                                             <li><a href="{{route('singers.index')}}">Ca sĩ</a></li>
 
                                             <li class="divider"></li>
-                                            <li><a href="{{ URL::to('artists') }}">Nhạc sĩ</a></li>
+                                            <li><a href="{{ route('artists.index') }}">Nhạc sĩ</a></li>
                                             <li class="divider"></li>
                                             <li><a href="{{ URL::to('/manage/playlist') }}">Playlist</a></li>
                                         </ul>

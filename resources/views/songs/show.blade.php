@@ -22,17 +22,99 @@
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
+    <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
+    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.min.css')}}" rel="stylesheet">
+    <style>
+        .song-info {
+            color: #21f8f8;
+            text-align: center;
+            position: center;
+        }
+
+        .thumb {
+            width: 100%;
+            height: 360px;
+            background-color: #3e3e3e;
+            background-image: none;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-size: cover;
+
+        }
+
+        img {
+            display: block;
+            max-width: 100%
+        }
+
+        .dia-cd {
+            width: 400px;
+            margin: 0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+            animation: xoayvong 20s linear 0s infinite;
+            -webkit-animation: xoayvong 20s linear 0s infinite;
+            -moz-animation: xoayvong 20s linear 0s infinite;
+            -o-animation: xoayvong 20s linear 0s infinite;
+        }
+
+        /*Chrome, Safari, Opera*/
+        @-webkit-keyframes xoayvong {
+            from {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+            }
+        }
+
+        /* Standard syntax */
+        @keyframes xoayvong {
+            from {
+                -webkit-transform: rotate(0deg);
+                -moz-transform: rotate(0deg);
+                -o-transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                -moz-transform: rotate(360deg);
+                -o-transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 <body data-vide-bg="video/snow">
 @include(' layouts.top-nav')
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">
-            <div class="player">
-                <audio controls autoplay>
-                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">
-                </audio>
+            <div class="thumb">
+                <div class="row">
+                    <div class="col-5">
+                        <img class="dia-cd" src="https://drive.google.com/uc?id=14_VgXAjKeCQ5MLsBsMA2hqJfr-DTObXd"
+                             alt="">
+                    </div>
+                    <div class="col-7 song-info">
+                       <h2> <div>{{$song->name}}</div></h2>
+                        <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
+                        <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
+                    </div>
+                </div>
+                <div>
+                    <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
+                        <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">
+                    </audio>
+                </div>
             </div>
+{{--            <div class="player">--}}
+{{--                <audio controls autoplay>--}}
+{{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
+{{--                </audio>--}}
+{{--            </div>--}}
             <div class="social-plugin"></div>
         </div>
         <div class="col-md-3" id="bxh" style="margin-top: 2px;">
@@ -163,20 +245,24 @@
             </div>
         </div>
     </div>
-
     <div class="lyric" id="_divLyricHtml">
         <div class="pd_name_lyric">
             <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
             <p class="name_post">
                 Nhạc sĩ:
-                @foreach($song->artists as $artist)
-                    {{ $artist->name.', ' }}
-                @endforeach
+                @foreach($song->artists as $artist) {{$artist->name}}@endforeach
             </p>
             <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
+
+            <div>
+                <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
+            </div>
         </div>
     </div>
 </div>
+<script>
+    var player = new MediaElementPlayer('player');
+</script>
 <script src="/js/app.js"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>

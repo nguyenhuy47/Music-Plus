@@ -53,30 +53,6 @@
         jQuery(document).ready(function ($) {
             $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {
                 hintText: 'Nhập tên ca sỹ',
-                noResultsText: "Không tìm thấy ca sỹ ",
-                searchingText: 'Đang tìm kiếm...',
-                theme: 'facebook',
-                preventDuplicates: true,
-                prePopulate: '',
-            })
-        });
-        jQuery(document).ready(function ($) {
-            $("#list_artist").tokenInput("{{asset('api/artists?q=artist')}}", {
-                hintText: 'Nhập tên ca sỹ',
-                noResultsText: "Không tìm thấy ca sỹ ",
-                searchingText: 'Đang tìm kiếm...',
-                theme: 'facebook',
-                preventDuplicates: true,
-                prePopulate: '',
-            })
-        });
-
-    </script>
-{{--    ===================================================modal=============================================--}}
-    <script>
-        $(document).ready(function () {
-            $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {
-                hintText: 'Nhập tên ca sỹ',
                 noResultsText: "Không tìm thấy ca sỹ. " + "<a href='#' data-toggle=\"modal\" data-target=\"#addSinger\">\n" +
                     "    Thêm mới\n" +
                     "</a>",
@@ -95,9 +71,12 @@
                 theme: 'facebook',
                 preventDuplicates: true,
                 prePopulate: '',
-            });
-        })
+            })
+        });
+
     </script>
+{{--    ===================================================modal=============================================--}}
+
 </head>
 <body>
     <div id="app">
