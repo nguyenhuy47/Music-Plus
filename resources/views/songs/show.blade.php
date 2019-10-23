@@ -39,25 +39,12 @@
             <div class="thumbnail" style="border-color: blue;">
                 <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
                 <hr>
-                @foreach($songs as $key => $baihat)
+                @foreach($songs as $key => $song)
                     <div class="caption">
-                        <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
+                        <h5><a href="{{route('songs.play', $song->id)}}" style="color: black;"><strong
+                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
                     </div>
                 @endforeach
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
-                {{--                            ơi</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
-                {{--                            này có anh</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
-                {{--                </div>--}}
             </div>
         </div>
     </div>

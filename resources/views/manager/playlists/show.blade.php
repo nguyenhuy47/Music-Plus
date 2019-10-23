@@ -19,8 +19,8 @@
         <tr>
             <td>{{$STT++}}</td>
             <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
-            <td></td>
-            <td></td>
+            <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
+            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
             <td><a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td>
         </tr>
     @endforeach

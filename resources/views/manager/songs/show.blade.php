@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-        <table border="1" class="table table-bordered text-center" style="width: 30%; margin-left: 35%;: ">
+        <table border="1" class="table table-bordered text-center" style="width: 40%; margin-left: 30%;: ">
             <thead class="thead-light">
             <tr>
                 <th colspan="5" style="text-align: center">DANH SÁCH BÀI HÁT</th>
@@ -18,8 +18,9 @@
                 <tr>
                     <td>{{++$STT}}</td>
                     <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
-                    <td>{{$song->singer}}</td>
-                    <td>{{$song->artist}}</td>
+
+                    <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
+                    <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
                     <td><a href="{{ route('songs.edit', $song->id) }}">sửa</a>
                         <a href="{{route('songs.destroy', $song->id)}}"
                            onclick="return confirm('Bạn có chắc chắn muốn xóa')">Xóa</a>

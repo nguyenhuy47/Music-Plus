@@ -24,8 +24,6 @@ class SongController extends Controller
 
     public function show($id)
     {
-
-
         $STT = 1;
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);

@@ -1,37 +1,41 @@
 @extends ('layouts.app')
 @section('content')
-    <div class="card" style="width: 18rem;">
-        <div class="card-header">
-            Featured
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{$singer->name}}</li>
-            <li class="list-group-item">{{$singer->dob}}</li>
-            <li class="list-group-item">{{$singer->story}}</li>
-        </ul>
-        <td><a href="{{route('singers.edit', $singer->id)}}">Thay đổi hông tin ca sĩ</a></td>
-
-    </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Ten bai hat</th>
-            <th scope="col">ten nhac si</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($singer->songs as $key => $song)
+    <div style="width: 30%; margin-left: 35%;: ">
+        <table border="1" class="table table-bordered text-center">
+            <thead class="thead-light">
             <tr>
-                <th scope="row">{{$key+1}}</th>
-                <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
-                <td>
-                    @foreach($song->artists as $artist)
-                        <a href="">{{$artist->name}}</a>
-                    @endforeach
-                </td>
+                <th colspan="2" style="text-align: center"><b>{{strtoupper($singer->name) }}</b></th>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tr style="text-align: left">
+                <td COLSPAN="2"><b>THÔNG TIN</b></td>
+            </tr>
+
+            <tbody>
+            <tr>
+                <td>Ngày sinh</td>
+                <td>{{$singer->dob}}</td>
+
+            </tr>
+            <tr>
+
+                <td>Tiểu sử</td>
+                <td>{{$singer->story}}</td>
+            </tr>
+            <tr style="text-align: left">
+                <td COLSPAN="2"><b>DANH SÁCH BÀI HÁT</b></td>
+            </tr>
+            <tr>
+                <td>STT</td>
+                <td>TÊN BÀI HÁT</td>
+            </tr>
+            @foreach($singer->songs as $key => $song)
+                <tr>
+                    <td>{{$key+1}}</td>
+                    <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
 @endsection
