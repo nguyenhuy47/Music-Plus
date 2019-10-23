@@ -1,12 +1,29 @@
-<table border="0">
+@extends('layouts.app')
+@section('content')
+
+<table border="1" class="table table-bordered text-center" style="width: 30%; margin-left: 35%;: ">
+    <thead class="thead-light">
     <tr>
-        <th>Playlist: {{ $playlist->name }}</th>
-        <th>Nghe tất cả</th>
+        <th colspan="5" style="text-align: center">{{strtoupper($playlist->name)}}</th>
     </tr>
+    <tr>
+        <td>STT</td>
+        <td>TÊN BÀI HÁT</td>
+        <td>TÊN CA SĨ</td>
+        <td>TÊN NHẠC SĨ</td>
+        <td>CHỈNH SỬA</td>
+    </tr>
+    </thead>
+    <tbody>
     @foreach($playlist->songs as $song)
         <tr>
-            <td>{{ $song->name }}</td>
+            <td>{{$STT++}}</td>
+            <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
+            <td></td>
+            <td></td>
             <td><a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}" onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td>
         </tr>
     @endforeach
+    </tbody>
 </table>
+@endsection

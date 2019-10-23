@@ -12,23 +12,23 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
+        <script>
+            window.Laravel = <?php echo json_encode([
+                'csrfToken' => csrf_token(),
+            ]); ?>
+        </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
+    <script type="text/javascript" src="{{asset('js/css3-mediaqueries.js')}}"></script>
     <script type="text/javascript" href="js/Search.js"></script>
-    <link rel="stylesheet" href="css/style_menu.css" type="text/css">
-    <link rel="stylesheet" href="css/slider.css">
+    <link rel="stylesheet" href="{{asset('css/style_menu.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('css/slider.css')}}">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
 </head>
 <body data-vide-bg="video/snow">
-    @include(' layouts.top-nav')
+@include(' layouts.top-nav')
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">
@@ -80,25 +80,25 @@
                 <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
                 <hr>
                 @foreach($songs as $key => $song)
-                <div class="caption">
-                    <h5><a href="{{route('songs.play', $song->id)}}" target="_blank" style="color: black;"><strong style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
-                    <td><a href="{{ route('songs.edit', $song->id) }}">sửa</a></td>
-                </div>
+                    <div class="caption">
+                        <h5><a href="{{route('songs.play', $song->id)}}" target="_blank" style="color: black;"><strong
+                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
+                    </div>
                 @endforeach
-{{--                <div class="caption">--}}
-{{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
-{{--                            ơi</a></h5>--}}
-{{--                </div>--}}
-{{--                <div class="caption">--}}
-{{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
-{{--                            này có anh</a></h5>--}}
-{{--                </div>--}}
-{{--                <div class="caption">--}}
-{{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
-{{--                </div>--}}
-{{--                <div class="caption">--}}
-{{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
-{{--                </div>--}}
+                {{--                <div class="caption">--}}
+                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
+                {{--                            ơi</a></h5>--}}
+                {{--                </div>--}}
+                {{--                <div class="caption">--}}
+                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
+                {{--                            này có anh</a></h5>--}}
+                {{--                </div>--}}
+                {{--                <div class="caption">--}}
+                {{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
+                {{--                </div>--}}
+                {{--                <div class="caption">--}}
+                {{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
+                {{--                </div>--}}
             </div>
         </div>
     </div>
@@ -216,19 +216,23 @@
                 <a href="#"><h3 style="text-align: center;color: blue;">BÁO ĐIỆN TỬ</h3></a>
                 <hr>
                 <div class="caption">
-                    <h5><a href="https://www.24h.com.vn/" target="_blank" style="color: black;"><strong style="color: red;">Tin tức
+                    <h5><a href="https://www.24h.com.vn/" target="_blank" style="color: black;"><strong
+                                style="color: red;">Tin tức
                                 24h</strong> </a></h5>
                 </div>
                 <div class="caption">
-                    <h5><a href="http://vnexpress.net" target="_blank" style="color: black;"><strong style="color: green;">Tin nhanh
+                    <h5><a href="http://vnexpress.net" target="_blank" style="color: black;"><strong
+                                style="color: green;">Tin nhanh
                                 VnExpress</strong> </a></h5>
                 </div>
                 <div class="caption">
-                    <h5><a href="https://dantri.com.vn" target="_blank" style="color: black;"><strong style="color: #FFCC33;">Báo dân
+                    <h5><a href="https://dantri.com.vn" target="_blank" style="color: black;"><strong
+                                style="color: #FFCC33;">Báo dân
                                 trí</strong> </a></h5>
                 </div>
                 <div class="caption">
-                    <h5><a href="https://vietnamnet.vn/" target="_blank" style="color: black;"><strong style="color: #66CC00;">Báo
+                    <h5><a href="https://vietnamnet.vn/" target="_blank" style="color: black;"><strong
+                                style="color: #66CC00;">Báo
                                 VietNamNet</strong> </a></h5>
                 </div>
             </div>
@@ -236,15 +240,15 @@
         </div>
     </div>
 </div>
-<div id="player">
-    <audio controls autoplay hidden>
-        <source src="{{URL::asset('uploads/music.mp3')}}" type="audio/mpeg">
-        unsupported !!
-    </audio>
-</div>
+{{--<div id="player">--}}
+{{--    <audio controls autoplay hidden>--}}
+{{--        <source src="{{URL::asset('uploads/music.mp3')}}" type="audio/mpeg">--}}
+{{--        unsupported !!--}}
+{{--    </audio>--}}
+{{--</div>--}}
 @include('layouts.footer')
 
-<script src="/js/app.js"></script>
+<script src="{{asset('/js/jquery-ui/app.js')}}"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
 </body>

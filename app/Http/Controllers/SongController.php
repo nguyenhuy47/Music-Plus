@@ -109,7 +109,7 @@ class SongController extends Controller
         $song = Song::findOrFail($id);
 //        $singer = Singer::all();
 //        $artist = Artist::all();
-        return view('songs.edit', compact('song', 'singer', 'artist','categories'));
+        return view('manager.songs.edit', compact('song','categories'));
     }
 
     public function update(Request $request, $id)
@@ -135,4 +135,17 @@ class SongController extends Controller
         $song->lyric = $request->input('lyric');
         $song->save();
     }
+    public function songManager(){
+        $STT = 0;
+        $user = Auth::user();
+        $songs = Song::where('user_id', $user->id)->get();
+        return view('manager.songs.show',compact('songs','STT'));
+    }
+
+    public function destroy($id){
+       $song = Song::find($id);
+       $song->delete();
+       return redirect()->back();
+    }
+
 }
