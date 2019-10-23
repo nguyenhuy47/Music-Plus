@@ -10,15 +10,17 @@ class PlaylistController extends Controller
 {
     public function index()
     {
+        $STT = 1;
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
-        return view('manager.playlists.list', compact('playlists'));
+        return view('manager.playlists.list', compact('playlists', 'STT'));
     }
 
     public function show($playlistId)
     {
+        $STT = 1;
         $playlist = Playlist::find($playlistId);
-        return view('manager.playlists.show', compact('playlist'));
+        return view('manager.playlists.show', compact('playlist', 'STT'));
     }
 
     public function store(Request $request)

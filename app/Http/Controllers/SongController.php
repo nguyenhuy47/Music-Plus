@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
+use App\Model\Artist;
 use App\Model\Category;
 use App\Model\Playlist;
 use App\Model\Singer;
@@ -23,8 +24,6 @@ class SongController extends Controller
 
     public function show($id)
     {
-
-
         $STT = 1;
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
@@ -107,4 +106,49 @@ class SongController extends Controller
         $playlist->songs()->attach($songId);
         return redirect()->route('songs.play', $songId);
     }
+
+    public function edit($id)
+    {
+        $categories = Category::all()->groupBy('description');
+        $song = Song::findOrFail($id);
+        return view('manager.songs.edit', compact('song','categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $song = Song::findOrFail($id);
+        $songImage = $song->image;
+        $song->name = $request->input('name');
+        $song->file_name = $request->input('song_file');
+
+        if($request->hasFile('image_file')){
+            $imageFile = $request->file('image_file');
+            $imageFileName = $imageFile->getClientOriginalName();
+            $song->image = $imageFileName;
+        }else{
+            $song->image = $songImage;
+        }
+
+        $singerIds = explode(',',$request->input('singer_ids'));
+        $song->singers()->sync($singerIds);
+        $artistIds = explode(',',$request->input('artist_ids'));
+        $song->artists()->sync($artistIds);
+        $song->category_id = $request->input('category_id');
+        $song->lyric = $request->input('lyric');
+        $song->save();
+        return redirect()->back();
+    }
+    public function songManager(){
+        $STT = 0;
+        $user = Auth::user();
+        $songs = Song::where('user_id', $user->id)->get();
+        return view('manager.songs.show',compact('songs','STT'));
+    }
+
+    public function destroy($id){
+       $song = Song::find($id);
+       $song->delete();
+       return redirect()->back();
+    }
+
 }

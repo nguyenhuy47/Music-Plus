@@ -11,19 +11,32 @@
     @endif
     <form method="post" action="{{route('singers.store')}}">
         @csrf
-        <div class="form-group">
-            <label>Tên ca sĩ</label>
-            <input type="text" class="form-control" name="name" placeholder="Tên ca sĩ">
+        <div style="width: 30%; margin-left: 35%;: ">
+            <table border="0" class="table table-bordered text-center">
+                <thead class="thead-light">
+                <tr>
+                    <th colspan="2" style="text-align: center">THÊM MỚI CA SĨ</th>
+                </tr>
+                <tr>
+                <div class="form-group">
+                    <td><label>Tên ca sĩ</label></td>
+                    <td><input type="text" class="form-control" name="name" placeholder="Tên ca sĩ"></td>
+                </div>
+                </tr>
+                <tr>
+                <div class="form-group">
+                    <td><label>Sinh nhật</label></td>
+                    <td><input type="date" class="form-control" name="dob"></td>
+                </div>
+                </tr>
+                <tr>
+                <div class="form-group">
+                    <td><label>Tiểu sử</label></td>
+                    <td><textarea name="story" class="form-control" rows="6"></textarea></td>
+                </div>
+                </tr>
+            </table>
+            <button CLASS="btn btn-primary" type="submit">LƯU</button>
         </div>
-
-        <div class="form-group">
-            <label>Sinh nhật</label>
-            <input type="date" class="form-control" name="dob">
-        </div>
-        <div class="form-group">
-            <label>Tiểu sử</label>
-            <textarea name="story" class="form-control" rows="3"></textarea>
-        </div>
-        <button type="submit">Thêm</button>
     </form>
 @endsection

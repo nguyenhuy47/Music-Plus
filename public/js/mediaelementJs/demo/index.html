@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MediaElement.js 3.0 - audio/video unification library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="../build/mediaelementplayer.css">
+
+    <style>
+
+        html, body {
+            overflow-x: hidden;
+        }
+
+        #container {
+            padding: 0 20px 50px;
+        }
+        .error {
+            color: red;
+        }
+        a {
+            word-wrap: break-word;
+        }
+
+        code {
+            font-size: 0.8em;
+        }
+
+        #player2-container .mejs__time-buffering, #player2-container .mejs__time-current, #player2-container .mejs__time-handle,
+        #player2-container .mejs__time-loaded, #player2-container .mejs__time-hovered, #player2-container .mejs__time-marker, #player2-container .mejs__time-total {
+            height: 2px;
+        }
+
+        #player2-container .mejs__time-total {
+            margin-top: 9px;
+        }
+        #player2-container .mejs__time-handle {
+            left: -5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ffffff;
+            top: -5px;
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            z-index: 2;
+            border: none;
+        }
+        #player2-container .mejs__time-handle-content {
+            top: 0;
+            left: 0;
+            width: 12px;
+            height: 12px;
+        }
+    </style>
+</head>
+            <div class="media-wrapper">
+                <audio id="player2" preload="none" controls style="max-width:100%;">
+                    <source src="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" type="audio/mp3">
+                </audio>
+            </div>
+            <br>
+            <div>
+                <label>Sources <select name="sources">
+                    <option value="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3">MP3</option>
+                    <option value="http://www.vorbis.com/music/Hydrate-Kenny_Beltrey.ogg">OGG</option>
+                    <option value="http://db3.indexcom.com/bucket/ram/00/05/64k/05.m3u8">HLS</option>
+                    <!--<option value="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st/mp3:fake_empire-cbr">RTMP</option>-->
+                    <!--<option value="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/282715465&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true">SoundCloud</option>-->
+                    <option value="https://api.soundcloud.com/tracks/323195515/stream?client_id=95f22ed54a5c297b1c41f72d713623ef">SoundCloud</option>
+                </select>
+                </label>
+            </div>
+            <br>
+            <div class="player-info">
+                <h4>Player information</h4>
+                <div id="player2-rendername">
+                    <p><strong>Source</strong>: <span class="src"><a href="http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3" target="_blank">http://www.largesound.com/ashborytour/sound/AshboryBYU.mp3</a></span></p>
+                    <p><strong>Renderer</strong>: <span class="renderer">html5</span></p>
+                    <p class="error"></p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="../build/mediaelement-and-player.js"></script>
+    <script src="../build/renderers/dailymotion.js"></script>
+    <script src="../build/renderers/facebook.js"></script>
+    <script src="../build/renderers/soundcloud.js"></script>
+    <script src="../build/renderers/twitch.js"></script>
+    <script src="../build/renderers/vimeo.js"></script>
+    <script src="../build/lang/cs.js"></script>
+    <script src="../build/lang/de.js"></script>
+    <script src="../build/lang/es.js"></script>
+    <script src="../build/lang/fa.js"></script>
+    <script src="../build/lang/fr.js"></script>
+    <script src="../build/lang/hr.js"></script>
+    <script src="../build/lang/hu.js"></script>
+    <script src="../build/lang/it.js"></script>
+    <script src="../build/lang/ja.js"></script>
+    <script src="../build/lang/ko.js"></script>
+    <script src="../build/lang/ms.js"></script>
+    <script src="../build/lang/nl.js"></script>
+    <script src="../build/lang/pl.js"></script>
+    <script src="../build/lang/pt.js"></script>
+    <script src="../build/lang/ro.js"></script>
+    <script src="../build/lang/ru.js"></script>
+    <script src="../build/lang/sk.js"></script>
+    <script src="../build/lang/sv.js"></script>
+    <script src="../build/lang/uk.js"></script>
+    <script src="../build/lang/zh-cn.js"></script>
+    <script src="../build/lang/zh.js"></script>
+    <script src="demo.js"></script>
+</body>
+</html>
