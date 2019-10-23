@@ -12,11 +12,11 @@
     <link href="/css/app.css" rel="stylesheet">
 
     <!-- Scripts -->
-        <script>
-            window.Laravel = <?php echo json_encode([
-                'csrfToken' => csrf_token(),
-            ]); ?>
-        </script>
+    <script>
+        window.Laravel = <?php echo json_encode([
+            'csrfToken' => csrf_token(),
+        ]); ?>
+    </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -82,6 +82,11 @@
                 @foreach($songs as $key => $song)
                     <div class="caption">
                         <h5><a href="{{route('songs.play', $song->id)}}" target="_blank" style="color: black;"><strong
+                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
+                    </div>
+
+                    <div class="caption">
+                        <h5><a href="{{route('songs.play', $song->id)}}" style="color: black;"><strong
                                     style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
                     </div>
                 @endforeach

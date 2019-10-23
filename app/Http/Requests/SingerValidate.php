@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FormUploadRequest extends FormRequest
+class SingerValidate extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,12 +25,7 @@ class FormUploadRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'song_file' => 'required|file|max:128000',
-            'image_file' => 'required|file|max:30000',
-            'singer_ids' => 'required',
-            'artist_ids' => 'required',
-            'category_id' => 'required',
-
+            'dob' => 'required',
         ];
     }
 }

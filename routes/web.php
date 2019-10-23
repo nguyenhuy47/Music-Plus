@@ -12,9 +12,9 @@
 */
 
 
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/', function () {
+    return view('index');
+});
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes();
@@ -42,7 +42,15 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
     });
+    Route::group(['prefix' => 'singers'], function () {
+        Route::get('/', 'SingerController@index')->name('singers.index');
+        Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
+        Route::post('/store', 'SingerController@store')->middleware('login')->name('singers.store');
+        Route::get('/{id}/show', 'SingerController@show')->name('singers.show');
+        Route::get('/{id}/edit', 'SingerController@edit')->middleware('login')->name('singers.edit');
+        Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
 
+    });
     Route::group(['prefix' => 'songs'], function () {
         Route::get('/', 'SongController@songManager')->name('songs.index');
         Route::get('/{id}/edit', 'SongController@edit')->name('songs.edit');
@@ -51,20 +59,3 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
     });
 });
 
-Route::post('/singers/store', function (\Illuminate\Http\Request $request) {
-    $singer = new \App\Model\Singer();
-    $singer->name = $request->name;
-    $singer->dob = $request->dob;
-    $singer->story = $request->story;
-    $singer->save();
-    return redirect()->back();
-})->name('singers.store');
-
-Route::post('/artists/store', function (\Illuminate\Http\Request $request) {
-    $artists = new \App\Model\Artist();
-    $artists->name = $request->name;
-    $artists->dob = $request->dob;
-    $artists->story = $request->story;
-    $artists->save();
-    return redirect()->back();
-})->name('artists.store');
