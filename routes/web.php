@@ -43,6 +43,7 @@ Route::group(['prefix' => 'singers'], function ()
     Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
 
 });
+
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
 {
     Route::group(['prefix' => 'playlist'], function ()
@@ -55,14 +56,13 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function ()
     });
 });
 
-
-
-Route::post('/artists/store', function (\Illuminate\Http\Request $request)
+Route::group(['prefix' => 'artists'], function ()
 {
-    $artists = new \App\Model\Artist();
-    $artists->name = $request->name;
-    $artists->dob = $request->dob;
-    $artists->story = $request->story;
-    $artists->save();
-    return redirect()->back();
-})->name('artists.store');
+    Route::get('/', 'ArtistController@index')->name('artists.index');
+    Route::get('/create', 'ArtistController@create')->middleware('login')->name('artists.create');
+    Route::post('/store', 'ArtistController@store')->middleware('login')->name('artists.store');
+    Route::get('/{id}/show', 'ArtistController@show')->name('artists.show');
+    Route::get('/{id}/edit', 'ArtistController@edit')->middleware('login')->name('artists.edit');
+    Route::post('/{id}/update', 'ArtistController@update')->middleware('login')->name('artists.update');
+
+});
