@@ -33,8 +33,8 @@ Route::group(['prefix' => 'songs'], function () {
 
 });
 
-Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
 
+Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
     Route::group(['prefix' => 'playlist'], function () {
         Route::get('/', 'PlaylistController@index')->name('playlists.index');
         Route::get('/{playlistId}/show', 'PlaylistController@show')->name('playlists.show');
@@ -42,6 +42,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
     });
+
     Route::group(['prefix' => 'singers'], function () {
         Route::get('/', 'SingerController@index')->name('singers.index');
         Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
@@ -57,5 +58,14 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/{id}/edit', 'SongController@update')->name('songs.update');
         Route::get('/{id}/destroy', 'SongController@destroy')->name('songs.destroy');
     });
-});
 
+    Route::group(['prefix' => 'artists'], function () {
+        Route::get('/', 'ArtistController@index')->name('artists.index');
+        Route::get('/create', 'ArtistController@create')->middleware('login')->name('artists.create');
+        Route::post('/store', 'ArtistController@store')->middleware('login')->name('artists.store');
+        Route::get('/{id}/show', 'ArtistController@show')->name('artists.show');
+        Route::get('/{id}/edit', 'ArtistController@edit')->middleware('login')->name('artists.edit');
+        Route::post('/{id}/update', 'ArtistController@update')->middleware('login')->name('artists.update');
+
+    });
+});

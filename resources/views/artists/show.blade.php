@@ -1,35 +1,37 @@
-@extends ('layout')
+@extends ('layouts.app')
 @section('content')
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Document</title>
-	</head>
-	<body>
-		<div class="container">
-			<div class="col-md-5">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td colspan="3" style="font-weight: bold; text-align: center;color: blue;"> Thông tin chi tiết nhạc sĩ - {{ $v_artist ->name }} </td>
-						</tr>
-						<tr>
-							<th>Họ tên </th>
-							<th> Ngày sinh  </th>
-							<th> Quốc tịch </th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>{{ $v_artist ->name }}</td>
-							<td>{{ $v_artist ->birthday }}</td>
-							<td>{{ $v_artist ->country }}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</body>
-	</html>
-@stop
+    <div class="card" style="width: 18rem;">
+        <div class="card-header">
+            Featured
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{$artist->name}}</li>
+            <li class="list-group-item">{{$artist->dob}}</li>
+            <li class="list-group-item">{{$artist->story}}</li>
+        </ul>
+        <td><a href="{{route('artists.edit', $artist->id)}}">Thay đổi hông tin nhạc sĩ</a></td>
+
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ten bài hát</th>
+            <th scope="col">ten ca sĩ</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($artist->songs as $key => $song)
+            <tr>
+                <th scope="row">{{$key+1}}</th>
+                <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
+                <td>
+                    @foreach($song->singers as $singer)
+                        <a href="">{{$singer->name}}</a>
+                    @endforeach
+                </td>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+@endsection
