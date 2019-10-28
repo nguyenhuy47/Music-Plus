@@ -47,8 +47,10 @@
                            class="form-control-file">
 
                     <small id="fileHelp" class="form-text text-muted">Vui lòng tải lên một tập tin hình ảnh hợp lệ. Kích thước của hình ảnh không được quá 2MB.</small>
+                    <button type="submit" class="btn btn-primary">Cập nhập</button><a href="{{ route('password.request') }} ">Thay đổi mật khẩu</a>
+
+
                 </div>
-                <button type="submit" class="btn btn-primary">Cập nhập</button>
             </form>
         </div>
     </div>
