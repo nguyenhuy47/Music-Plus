@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/', 'SongController@index')->name('songs.index');
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('profile', 'UserController@profile');
