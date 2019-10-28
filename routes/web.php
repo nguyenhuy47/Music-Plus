@@ -17,9 +17,13 @@ Route::get('/', function () {
 });
 Route::get('/', 'SongController@index')->name('songs.index');
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('profile', 'UserController@profile');
+Route::post('profile', 'UserController@update_avatar');
+
+
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
@@ -29,8 +33,6 @@ Route::group(['prefix' => 'songs'], function () {
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
-
-
 });
 
 
