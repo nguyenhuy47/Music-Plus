@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Xác nhận mật khẩu') }}</div>
 
+
                 <div class="card-body">
                     {{ __('Vui lòng xác nhận mật khẩu của bạn trước khi tiếp tục.') }}
 
@@ -31,6 +32,7 @@
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Xác nhận mật khẩu') }}
+
                                 </button>
 
                                 @if (Route::has('password.request'))

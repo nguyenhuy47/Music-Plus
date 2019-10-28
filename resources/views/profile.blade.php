@@ -17,8 +17,8 @@
 
             @if (count($errors) > 0)
                 <div class="alert alert-danger">
-                    <strong>Rất tiếc!</strong>Có một số vấn đề với đầu vào của bạn.<br><br>
-                    <ul>
+                    <strong>Rất tiếc!</strong> Có một số vấn đề với đầu vào của bạn.<br><br>
+                            <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -45,11 +45,8 @@
                     <input type="file" class="form-control-file" name="avatar" id="avatarFile" aria-describedby="fileHelp"
                            onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
                            class="form-control-file">
-
                     <small id="fileHelp" class="form-text text-muted">Vui lòng tải lên một tập tin hình ảnh hợp lệ. Kích thước của hình ảnh không được quá 2MB.</small>
                     <button type="submit" class="btn btn-primary">Cập nhập</button><a href="{{ route('password.request') }} ">Thay đổi mật khẩu</a>
-
-
                 </div>
             </form>
         </div>
