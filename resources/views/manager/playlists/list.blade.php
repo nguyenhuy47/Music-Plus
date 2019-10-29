@@ -4,6 +4,10 @@
         <div class="row">
             <div class="col-md-9">
                 <div>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewPlaylist">
+                        THÊM MỚI PLAYLIST
+                    </button>
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
@@ -27,10 +31,7 @@
                         </tbody>
                     </table>
 
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewPlaylist">
-                        Thêm mới Playlist
-                    </button>
+
                 </div>
                 <!-- Modal -->
                 <div class="modal fade" id="addNewPlaylist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -38,7 +39,7 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Thêm Playlist</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">THÊM MỚI PLAYLIST</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
