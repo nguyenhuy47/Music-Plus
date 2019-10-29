@@ -92,7 +92,21 @@
 <div class="container pt-5">
     @if(!$song->path)
         <div class="row">
-            <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
+            <div class="col-md-9">
+                <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
+            </div>
+            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
+                <div class="thumbnail" style="border-color: blue;">
+                    <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
+                    <hr>
+                    @foreach($songs as $key => $baihat)
+                        <div class="caption">
+                            <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
+                                        style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     @else
     <div class="row">

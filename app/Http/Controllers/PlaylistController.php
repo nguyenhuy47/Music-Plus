@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Playlist;
+use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,15 @@ class PlaylistController extends Controller
         $STT = 1;
         $playlist = Playlist::find($playlistId);
         return view('manager.playlists.show', compact('playlist', 'STT'));
+    }
+
+    public function playAll($playlistId)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $user = Auth::user();
+        $playlist = Playlist::find($playlistId);
+        return view('playlists.show', compact('playlist', 'songs','STT','user'));
     }
 
     public function store(Request $request)
