@@ -8,6 +8,7 @@ use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class SingerController extends Controller
 {
@@ -24,12 +25,16 @@ class SingerController extends Controller
 
     public function store(SingerValidate $request)
     {
+        if($request->dob >= now('Asia/Ho_Chi_Minh')) {
+            return redirect()->back()->with('errorDob','Ngày sinh của ca sĩ không hợp lệ');
+        }
         $singer = new Singer();
         $singer->name = $request->name;
         $singer->dob = $request->dob;
         $singer->story = $request->story;
         $singer->save();
-        return redirect()->back();
+        return redirect()->route('songs.create')->with('createdSingerSuccess','Thêm mới ca sĩ thành công');
+
     }
 
     public function show($id)

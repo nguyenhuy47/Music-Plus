@@ -49,7 +49,9 @@
                         <img id="blaha" src="{{asset('storage/upload/images/'.$song->image)}}" alt=""
                              style="width: 80px">
                         <br>
-                        <input id="imgInp" type="file" class="form-control-file" name="image_file"
+                        <input
+                            onchange="document.getElementById('blaha').src = window.URL.createObjectURL(this.files[0])"
+                            id="imgInp" type="file" class="form-control-file" name="image_file"
                                value="{{$song->image}}">
                     </div>
                     <div class="form-group">

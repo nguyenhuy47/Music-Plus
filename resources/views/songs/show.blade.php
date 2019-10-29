@@ -15,14 +15,9 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
-    <script type="text/javascript" href="js/Search.js"></script>
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
-    <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
     <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.min.css')}}" rel="stylesheet">
     <style>
         .song-info {
@@ -121,10 +116,10 @@
             <div class="thumbnail" style="border-color: blue;">
                 <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
                 <hr>
-                @foreach($songs as $key => $song)
+                @foreach($songs as $key => $baihat)
                     <div class="caption">
-                        <h5><a href="{{route('songs.play', $song->id)}}" style="color: black;"><strong
-                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
+                        <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
+                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
                     </div>
                 @endforeach
             </div>
@@ -260,14 +255,19 @@
         </div>
     </div>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('js/css3-mediaqueries.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/Search.js')}}"></script>
+<script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
 <script>
     var player = new MediaElementPlayer('player');
 </script>
-<script src="/js/app.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
 </body>
-
 </html>
 
 

@@ -22,12 +22,16 @@ class ArtistController extends Controller
 
     public function store(ArtistValidate $request)
     {
+        if($request->dob >= now('Asia/Ho_Chi_Minh')) {
+            return redirect()->back()->with('errorDob','Ngày sinh của nhạc sĩ không hợp lệ');
+        }
+
         $artist = new Artist();
         $artist->name = $request->name;
         $artist->dob = $request->dob;
         $artist->story = $request->story;
         $artist->save();
-        return redirect()->back();
+        return redirect()->route('songs.create')->with('createdArtistSuccess','Thêm mới nhạc sĩ thành công');
     }
 
     public function show($id)

@@ -29,7 +29,7 @@
 </head>
 <body data-vide-bg="video/snow">
 @include(' layouts.top-nav')
-<div class="container pt-5">
+<div class="container pt-5 bg-light">
     <div class="row">
         <div class="col-md-9">
             <div class="example">
@@ -75,90 +75,10 @@
                 </div>
             </div> <!-- /SLIDE -->
         </div>
-        <div class="col-md-3" id="bxh" style="margin-top: 2px;">
-            <div class="thumbnail" style="border-color: blue;">
-                <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
-                <hr>
-                @foreach($songs as $key => $song)
-                    <div class="caption">
-                        <h5><a href="{{route('songs.play', $song->id)}}" style="color: black;"><strong
-                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
-                    </div>
-                @endforeach
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
-                {{--                            ơi</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
-                {{--                            này có anh</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
-                {{--                </div>--}}
-            </div>
-        </div>
+        @include('manager.songs.list-new-songs')
     </div>
     @yield('content')
-    <div class="row">
-        <div class="col-md-9">
-            <hr style="border-color: white;">
-            <a href="#"><h3 style="color: blue;"> ALBUM HOT</h3></a>
-            <hr style="border-color: white;">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="img/al1.jpg" alt="album1">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="img/al2.jpg" alt="album2">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="thumbnail">
-                        <a href="">
-                            <img src="img/al3.jpg" alt="album3">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="thumbnail" style="margin-top: 20px;border-color: green;">
-                <h3 align="center"><a href="">CHỦ ĐỀ HOT</a></h3>
-                <hr>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="img/cd1.jpg" alt="" width="90%;">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="img/cd2.jpg" alt="" width="90%">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="img/cd3.jpg" alt="" width="90%">
-                    </a>
-                </div>
-                <div class="row" style="margin-bottom: 7px;">
-                    <a href="">
-                        <img src="img/cd4.jpg" alt="" width="90%">
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('manager.playlists.hot-playlist')
     <div class="row">
         <div class="col-md-9">
             <hr>

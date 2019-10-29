@@ -23,6 +23,14 @@ class PlaylistController extends Controller
         return view('manager.playlists.show', compact('playlist', 'STT'));
     }
 
+    public function showHotPlaylist($id){
+        $STT = 1;
+        $hotPlaylists = Playlist::all()->sortByDesc('create_at')->take(5);
+        $hotPlaylist = Playlist::findOrFail($id);
+        return view('manager.playlists.hot-playlist', compact('STT','hotPlaylists', 'hotPlaylist'));
+
+    }
+
     public function store(Request $request)
     {
         if (!$request->name) {
@@ -49,5 +57,12 @@ class PlaylistController extends Controller
         $playlist = Playlist::find($id);
         $playlist->delete();
         return redirect()->back();
+    }
+
+    public function countPlaylist()
+    {
+        $playlist = Playlist::all();
+        $countByName = $playlist->count($playlist->name);
+        return view('manager.playlists.hot-playlist', compact('playlist', 'countByName'));
     }
 }

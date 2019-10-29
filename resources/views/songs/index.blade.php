@@ -127,7 +127,7 @@
     <div class="row">
         <div class="col-md-9">
             <hr>
-            <a href="#"><h3 style="color: blue;"> MV HOT</h3></a>
+            <a href="#"><h3 style="color: blue;"> PLAYLIST MỚI NHẤT</h3></a>
             <hr>
             <div class="row">
                 <div class="col-md-4">

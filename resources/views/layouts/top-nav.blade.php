@@ -120,7 +120,7 @@
                                         <ul class="multi-column-dropdown col-sm-8">
                                             <li><a href="{{ URL::to('/manage/songs') }}">Bài hát</a></li>
                                             <li class="divider"></li>
-{{--                                            <li><a href="{{ URL::to('singers.store') }}">Ca sĩ</a></li>--}}
+                                            {{--                                            <li><a href="{{ URL::to('singers.store') }}">Ca sĩ</a></li>--}}
 
                                             <li><a href="{{route('singers.index')}}">Ca sĩ</a></li>
 
@@ -173,18 +173,21 @@
                                 <ul class="dropdown-menu" role="menu">
                                     <li><a href="#contains">Bài hát</a></li>
                                     <li><a href="#its_equal">Ca sĩ</a></li>
-                                    <li><a href="#greather_than">Album</a></li>
                                     <li><a href="#less_than">Playlist</a></li>
                                     <li class="divider"></li>
                                     <li><a href="#all">Tất cả</a></li>
                                 </ul>
                             </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control" name="x" placeholder="Search term...">
-                            <span class="input-group-btn">
-				                    <button class="btn btn-default" type="button"><span
+                            <form action="{{route('songs.search')}}" method="get">
+                                <input type="hidden" name="search_param" value="all" id="search_param">
+                                <input type="text" class="form-control" name="keySearch"
+                                       placeholder="Search term...">
+                                <span class="input-group-btn">
+				                    <button class="btn btn-default" type="submit"><span
                                             class="glyphicon glyphicon-search"></span></button>
 				                </span>
+                            </form>
+
                         </div>
                     </div>
                 </div>

@@ -24,6 +24,12 @@
         @if (Session::has('success'))
             <p class="text-success">{{Session::get('success')}}</p>
         @endif
+        @if (Session::has('createdSingerSuccess'))
+            <p class="text-success">{{Session::get('createdSingerSuccess')}}</p>
+        @endif
+        @if (Session::has('createdArtistSuccess'))
+            <p class="text-success">{{Session::get('createdArtistSuccess')}}</p>
+        @endif
         @if (Session::has('errorImageFile'))
             <p class="text-danger">{{Session::get('errorImageFile')}}</p>
         @endif
@@ -35,6 +41,9 @@
         @endif
         @if (Session::has('errorSongInfo'))
             <p class="alert alert-danger">{{Session::get('errorSongInfo')}}</p>
+        @endif
+        @if (Session::has('errorDob'))
+            <p class="text-danger">{{Session::get('errorDob')}}</p>
         @endif
         <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
             @csrf

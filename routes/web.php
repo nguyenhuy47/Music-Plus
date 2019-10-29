@@ -20,6 +20,7 @@ Route::get('/', 'SongController@index')->name('songs.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/search', 'SongController@search')->name('songs.search');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'songs'], function () {
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
+
 
 
 });
@@ -41,6 +43,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
+        Route::get('/{id}/showHotPlaylist', 'PlaylistController@showHotPlaylist')->name('playlists.showHotPlaylist');
     });
 
     Route::group(['prefix' => 'singers'], function () {
