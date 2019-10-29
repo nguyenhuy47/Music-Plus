@@ -6,21 +6,21 @@
         <div class="col-md-4">
             <div class="thumbnail">
                 <a href="">
-                    <img src="img/al1.jpg" alt="album1">
+                    <img src="{{asset('img/al1.jpg')}}" alt="album1">
                 </a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
                 <a href="">
-                    <img src="img/al2.jpg" alt="album2">
+                    <img src="{{asset('img/al2.jpg')}}" alt="album2">
                 </a>
             </div>
         </div>
         <div class="col-md-4">
             <div class="thumbnail">
                 <a href="">
-                    <img src="img/al3.jpg" alt="album3">
+                    <img src="{{asset('img/al3.jpg')}}" alt="album3">
                 </a>
             </div>
         </div>

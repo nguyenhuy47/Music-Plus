@@ -1,6 +1,6 @@
 @extends('pages.index')
 @section('content')
-    <div class="container pt-5">
+    <div  class="container pt-5">
         <div class="row">
             @include('pages.slide')
             @include('pages.newsong')

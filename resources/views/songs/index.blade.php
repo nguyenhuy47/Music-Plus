@@ -37,7 +37,6 @@
                     <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">
                 </audio>
             </div>
-            <div class="social-plugin"></div>
         </div>
         </div>
         <div class="col-md-3" id="bxh" style="margin-top: 2px;">

@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-md-9">
 
-                <div style="width: 30%; margin-left: 35%;: ">
-                    <table border="1" class="table table-bordered text-center">
+                <div>
+                    <table class="table">
                         <thead class="thead-light">
                         <tr>
                             <th colspan="2" style="text-align: center"><b>{{strtoupper($singer->name) }}</b></th>
