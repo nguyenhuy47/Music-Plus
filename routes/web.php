@@ -35,6 +35,7 @@ Route::group(['prefix' => 'songs'], function () {
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
 });
 
+Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');
 
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
     Route::group(['prefix' => 'playlist'], function () {

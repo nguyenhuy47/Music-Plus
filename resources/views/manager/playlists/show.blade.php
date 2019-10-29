@@ -4,7 +4,8 @@
 <table border="1" class="table table-bordered text-center" style="width: 30%; margin-left: 35%;: ">
     <thead class="thead-light">
     <tr>
-        <th colspan="5" style="text-align: center">{{strtoupper($playlist->name)}}</th>
+        <th colspan="4" style="text-align: center">{{strtoupper($playlist->name)}}</th>
+        <th style="text-align: center"><a href="{{ route('playlists.playAll', $playlist->id) }}"><i class="fas fa-play-circle"></i></a></th>
     </tr>
     <tr>
         <td>STT</td>
