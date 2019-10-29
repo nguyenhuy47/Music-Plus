@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Model;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Comment extends Model
+{
+    public function commentList()
+    {
+        return $this->belongsTo('App\Model\CommentList');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\User');
+    }
+}
