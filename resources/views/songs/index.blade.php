@@ -67,7 +67,6 @@
             </div>
         </div>
     </div>
-    @yield('content')
     <div class="row">
         <div class="col-md-9">
             <hr style="border-color: white;">

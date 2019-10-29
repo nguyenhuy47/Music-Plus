@@ -12,16 +12,18 @@ class PlaylistController extends Controller
     public function index()
     {
         $STT = 1;
+        $songs = Song::all();
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
-        return view('manager.playlists.list', compact('playlists', 'STT'));
+        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
     }
 
     public function show($playlistId)
     {
         $STT = 1;
+        $songs = Song::all();
         $playlist = Playlist::find($playlistId);
-        return view('manager.playlists.show', compact('playlist', 'STT'));
+        return view('manager.playlists.show', compact('playlist', 'STT','songs'));
     }
 
     public function playAll($playlistId)
