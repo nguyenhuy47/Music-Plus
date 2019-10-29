@@ -10,4 +10,9 @@ class Playlist extends Model
     {
         return $this->belongsToMany('App\Model\Song');
     }
+
+    public function commentList()
+    {
+        return $this->hasOne('App\Model\CommentList');
+    }
 }

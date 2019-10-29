@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
+use App\Jobs\SetPathFile;
+use App\Jobs\UploadFile;
 use App\Model\Artist;
 use App\Model\Category;
 use App\Model\Playlist;
@@ -75,9 +77,6 @@ class SongController extends Controller
             $songFile = $request->file('song_file');
             $songFileExtension = $songFile->getClientOriginalExtension();
             $songFileName = str_replace(".$songFileExtension", "-" . Str::random(4) . ".$songFileExtension", $songFile->getClientOriginalName());
-            while (file_exists('../storage/app/public/upload/songs/' . $songFileName)) {
-                $songFileName = str_replace(".$songFileExtension", "-" . Str::random(4) . ".$songFileExtension", $songFile->getClientOriginalName());
-            }
             $songFileSize = $songFile->getClientSize();
             $song->file_name = $songFileName;
             $song->size = $songFileSize / 1000;//chuyen doi Byte -> Kilobyte
@@ -90,8 +89,12 @@ class SongController extends Controller
             return redirect()->route('songs.create');
         }
 
-        $songFile->storeAs('public/upload/songs', $songFileName);
+        $songFile->storeAs('/', $songFileName, 'public');
         $song->save();
+
+        UploadFile::dispatch($songFileName);
+        SetPathFile::dispatch($songFileName, $songFileExtension, $song->id);
+
         $song->artists()->attach($artistIds);
         $song->singers()->attach($singerIds);
         Session::flash('success', 'Tải bài hát thành công');

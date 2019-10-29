@@ -48,6 +48,7 @@
     <script src="{{asset('js/jquery-3.4.1.js')}}"></script>
     <script src="{{asset('js/jquery.tokeninput.js')}}"></script>
 
+
 {{--    ==================================================input suggest============================================--}}
     <script>
         jQuery(document).ready(function ($) {

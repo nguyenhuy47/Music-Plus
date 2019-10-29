@@ -85,7 +85,7 @@
                     <textarea class="form-control" name="lyric" rows="3"></textarea>
                 </div>
             </div>
-            <button type="submit">Upload</button>
+            <button type="submit">Tải lên</button>
         </form>
     </div>
 

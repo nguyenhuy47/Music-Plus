@@ -133,13 +133,14 @@
                                 </ul>
                             </li>
                         @endif
-                        <li><a href="{{ route('songs.create') }}">Upload</a></li>
+                        <li><a href="{{ route('songs.create') }}">Tải lên</a></li>
                     </ul> <!-- END_urQuanLy -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ url('/login') }} ">Login</a></li>
-                            <li><a href="{{ url('/register') }}">Register</a></li>
+                            <li><a href="{{ url('/login') }} ">Đăng nhập</a></li>
+
+                            <li><a href="{{ url('/register') }}">Đăng ký</a></li>
                         @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -152,13 +153,18 @@
                                         <a href="{{ url('/logout') }}"
                                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            Đăng xuất
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST"
                                               style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
+                                    </li>
+                                    <li>
+                                    <a class="dropdown-item" href="/profile">
+                                        Thông tin người dùng
+                                    </a>
                                     </li>
                                 </ul>
                             </li>

@@ -85,6 +85,11 @@
 <body data-vide-bg="video/snow">
 @include(' layouts.top-nav')
 <div class="container pt-5">
+    @if(!$song->path)
+        <div class="row">
+            <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
+        </div>
+    @else
     <div class="row">
         <div class="col-md-9">
             <div class="thumb">
@@ -94,22 +99,24 @@
                              alt="">
                     </div>
                     <div class="col-7 song-info">
-                       <h2> <div>{{$song->name}}</div></h2>
+                        <h2>
+                            <div>{{$song->name}}</div>
+                        </h2>
                         <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
                         <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
                     </div>
                 </div>
                 <div>
                     <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
-                        <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">
+                        <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
                     </audio>
                 </div>
             </div>
-{{--            <div class="player">--}}
-{{--                <audio controls autoplay>--}}
-{{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
-{{--                </audio>--}}
-{{--            </div>--}}
+            {{--            <div class="player">--}}
+            {{--                <audio controls autoplay>--}}
+            {{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
+            {{--                </audio>--}}
+            {{--            </div>--}}
             <div class="social-plugin"></div>
         </div>
         <div class="col-md-3" id="bxh" style="margin-top: 2px;">
@@ -125,6 +132,7 @@
             </div>
         </div>
     </div>
+    @endif
 
     <div class="social-plugin">
         <div>

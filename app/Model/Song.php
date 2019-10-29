@@ -34,4 +34,9 @@ class Song extends Model
     {
         return $this->belongsToMany('App\Model\Playlist');
     }
+
+    public function commentList()
+    {
+        return $this->hasOne('App\Model\CommentList', 'comment_list_id', 'id');
+    }
 }
