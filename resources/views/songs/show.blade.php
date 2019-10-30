@@ -267,21 +267,31 @@
             </div>
         </div>
     </div>
-    <div class="lyric" id="_divLyricHtml">
-        <div class="pd_name_lyric">
-            <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
-            <p class="name_post">
-                Nhạc sĩ:
-                @foreach($song->artists as $artist) {{$artist->name}}@endforeach
-            </p>
-            <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="lyric" id="_divLyricHtml">
+                    <div class="pd_name_lyric">
+                        <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
+                        <p class="name_post">
+                            Nhạc sĩ:
+                            @foreach($song->artists as $artist) {{$artist->name}}@endforeach
+                        </p>
+                        <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
 
-            <div>
-                <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
+                        <div>
+                            <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
+                        </div>
+                    </div>
+                </div>
             </div>
+            @include('pages.topic')
         </div>
-    </div>
+        <div class="row">
+            @include('pages.mv')
+            @include('pages.media')
+        </div>
 </div>
+@include('layouts.footer')
 <script>
     var player = new MediaElementPlayer('player');
 </script>
@@ -291,5 +301,4 @@
 </body>
 
 </html>
-
 

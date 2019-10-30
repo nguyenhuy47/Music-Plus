@@ -4,15 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArtistValidate;
 use App\Model\Artist;
-use Illuminate\Http\Request;
+use App\Model\Song;
 
 class ArtistController extends Controller
 {
 
     public function index()
     {
-        $artists = Artist::all();
-        return view('manager.artists.index', compact('artists'));
+        $STT = 1;
+        $songs = Song::all();
+        $artists = Artist::paginate(10);
+        return view('manager.artists.index', compact('artists','songs','STT'));
     }
 
     public function create()
@@ -32,8 +34,10 @@ class ArtistController extends Controller
 
     public function show($id)
     {
+        $STT = 1;
+        $songs = Song::all();
         $artist = Artist::findOrFail($id);
-        return view('manager.artists.show', compact('artist'));
+        return view('manager.artists.show', compact('artist','songs','STT'));
     }
 
     public function edit($id)

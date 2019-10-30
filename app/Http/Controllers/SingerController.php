@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SingerValidate;
 use App\Model\Singer;
 use App\Model\Song;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+
 
 class SingerController extends Controller
 {
     public function index()
     {
+        $STT = 1;
+        $songs = Song::all();
         $singers = Singer::all();
-        return view('singers.index', compact('singers'));
+        return view('singers.index', compact('singers','songs','STT'));
     }
 
     public function create()
@@ -34,8 +34,10 @@ class SingerController extends Controller
 
     public function show($id)
     {
+        $STT = 1;
+        $songs = Song::all();
         $singer = Singer::findOrFail($id);
-        return view('singers.show', compact('singer'));
+        return view('singers.show', compact('singer','songs','STT'));
     }
 
     public function edit($id)
