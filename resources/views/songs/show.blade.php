@@ -23,12 +23,18 @@
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
-    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.css')}}" rel="stylesheet">
     <style>
         .song-info {
             color: #21f8f8;
             text-align: center;
             position: center;
+        }
+
+        .player-control {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
         }
 
         .thumb {
@@ -39,6 +45,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            position: relative;
 
         }
 
@@ -125,7 +132,7 @@
                             <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
                         </div>
                     </div>
-                    <div>
+                    <div class="player-control">
                         <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
                             <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
                         </audio>
