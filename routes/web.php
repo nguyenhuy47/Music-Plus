@@ -20,7 +20,9 @@ Route::get('/', 'SongController@index')->name('songs.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/search', 'SongController@search')->name('songs.search');
+Route::get('/search', 'SearchController@searchByName')->name('search.searchByName');
+//Route::get('/search', 'SingerController@searchByName')->name('singers.searchByName');
+//Route::get('/search', 'PlaylistController@searchByName')->name('playlists.searchByName');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');

@@ -25,7 +25,9 @@
     <script type="text/javascript" href="js/Search.js"></script>
     <link rel="stylesheet" href="{{asset('css/style_menu.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('css/slider.css')}}">
-    <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/1cd0cba936.js"></script>
+    <script src="{{asset('js/typeahead.bundle.min.js')}}"></script>
+
 </head>
 <body data-vide-bg="video/snow">
 @include(' layouts.top-nav')
@@ -171,5 +173,45 @@
 <script src="{{asset('/js/jquery-ui/app.js')}}"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 <script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+{{--<script>--}}
+{{--    $(document).ready(function ($) {--}}
+{{--        var engine1 = new Bloodhound({--}}
+{{--            remote: {--}}
+{{--                url: '/search/name?value=%QUERY%',--}}
+{{--                wildcard: '%QUERY%'--}}
+{{--            },--}}
+{{--            datumTokenizer: Bloodhound.tokenizers.whitespace('value'),--}}
+{{--            queryTokenizer: Bloodhound.tokenizers.whitespace--}}
+{{--        });--}}
+{{--    });--}}
+
+{{--    $(".search-input").typeahead({--}}
+{{--        hint: true,--}}
+{{--        highlight: true,--}}
+{{--        minLength: 1--}}
+{{--    }, [--}}
+{{--        {--}}
+{{--            source: engine1.ttAdapter(),--}}
+{{--            name: 'songs-name',--}}
+{{--            display: function (data) {--}}
+{{--                return data.name;--}}
+{{--            },--}}
+{{--            templates: {--}}
+{{--                empty: [--}}
+{{--                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"><div class="list-group-item">Nothing found.</div></div>'--}}
+{{--                ],--}}
+{{--                header: [--}}
+{{--                    '<div class="header-title">Name</div><div class="list-group search-results-dropdown"></div>'--}}
+{{--                ],--}}
+{{--                suggestion: function (data) {--}}
+{{--                    return '<a href="/students/' + data.id + '" class="list-group-item">' + data.name + '</a>';--}}
+{{--                }--}}
+{{--            }--}}
+{{--        }--}}
+{{--    ]);--}}
+
+
+{{--</script>--}}
+
 </body>
 </html>

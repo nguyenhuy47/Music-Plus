@@ -154,7 +154,7 @@ class SongController extends Controller
        return redirect()->back();
     }
 
-    public function search(Request $request){
+    public function searchByName(Request $request){
         $STT = 1;
         $songs = Song::where('name','LIKE','%'.$request->keySearch.'%')->get();
         return view('songs.search',compact('songs','STT'));

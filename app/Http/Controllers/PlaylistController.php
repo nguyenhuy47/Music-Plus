@@ -65,4 +65,12 @@ class PlaylistController extends Controller
         $countByName = $playlist->count($playlist->name);
         return view('manager.playlists.hot-playlist', compact('playlist', 'countByName'));
     }
+
+    public function searchByName(Request $request){
+        $STT = 1;
+        $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
+        return view('manager.playlists.search',compact('playlists','STT'));
+
+    }
+
 }

@@ -162,39 +162,55 @@
                                         </form>
                                     </li>
                                     <li>
-                                    <a class="dropdown-item" href="/profile">
-                                        Thông tin người dùng
-                                    </a>
+                                        <a class="dropdown-item" href="/profile">
+                                            Thông tin người dùng
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                         @endif
                     </ul> <!-- END_urLOGIN -->
-                    <div class="row" style="float: right; margin-right: 1em">
-                        <div class="input-group" style="margin-top: 10px;padding-left: 50px; width: 48em;">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Tìm kiếm theo</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#contains">Bài hát</a></li>
-                                    <li><a href="#its_equal">Ca sĩ</a></li>
-                                    <li><a href="#less_than">Playlist</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#all">Tất cả</a></li>
-                                </ul>
-                            </div>
-                            <form action="{{route('songs.search')}}" method="get">
+
+                    <div class="nav navbar-nav" style="float: right; margin-right: 1em">
+                        <form action="{{route('search.searchByName')}}" method="get" class="row">
+                            {{--                            <div class="input-group" style="margin-top: 10px;padding-left: 50px; width: 48em;">--}}
+                            {{--                                <div class="input-group-btn search-panel">--}}
+                            {{--                                    <button type="button" class="btn btn-default dropdown-toggle"--}}
+                            {{--                                            data-toggle="dropdown">--}}
+                            {{--                                        <span id="search_concept">Tìm kiếm theo</span>--}}
+                            {{--                                    </button>--}}
+
+                            {{--                                <ul class="dropdown-menu" role="menu">--}}
+
+                            {{--                                    <li><a href="#contains">Bài hát</a></li>--}}
+                            {{--                                    <li><a href="#its_equal">Ca sĩ</a></li>--}}
+                            {{--                                    <li><a href="#less_than">Playlist</a></li>--}}
+                            {{--                                    <li class="divider"></li>--}}
+                            {{--                                    <li><a href="#all">Tất cả</a></li>--}}
+                            <div>
                                 <input type="hidden" name="search_param" value="all" id="search_param">
                                 <input type="text" class="form-control" name="keySearch"
-                                       placeholder="Search term...">
-                                <span class="input-group-btn">
-				                    <button class="btn btn-default" type="submit"><span
-                                            class="glyphicon glyphicon-search"></span></button>
-				                </span>
-                            </form>
+                                       placeholder="Tìm kiếm...">
+                                <span class="input-group-btn"></span>
+                            </div>
+                            <div>
+                                <select class="form-control" name="search" id="">
+                                    <option value="songs">Bài hát</option>
+                                    <option value="singers">Ca sĩ</option>
+                                    <option value="playlists">Playlist</option>
+                                    <option value="all">ALL</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit"><span
+                                        class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                            {{--                                </ul>--}}
+                            {{--                            </div>--}}
+                            {{--                            </div>--}}
+                        </form>
 
-                        </div>
                     </div>
                 </div>
                 <!--/.navbar-collapse-->
