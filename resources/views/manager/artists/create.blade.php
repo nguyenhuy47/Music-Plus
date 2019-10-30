@@ -25,7 +25,7 @@
             <label>Tiểu sử</label>
             <textarea name="story" class="form-control" rows="3"></textarea>
         </div>
-        <button type="submit">Thêm</button>
+        <button class="btn btn-primary" type="submit">Thêm</button>
     </form>
     </div>
 @endsection

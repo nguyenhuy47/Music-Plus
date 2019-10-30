@@ -1,9 +1,10 @@
 @extends ('layouts.app')
 @section('content')
+    <div class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
-                @foreach ($errors->all() as $error)
+            @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
@@ -24,6 +25,7 @@
             <label>Tiểu sử</label>
             <textarea name="story" class="form-control" rows="3">{{$artist->story}}</textarea>
         </div>
-        <button type="submit">Thêm</button>
+        <button class="btn btn-primary" type="submit">Thêm</button>
     </form>
+    </div>
 @endsection
