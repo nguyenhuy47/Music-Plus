@@ -26,11 +26,24 @@ class FormUploadRequest extends FormRequest
         return [
             'name' => 'required',
             'song_file' => 'required|file|max:128000',
-            'image_file' => 'required|file|max:30000',
+            'image_file' => 'required|file|max:3000',
             'singer_ids' => 'required',
             'artist_ids' => 'required',
             'category_id' => 'required',
 
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên bài hát',
+            'song_file.required' => 'Bạn chưa chọn bài hát',
+            'song_file.max' => 'File qua lớn, kích thước tối đa là 128 MB',
+            'image_file.required' => 'Bạn chưa chọn ảnh',
+            'image_file.max' => 'File qua lớn, kích thước tối đa là 3 MB',
+            'singer_ids.required' => 'Bạn chưa chọn ca sỹ',
+            'artist_ids.required' => 'Bạn chưa chọn nhạc sỹ',
         ];
     }
 }

@@ -93,7 +93,7 @@
     <div class="row">
         <div class="col-md-9">
             <div class="media-wrapper">
-                <audio id="player" preload="none" controls autoplay width="750">
+                <audio id="player" preload controls autoplay width="750">
                     @foreach($playlist->songs as $song)
                         <source src="https://drive.google.com/uc?id={{ $song->path }}" type="audio/mp3"
                                 title="{{ $song->name }}"
