@@ -13,7 +13,7 @@ class ArtistController extends Controller
     {
         $STT = 1;
         $songs = Song::all();
-        $artists = Artist::all();
+        $artists = Artist::paginate(10);
         return view('manager.artists.index', compact('artists','songs','STT'));
     }
 

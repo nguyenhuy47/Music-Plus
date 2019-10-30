@@ -24,6 +24,8 @@
                     @endforeach
                     </tbody>
                 </table>
+                {{ $artists->links() }}
+
             </div>
             @include('pages.newsong')
         </div>

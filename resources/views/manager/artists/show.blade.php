@@ -39,6 +39,7 @@
                 </table>
 
             </div>
+
             @include('pages.newsong')
         </div>
         <div class="row">
