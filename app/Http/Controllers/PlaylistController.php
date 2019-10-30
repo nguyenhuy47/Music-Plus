@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Comment;
+use App\Model\CommentList;
 use App\Model\Playlist;
 use App\Model\Song;
 use Illuminate\Http\Request;
@@ -32,7 +34,8 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
-        return view('playlists.show', compact('playlist', 'songs','STT','user'));
+        $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
+        return view('playlists.show', compact('playlist', 'songs','STT','user', 'comments'));
     }
 
     public function store(Request $request)
@@ -44,6 +47,9 @@ class PlaylistController extends Controller
         $playlist = new Playlist();
         $playlist->name = $request->name;
         $playlist->user_id = $user->id;
+        $commentList = new CommentList();
+        $commentList->save();
+        $playlist->comment_list_id = $commentList->id;
         $playlist->save();
         return redirect()->back();
 

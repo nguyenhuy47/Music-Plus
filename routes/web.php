@@ -72,3 +72,9 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
 
     });
 });
+
+Route::group(['prefix' => 'comment', 'middleware' => ['login']], function () {
+    Route::post('/store/{commentListId}', 'CommentController@store')->name('comments.store');
+    Route::get('/{id}/destroy', 'CommentController@destroy')->name('comments.destroy');
+    Route::post('/{id}/update', 'CommentController@update')->name('comments.update');
+});
