@@ -92,8 +92,8 @@
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">
-            <div class="media-wrapper">
-                <audio id="player" preload="none" controls autoplay width="750">
+            <div class="media-wrapper col-md-12">
+                <audio id="player" preload controls autoplay width="750">
                     @foreach($playlist->songs as $song)
                         <source src="https://drive.google.com/uc?id={{ $song->path }}" type="audio/mp3"
                                 title="{{ $song->name }}"
@@ -101,8 +101,33 @@
                     @endforeach
                 </audio>
             </div>
-        </div>        @include('pages.newsong')
+        </div>
+        @include('pages.newsong')
     </div>
+    @if($playlist->comment_list_id)
+        <div class="comment col-md-9">
+            <div class="create-comment">
+                <form action="{{route('comments.store', $playlist->comment_list_id)}}" method="post">
+                    @csrf
+                    <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
+                    <button class="btn btn-primary" type="submit">Bình luận</button>
+                </form>
+            </div>
+            <hr>
+            <div class="show-comment col-md-12">
+                @foreach($comments as $comment)
+                    <div class="row">
+                        <div class="col-md-3"><b>avatar</b></div>
+                        <div class="col-md-9">
+                            <div class="col-md-12"><b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
+                            <div class="col-md-12">{{$comment->content}}</div>
+                        </div>
+                    </div>
+                    <hr>
+                @endforeach
+            </div>
+        </div>
+    @endif
     <div class="row">
         @include('pages.album')
         @include('pages.topic')

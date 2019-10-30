@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SingerValidate;
+use App\Model\Comment;
+use App\Model\CommentList;
 use App\Model\Singer;
 use App\Model\Song;
 
@@ -28,6 +30,9 @@ class SingerController extends Controller
         $singer->name = $request->name;
         $singer->dob = $request->dob;
         $singer->story = $request->story;
+        $commentList = new CommentList();
+        $commentList->save();
+        $singer->comment_list_id = $commentList->id;
         $singer->save();
         return redirect()->back();
     }
@@ -37,7 +42,8 @@ class SingerController extends Controller
         $STT = 1;
         $songs = Song::all();
         $singer = Singer::findOrFail($id);
-        return view('singers.show', compact('singer','songs','STT'));
+        $comments = Comment::where('comment_list_id', '=', $singer->comment_list_id)->get()->sortByDesc('created_at');
+        return view('singers.show', compact('singer','songs','STT', 'comments'));
     }
 
     public function edit($id)
