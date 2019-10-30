@@ -9,9 +9,9 @@
                         <thead class="thead-light">
                         <tr>
                             <th colspan="2" style="text-align: center"><b>{{strtoupper($singer->name) }}</b></th>
+                        <tr style="text-align: left">
                         </tr>
                         </thead>
-                        <tr style="text-align: left">
                             <td COLSPAN="2"><b>THÔNG TIN</b></td>
                         </tr>
 
