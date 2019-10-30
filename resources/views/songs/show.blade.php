@@ -131,11 +131,6 @@
                         </audio>
                     </div>
                 </div>
-                {{--            <div class="player">--}}
-                {{--                <audio controls autoplay>--}}
-                {{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
-                {{--                </audio>--}}
-                {{--            </div>--}}
                 <div class="social-plugin"></div>
             </div>
             <div class="col-md-3" id="bxh" style="margin-top: 2px;">
@@ -276,7 +271,7 @@
             </p>
             <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
 
-            <div>
+            <div class="col-md-9">
                 <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
             </div>
             @if($song->comment_list_id)
@@ -284,7 +279,7 @@
                     <div class="create-comment">
                         <form action="{{route('comments.store', $song->comment_list_id)}}" method="post">
                             @csrf
-                            <textarea name="content" cols="30" rows="5" class="form-control"></textarea>
+                            <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
                             <button class="btn btn-primary" type="submit">Bình luận</button>
                         </form>
                     </div>
