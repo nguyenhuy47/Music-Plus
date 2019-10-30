@@ -1,0 +1,86 @@
+ @media (min-width:900px) {
+                .dropdown:hover .dropdown-menu {
+                    display: block;
+
+                }
+                .dropdown .dropdown-menu{
+                    display: none;
+                }
+
+            }
+			/*#menu{*/
+			/*	border-top: #8B8B00 solid 1px;*/
+			/*}*/
+            .navbar-default{
+                background: none;
+                padding: 0px;
+                border-width: 0px 0px 5px 0px;
+                border-color: #009431;
+                border-radius: 0px;
+            }
+
+            .dropdown-toggle:hover{
+                color: #FFFFFF;
+            }
+
+
+            .dropdown-menu {
+                min-width: 200px;
+            }
+            .dropdown-menu.columns-2{
+                min-width: 500px;
+            }
+            .dropdown-menu.columns-3 {
+                min-width: 600px;
+            }
+            .dropdown-menu li a {
+                padding: 5px 15px;
+                font-weight: 300;
+            }
+            .multi-column-dropdown {
+                list-style: none;
+            }
+            .multi-column-dropdown li a {
+                display: block;
+                clear: both;
+                line-height: 1.428571429;
+                color: #333;
+                white-space: normal;
+            }
+            .multi-column-dropdown li a:hover {
+                text-decoration: none;
+                color: #262626;
+                background-color: #f5f5f5;
+            }
+            .navbar-nav > li > .dropdown-menu{
+                margin-top: 3px;
+            }
+            .navbar-default .navbar-nav > li > a {
+                color: #777;
+                padding-top: 15px;
+                padding-bottom: 19px;
+                margin-bottom: -4px;
+            }
+            @media (max-width: 767px) {
+                .dropdown-menu.multi-column {
+                    min-width: 240px !important;
+                    overflow-x: hidden;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .content {
+                    width: 90%;
+                    margin: 50px auto;
+                    padding: 10px;
+                }
+            }
+            @media (min-width: 768px) and (max-width:1023px) {
+                .dropdown-menu.columns-2 {
+                    margin-left: -100px;
+                }
+
+                .dropdown-menu.columns-3 {
+                    margin-left: -300px;
+                }
+            }
