@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    <div class="container pt-5">
+    <div class="col-9 container">
         @if (Session::has('success'))
             <p class="text-success">{{Session::get('success')}}</p>
         @endif
@@ -69,7 +69,7 @@
                     <textarea class="form-control" name="lyric" rows="3"></textarea>
                 </div>
             </div>
-            <button type="submit">Tải lên</button>
+            <button class="btn btn-success" type="submit">Tải lên</button>
         </form>
     </div>
 

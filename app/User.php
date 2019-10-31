@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravolt\Avatar\Avatar;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -17,6 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name', 'email', 'password',
+        'avatar_path'
     ];
 
     /**
@@ -45,5 +47,17 @@ class User extends Authenticatable implements MustVerifyEmail
     public function playlists()
     {
         return $this->hasMany('App\Model\Playlist');
+    }
+    public function getAvatarPathAttribute()
+    {
+        if (empty($this->attributes['avatar'])) {
+            return Avatar::create($this->attributes['name'])
+                ->setDimension(30, 30)
+                ->setFontSize(10)
+                ->setShape('round')
+                ->toBase64();
+        }
+
+        return $this->attributes['avatar'];
     }
 }

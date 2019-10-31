@@ -105,6 +105,14 @@
       <path value="$PROJECT_DIR$/vendor/google/auth" />
       <path value="$PROJECT_DIR$/vendor/google/apiclient" />
       <path value="$PROJECT_DIR$/vendor/nao-pon/flysystem-google-drive" />
+      <path value="$PROJECT_DIR$/vendor/intervention/image" />
+      <path value="$PROJECT_DIR$/vendor/laravolt/avatar" />
+      <path value="$PROJECT_DIR$/vendor/rackbeat/laravel-ui-avatars" />
+      <path value="$PROJECT_DIR$/vendor/lasserafn/php-string-script-language" />
+      <path value="$PROJECT_DIR$/vendor/lasserafn/php-initial-avatar-generator" />
+      <path value="$PROJECT_DIR$/vendor/lasserafn/php-initials" />
+      <path value="$PROJECT_DIR$/vendor/overtrue/pinyin" />
+      <path value="$PROJECT_DIR$/vendor/meyfa/php-svg" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.2" />

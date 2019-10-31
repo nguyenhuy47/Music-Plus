@@ -27,11 +27,11 @@
             @endif
         </div>
         <div class="row">
-            <div class="col-2">
+            <div class="col-4">
                 <div class="profile-header-container">
-                    <div class="profile-header-img">
-                        <img id="image" height="150" width="150" class="rounded-circle"
-                             src="{{asset('/storage/avatars/'.$user->avatar) }}"/>
+                    <div class="col-4 profile-header-img">
+                        <img id="image" height="200" width="200" class="rounded-circle"
+                             src=" @if(!$user->avatar){{asset('/storage/avatars/default-ava.jpg') }} @else {{asset('/storage/avatars/'.$user->avatar) }} @endif"/>
                         <!-- badge -->
                         <div class="rank-label-container">
                         </div>
@@ -69,10 +69,11 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="exampleFormControlInput1">ẢNH ĐẠI DIỆN</label>
                         <input type="file" class="form-control-file" name="avatar" id="avatarFile"
                                aria-describedby="fileHelp"
                                onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                               class="form-control-file">
+                        >
                         <small id="fileHelp" class="form-text text-muted">Vui lòng tải lên một tập tin hình ảnh hợp lệ.
                             Kích thước của hình ảnh không được quá 2MB.</small>
                         <button type="submit" class="btn btn-primary">Cập nhập</button>
