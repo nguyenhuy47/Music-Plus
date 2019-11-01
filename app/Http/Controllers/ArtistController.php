@@ -14,7 +14,7 @@ class ArtistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $artists = Artist::paginate(10);
-        return view('manager.artists.index', compact('artists','songs','STT'));
+        return view('manager.artists.index', compact('artists', 'songs', 'STT'));
     }
 
     public function create()
@@ -37,7 +37,7 @@ class ArtistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $artist = Artist::findOrFail($id);
-        return view('manager.artists.show', compact('artist','songs','STT'));
+        return view('manager.artists.show', compact('artist', 'songs', 'STT'));
     }
 
     public function edit($id)
@@ -61,5 +61,14 @@ class ArtistController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function guestShow($id)
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $artist = Artist::findOrFail($id);
+        return view('artists.show', compact('artist', 'songs', 'STT'));
+
     }
 }

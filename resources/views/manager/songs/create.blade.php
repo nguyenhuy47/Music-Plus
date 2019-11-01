@@ -1,6 +1,5 @@
 @extends('layouts.app')
 @section('content')
-
     <div class="container pt-5">
         @if (Session::has('success'))
             <p class="text-success">{{Session::get('success')}}</p>

@@ -16,12 +16,12 @@ class SingerController extends Controller
         $STT = 1;
         $songs = Song::all();
         $singers = Singer::all();
-        return view('singers.index', compact('singers','songs','STT'));
+        return view('manager.singers.index', compact('singers','songs','STT'));
     }
 
     public function create()
     {
-        return view('singers.create');
+        return view('manager.singers.create');
     }
 
     public function store(SingerValidate $request)
@@ -43,13 +43,13 @@ class SingerController extends Controller
         $songs = Song::all();
         $singer = Singer::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $singer->comment_list_id)->get()->sortByDesc('created_at');
-        return view('singers.show', compact('singer','songs','STT', 'comments'));
+        return view('manager.singers.show', compact('singer','songs','STT', 'comments'));
     }
 
     public function edit($id)
     {
         $singer =  Singer::findOrfail($id);
-        return view('singers.edit', compact('singer'));
+        return view('manager.singers.edit', compact('singer'));
     }
 
 

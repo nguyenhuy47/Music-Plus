@@ -20,19 +20,31 @@ Route::get('/', 'SongController@index')->name('songs.index');
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('profile', 'UserController@profile');
+Route::get('profile', 'UserController@profile')->middleware('login');
 Route::post('profile', 'UserController@update_avatar');
 
 
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
+
+
 Route::group(['prefix' => 'songs'], function () {
     Route::get('/', 'SongController@index')->name('songs.index');
     Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
+});
+
+Route::group(['prefix' => 'guest.singers'], function () {
+    Route::get('/', 'SingerController@index')->name('guest.singers.index');
+    Route::get('/{id}/play', 'SingerController@show')->name('guest.singers.play');
+});
+
+Route::group(['prefix' => 'guest.artists'], function () {
+    Route::get('/', 'ArtistController@guestIndex')->name('guest.artists.index');
+    Route::get('/{id}/play', 'ArtistController@guestShow')->name('guest.artists.play');
 });
 
 Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');

@@ -4,6 +4,7 @@
         <div class="row">
             <div class="col-md-9">
                 <div>
+                    <a class="btn btn-group bg-primary" href="{{route('singers.create')}}">THÊM CA SĨ</a>
                     <table class="table">
                         <thead class="thead-light">
                         <tr>

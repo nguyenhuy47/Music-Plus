@@ -272,11 +272,15 @@
     <div class="lyric" id="_divLyricHtml">
         <div class="pd_name_lyric">
             <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
-            <p class="name_post">
                 Nhạc sĩ:
-                @foreach($song->artists as $artist) {{$artist->name}}@endforeach
-            </p>
-            <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
+            @foreach($song->artists as $artist)
+                <a href="{{route('guest.artists.play',$artist->id)}}">{{$artist->name}}@endforeach</a>
+            ca sĩ:
+            @foreach($song->singers as $singer)
+                <a href="{{route('guest.singers.play',$singer->id)}}">{{$singer->name}}</a>
+            @endforeach
+
+            <p class="name_post">Lời đăng bởi: {{$song->user->name }}</p>
 
             <div class="col-md-9">
                 <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
@@ -296,7 +300,8 @@
                             <div class="row">
                                 <div class="col-md-3"><b>avatar</b></div>
                                 <div class="col-md-9">
-                                    <div class="col-md-12"><b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
+                                    <div class="col-md-12">
+                                        <b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
                                     <div class="col-md-12">{{$comment->content}}</div>
                                 </div>
                             </div>
