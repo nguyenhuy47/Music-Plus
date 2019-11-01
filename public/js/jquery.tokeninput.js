@@ -625,7 +625,7 @@ $.TokenList = function (input, url_or_data, settings) {
     function hide_dropdown () {
         setTimeout(function () {
             dropdown.hide().empty();
-        }, 150);
+        }, 200);
         selected_dropdown_item = null;
     }
 
