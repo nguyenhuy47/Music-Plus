@@ -18,12 +18,20 @@
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
-    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.min.css')}}" rel="stylesheet">
-    <style>
+
+    <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
+    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.css')}}" rel="stylesheet">
+   <style>
         .song-info {
             color: #21f8f8;
             text-align: center;
             position: center;
+        }
+
+        .player-control {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
         }
 
         .thumb {
@@ -34,6 +42,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            position: relative;
 
         }
 
@@ -87,51 +96,60 @@
 <div class="container pt-5">
     @if(!$song->path)
         <div class="row">
-            <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
+            <div class="col-md-9">
+                <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
+            </div>
+            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
+                <div class="thumbnail" style="border-color: blue;">
+                    <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
+                    <hr>
+                    @foreach($songs as $key => $baihat)
+                        <div class="caption">
+                            <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
+                                        style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     @else
-    <div class="row">
-        <div class="col-md-9">
-            <div class="thumb">
-                <div class="row">
-                    <div class="col-5">
-                        <img class="dia-cd" src="https://drive.google.com/uc?id=14_VgXAjKeCQ5MLsBsMA2hqJfr-DTObXd"
-                             alt="">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="thumb">
+                    <div class="row">
+                        <div class="col-5">
+                            <img class="dia-cd" src="https://drive.google.com/uc?id=14_VgXAjKeCQ5MLsBsMA2hqJfr-DTObXd"
+                                 alt="">
+                        </div>
+                        <div class="col-7 song-info">
+                            <h2>
+                                <div>{{$song->name}}</div>
+                            </h2>
+                            <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
+                            <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
+                        </div>
                     </div>
-                    <div class="col-7 song-info">
-                        <h2>
-                            <div>{{$song->name}}</div>
-                        </h2>
-                        <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
-                        <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
+                    <div class="player-control">
+                        <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
+                            <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
+                        </audio>
                     </div>
                 </div>
-                <div>
-                    <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
-                        <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
-                    </audio>
+                <div class="social-plugin"></div>
+            </div>
+            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
+                <div class="thumbnail" style="border-color: blue;">
+                    <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
+                    <hr>
+                    @foreach($songs as $key => $baihat)
+                        <div class="caption">
+                            <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
+                                        style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            {{--            <div class="player">--}}
-            {{--                <audio controls autoplay>--}}
-            {{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
-            {{--                </audio>--}}
-            {{--            </div>--}}
-            <div class="social-plugin"></div>
         </div>
-        <div class="col-md-3" id="bxh" style="margin-top: 2px;">
-            <div class="thumbnail" style="border-color: blue;">
-                <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
-                <hr>
-                @foreach($songs as $key => $baihat)
-                    <div class="caption">
-                        <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
-                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
     @endif
 
     <div class="social-plugin">
@@ -257,9 +275,33 @@
             </p>
             <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
 
-            <div>
+            <div class="col-md-9">
                 <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
             </div>
+            @if($song->comment_list_id)
+                <div class="comment col-md-9">
+                    <div class="create-comment">
+                        <form action="{{route('comments.store', $song->comment_list_id)}}" method="post">
+                            @csrf
+                            <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
+                            <button class="btn btn-primary" type="submit">Bình luận</button>
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="show-comment col-md-12">
+                        @foreach($comments as $comment)
+                            <div class="row">
+                                <div class="col-md-3"><b>avatar</b></div>
+                                <div class="col-md-9">
+                                    <div class="col-md-12"><b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
+                                    <div class="col-md-12">{{$comment->content}}</div>
+                                </div>
+                            </div>
+                            <hr>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 </div>

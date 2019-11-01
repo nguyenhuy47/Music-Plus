@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 Route::get('/', 'SongController@index')->name('songs.index');
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@searchByName')->name('search.searchByName');
@@ -37,6 +37,7 @@ Route::group(['prefix' => 'songs'], function () {
 
 });
 
+Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');
 
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
     Route::group(['prefix' => 'playlist'], function () {
@@ -73,4 +74,10 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/{id}/update', 'ArtistController@update')->middleware('login')->name('artists.update');
 
     });
+});
+
+Route::group(['prefix' => 'comment', 'middleware' => ['login']], function () {
+    Route::post('/store/{commentListId}', 'CommentController@store')->name('comments.store');
+    Route::get('/{id}/destroy', 'CommentController@destroy')->name('comments.destroy');
+    Route::post('/{id}/update', 'CommentController@update')->name('comments.update');
 });

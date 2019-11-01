@@ -201,7 +201,7 @@
                                     <option value="all">ALL</option>
                                 </select>
                             </div>
-                            <div>
+                            <div class="bg">
                                 <button class="btn btn-primary" type="submit"><span
                                         class="glyphicon glyphicon-search"></span></button>
                                 </span>

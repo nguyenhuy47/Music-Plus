@@ -1,43 +1,9 @@
-{{--<!doctype html>--}}
-{{--<html lang="en">--}}
-{{--<head>--}}
-{{--    <meta charset="UTF-8">--}}
-{{--    <meta name="viewport"--}}
-{{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
-{{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
-{{--    <title>Document</title>--}}
-
 @extends('layouts.app')
 @section('content')
 
     <div class="container pt-5">
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         @if (Session::has('success'))
             <p class="text-success">{{Session::get('success')}}</p>
-        @endif
-        @if (Session::has('createdSingerSuccess'))
-            <p class="text-success">{{Session::get('createdSingerSuccess')}}</p>
-        @endif
-        @if (Session::has('createdArtistSuccess'))
-            <p class="text-success">{{Session::get('createdArtistSuccess')}}</p>
-        @endif
-        @if (Session::has('errorImageFile'))
-            <p class="text-danger">{{Session::get('errorImageFile')}}</p>
-        @endif
-        @if (Session::has('errorSongFile'))
-            <p class="text-danger">{{Session::get('errorSongFile')}}</p>
-        @endif
-        @if (Session::has('error'))
-            <p class="text-danger">{{Session::get('error')}}</p>
         @endif
         @if (Session::has('errorSongInfo'))
             <p class="alert alert-danger">{{Session::get('errorSongInfo')}}</p>
@@ -52,22 +18,43 @@
                     <label>Bài hát</label>
                     <input type="text" class="form-control" name="name" placeholder="Tên bài hát">
                 </div>
+                @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label for="exampleFormControlFile1">Upload bài hát</label>
                     <input type="file" class="form-control-file" name="song_file">
                 </div>
+                @error('song_file')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @if (Session::has('errorSongFile'))
+                    <div class="text-danger">{{Session::get('errorSongFile')}}</div>
+                @endif
                 <div class="form-group">
                     <label>Ảnh bài hát</label>
                     <input type="file" class="form-control-file" name="image_file">
                 </div>
+                @error('image_file')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
+                @if (Session::has('errorImageFile'))
+                    <p class="text-danger">{{Session::get('errorImageFile')}}</p>
+                @endif
                 <div class="form-group">
                     <label>Ca sĩ</label>
                     <input type="text" class="form-control" id="list_singer" name="singer_ids">
                 </div>
+                @error('singer_ids')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label>Nhạc sĩ</label>
                     <input type="text" class="form-control" id="list_artist" name="artist_ids">
                 </div>
+                @error('artist_ids')
+                <div class="alert alert-danger">{{ $message }}</div>
+                @enderror
                 <div class="form-group">
                     <label>Thể loại</label>
                     <select name="category_id" class="form-control">

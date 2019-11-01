@@ -65,10 +65,10 @@ class SingerController extends Controller
         //
     }
 
-    public function searchByName(Request $request){
-        $STT = 1;
-        $singers = Singer::where('name','LIKE','%'.$request->keySearch.'%')->get();
-        return view('singers.search',compact('singers','STT'));
-
-    }
+//    public function searchByName(Request $request){
+//        $STT = 1;
+//        $singers = Singer::where('name','LIKE','%'.$request->keySearch.'%')->get();
+//        return view('singers.search',compact('singers','STT'));
+//
+//    }
 }

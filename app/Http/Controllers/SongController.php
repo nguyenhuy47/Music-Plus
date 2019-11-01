@@ -7,6 +7,8 @@ use App\Jobs\SetPathFile;
 use App\Jobs\UploadFile;
 use App\Model\Artist;
 use App\Model\Category;
+use App\Model\Comment;
+use App\Model\CommentList;
 use App\Model\Playlist;
 use App\Model\Singer;
 use App\Model\Song;
@@ -30,7 +32,8 @@ class SongController extends Controller
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        return view('songs.show', compact('song','songs','STT', 'user'));
+        $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
+        return view('songs.show', compact('song','songs','STT', 'user', 'comments'));
 
 
     }
@@ -85,11 +88,14 @@ class SongController extends Controller
                 return redirect()->route('songs.create');
             }
         } else {
-            Session::flash('error', 'Bạn chưa chọn file');
+            Session::flash('errorSongFile', 'Bạn chưa chọn file');
             return redirect()->route('songs.create');
         }
 
         $songFile->storeAs('/', $songFileName, 'public');
+        $commentList = new CommentList();
+        $commentList->save();
+        $song->comment_list_id = $commentList->id;
         $song->save();
 
         UploadFile::dispatch($songFileName);

@@ -1,5 +1,6 @@
 @extends ('layouts.app')
 @section('content')
+    <div class="container">
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
@@ -11,8 +12,8 @@
     @endif
     <form method="post" action="{{route('singers.store')}}">
         @csrf
-        <div style="width: 30%; margin-left: 35%;: ">
-            <table border="0" class="table table-bordered text-center">
+        <div>
+            <table class="table">
                 <thead class="thead-light">
                 <tr>
                     <th colspan="2" style="text-align: center">THÊM MỚI CA SĨ</th>
@@ -39,4 +40,5 @@
             <button CLASS="btn btn-primary" type="submit">LƯU</button>
         </div>
     </form>
+    </div>
 @endsection

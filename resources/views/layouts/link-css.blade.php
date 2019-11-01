@@ -12,8 +12,6 @@
 <link rel="stylesheet" href="{{asset('css/slider.css')}}">
 <link rel="stylesheet" href="{{asset('css/token-input.css')}} ">
 <link rel="stylesheet" href="{{asset('css/token-input-facebook.css')}}">
-<link rel="stylesheet" href="{{asset('css/token-input.css')}}">
-<link rel="stylesheet" href="{{asset('css/token-input-facebook.css')}}">
 {{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">--}}
 <script>
     var csrfToken = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
