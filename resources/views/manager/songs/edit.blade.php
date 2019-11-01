@@ -26,11 +26,10 @@
 
     {{--    </script>--}}
 
-    <div class="col-12 col-md-12" style="margin-left: 35%">
-        <div class="row" style="margin: auto">
+    <div class="container">
             <form method="post" action="{{route('songs.update', $song->id)}}" enctype="multipart/form-data">
                 @csrf
-                <div class="col-12" style="padding-top: 10px">
+                <div>
                     <h3>CHỈNH SỬA THÔNG TIN BÀI HÁT</h3>
                 </div>
                 <div>
@@ -42,15 +41,24 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleFormControlFile1">File</label>
-                        <input type="text" class="form-control-file" name="song_file" value="{{ $song->file_name }}">
+                        <input type="text" class="form-control-file" name="song_file" value="{{ $song->file_name }}" readonly>
                     </div>
                     <div class="form-group">
                         <label>Ảnh bài hát</label><br>
-                        <img id="blaha" src="{{asset('storage/upload/images/'.$song->image)}}" alt=""
-                             style="width: 80px">
+                        @if($song->image == '')
+                            <img id="blaha" height="150" width="150"
+                                 src="https://playercdn.listenlive.co/templates/StandardPlayerV4/webroot/img/default-cover-art.png"/>
+                        @else
+                            <img id="blaha" height="150" width="150"
+                                 src="{{asset('/storage/public/upload/images/'.$song->image) }}"/>
+                        @endif
                         <br>
                         <input id="imgInp" type="file" class="form-control-file" name="image_file"
-                               value="{{$song->image}}">
+                               aria-describedby="fileHelp"
+                               onchange="document.getElementById('blaha').src = window.URL.createObjectURL(this.files[0])"
+                               class="form-control-file"
+
+                        >
                     </div>
                     <div class="form-group">
                         <label>Ca sĩ</label>
@@ -85,7 +93,6 @@
                 <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>
             </form>
         </div>
-    </div>
     <div class="modal fade" id="addArtist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">

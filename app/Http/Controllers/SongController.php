@@ -41,7 +41,7 @@ class SongController extends Controller
     public function create()
     {
         $categories = Category::all()->groupBy('description');
-        return view('songs.create', compact('categories'));
+        return view('manager.songs.create', compact('categories'));
     }
 
     public function store(FormUploadRequest $request)
