@@ -18,7 +18,7 @@
                         @foreach($singers as $key => $singer)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td><a href="{{route('singers.show', $singer->id)}}">{{$singer->name}}</a>
+                                <td><a href="{{route('guest.singers.play', $singer->id)}}">{{$singer->name}}</a>
                             </tr>
                         @endforeach
                         </tbody>

@@ -94,4 +94,13 @@ class PlaylistController extends Controller
         $playlist = Playlist::find($playlistId);
         return view('playlists.show', compact('playlist', 'STT', 'songs'));
     }
+
+    public function guestPlayAll($playlistId)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $playlist = Playlist::find($playlistId);
+        $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
+        return view('playlists.playAll', compact('playlist', 'songs', 'STT', 'comments'));
+    }
 }

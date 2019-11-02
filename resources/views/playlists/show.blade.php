@@ -8,7 +8,7 @@
                     <tr>
                         <th colspan="3" style="text-align: center">{{strtoupper($playlist->name)}}</th>
                         <th colspan="2" style="text-align: center"><a
-                                href="{{ route('playlists.playAll', $playlist->id) }}">{{'Nghe tất cả  '}}<i
+                                href="{{ route('guest.playlists.playAll', $playlist->id) }}">{{'Nghe tất cả  '}}<i
                                     class="fas fa-play-circle"></i></a></th>
                     </tr>
                     <tr>
@@ -16,7 +16,6 @@
                         <td>TÊN BÀI HÁT</td>
                         <td>TÊN CA SĨ</td>
                         <td>TÊN NHẠC SĨ</td>
-                        <td>CHỈNH SỬA</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -29,7 +28,7 @@
                                 <a href="" style="color: black">
                                     @foreach($song->singers as $singer)
                                         {{$singer->name.""}}
-                                        <br>
+
                                     @endforeach
                                 </a>
                             </td>
@@ -37,13 +36,10 @@
                                 <a href="" style="color: black">
                                     @foreach($song->artists as $artist)
                                         {{$artist->name.""}}
-                                        <br>
+
                                     @endforeach
                                 </a>
                             </td>
-                            <td>
-                                <a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}"
-                                   onclick="return confirm('Bạn chắc chắn muốn xóa?')">Xóa</a></td>
                         </tr>
                     @endforeach
                     </tbody>

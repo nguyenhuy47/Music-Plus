@@ -63,6 +63,14 @@ class ArtistController extends Controller
         //
     }
 
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $artists = Artist::paginate(10);
+        return view('artists.index', compact('artists', 'songs', 'STT'));
+    }
+
     public function guestShow($id)
     {
         $STT = 1;

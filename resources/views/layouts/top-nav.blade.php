@@ -45,43 +45,8 @@
                         <li>
                             <a href={{route('guest.playlists.index')}}>Playlist</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề</a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">The Best Of 2017</a></li>
-                                        <li><a href="#">Coffe Time</a></li>
-                                        <li><a href="#">Acoustic</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Cover - Mashup</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Do You Travel</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">Nhạc Xuân</a></li>
-                                        <li><a href="#">Nhạc Vàng</a></li>
-                                        <li><a href="#">Cải Lương</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Nhạc V-POP</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Nhạc K-POP</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">EDM Sôi Động</a></li>
-                                        <li><a href="#">Nhạc Remix</a></li>
-                                        <li><a href="#">Nonstop</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Electronic</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Tin tức âm nhạc</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="{{route('guest.singers.index')}}">Ca sĩ</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav">
@@ -104,7 +69,7 @@
                                             <li class="divider"></li>
                                             <li><a href="{{ route('artists.index') }}">Nhạc sĩ</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{{ URL::to('/manage/playlist') }}">Playlist</a></li>
+                                            <li><a href="{{ URL::to('/manager/playlist') }}">Playlist</a></li>
                                         </ul>
                                     </li>
                                 </ul>

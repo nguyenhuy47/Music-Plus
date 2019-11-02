@@ -18,7 +18,7 @@
                             @foreach($playlists as $key => $playlist)
                                 <tr class="p-2">
                                     <td>{{$STT++}}</td>
-                                    <td style="text-align: left"><a href="{{ route('playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a></td>
+                                    <td style="text-align: left"><a href="{{ route('guest.playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a></td>
                                 </tr>
                             @endforeach
                             </tbody>

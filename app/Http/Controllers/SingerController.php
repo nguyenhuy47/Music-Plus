@@ -67,4 +67,21 @@ class SingerController extends Controller
     {
         //
     }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $singers = Singer::all();
+        return view('singers.index', compact('singers','songs','STT'));
+    }
+
+    public function guestShow($id)
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $singer = Singer::findOrFail($id);
+        $comments = Comment::where('comment_list_id', '=', $singer->comment_list_id)->get()->sortByDesc('created_at');
+        return view('singers.show', compact('singer','songs','STT', 'comments'));
+    }
 }

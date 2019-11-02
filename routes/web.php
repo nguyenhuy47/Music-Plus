@@ -38,8 +38,8 @@ Route::group(['prefix' => 'songs'], function () {
 });
 
 Route::group(['prefix' => 'guest.singers'], function () {
-    Route::get('/', 'SingerController@index')->name('guest.singers.index');
-    Route::get('/{id}/play', 'SingerController@show')->name('guest.singers.play');
+    Route::get('/', 'SingerController@guestIndex')->name('guest.singers.index');
+    Route::get('/{id}/play', 'SingerController@guestShow')->name('guest.singers.play');
 });
 
 Route::group(['prefix' => 'guest.artists'], function () {
@@ -50,10 +50,12 @@ Route::group(['prefix' => 'guest.artists'], function () {
 Route::group(['prefix' => 'guest.playlists'], function () {
     Route::get('/', 'PlaylistController@guestIndex')->name('guest.playlists.index');
     Route::get('/{playlistId}/show', 'PlaylistController@guestShow')->name('guest.playlists.show');
+    Route::get('playlists/{id}/playAll', 'PlaylistController@guestPlayAll')->name('guest.playlists.playAll');
+
 });
 
 
-Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
+Route::group(['prefix' => 'manager', 'middleware' => ['login']], function () {
     Route::group(['prefix' => 'playlist'], function () {
         Route::get('/', 'PlaylistController@index')->name('playlists.index');
         Route::get('/{playlistId}/show', 'PlaylistController@show')->name('playlists.show');
