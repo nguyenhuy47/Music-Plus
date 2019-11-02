@@ -27,7 +27,7 @@
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
 </head>
 <body data-vide-bg="video/snow">
-@include(' layouts.top-nav')
+@include('layouts.top-nav')
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">

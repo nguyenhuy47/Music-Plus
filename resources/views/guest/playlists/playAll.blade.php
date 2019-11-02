@@ -88,7 +88,7 @@
     </style>
 </head>
 <body data-vide-bg="video/snow">
-@include(' layouts.top-nav')
+@include('layouts.top-nav')
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">

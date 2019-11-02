@@ -75,7 +75,6 @@
                                 </ul>
                             </li>
                         @endif
-                        <li><a href="{{ route('songs.create') }}">Tải lên</a></li>
                     </ul> <!-- END_urQuanLy -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->

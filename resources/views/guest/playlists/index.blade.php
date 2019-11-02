@@ -17,7 +17,7 @@
                             <tbody>
                             @foreach($playlists as $key => $playlist)
                                 <tr class="p-2">
-                                    <td>{{$STT++}}</td>
+                                    <td>{{$key++}}</td>
                                     <td style="text-align: left"><a href="{{ route('guest.playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a></td>
                                 </tr>
                             @endforeach

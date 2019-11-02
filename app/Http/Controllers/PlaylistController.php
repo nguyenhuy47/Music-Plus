@@ -14,7 +14,7 @@ class PlaylistController extends Controller
     public function index()
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
         return view('manager.playlists.list', compact('playlists', 'STT', 'songs'));
@@ -23,7 +23,7 @@ class PlaylistController extends Controller
     public function show($playlistId)
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $playlist = Playlist::find($playlistId);
         return view('manager.playlists.show', compact('playlist', 'STT', 'songs'));
     }
@@ -82,17 +82,17 @@ class PlaylistController extends Controller
     public function guestIndex()
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $playlists = Playlist::all();
-        return view('playlists.index',compact('playlists','songs','STT'));
+        return view('guest.playlists.index',compact('playlists','songs','STT'));
     }
 
     public function guestShow($playlistId)
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $playlist = Playlist::find($playlistId);
-        return view('playlists.show', compact('playlist', 'STT', 'songs'));
+        return view('guest.playlists.show', compact('playlist', 'STT', 'songs'));
     }
 
     public function guestPlayAll($playlistId)
@@ -101,6 +101,6 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $playlist = Playlist::find($playlistId);
         $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
-        return view('playlists.playAll', compact('playlist', 'songs', 'STT', 'comments'));
+        return view('guest.playlists.playAll', compact('playlist', 'songs', 'STT', 'comments'));
     }
 }

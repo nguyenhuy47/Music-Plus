@@ -34,7 +34,7 @@ class SongController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
-        return view('songs.show', compact('song','songs','STT', 'user', 'comments'));
+        return view('manager.songs.play', compact('song','songs','STT', 'user', 'comments'));
 
 
     }
@@ -151,8 +151,10 @@ class SongController extends Controller
     public function songManager(){
         $STT = 0;
         $user = Auth::user();
-        $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.show',compact('songs','STT'));
+        $baihat = Song::where('user_id', $user->id)->get();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+
+        return view('manager.songs.list',compact('songs','baihat','STT'));
     }
 
     public function destroy($id){
