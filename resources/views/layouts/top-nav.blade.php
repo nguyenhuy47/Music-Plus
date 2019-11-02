@@ -42,31 +42,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Playlist</a>
-                            <ul class="dropdown-menu multi-column columns-2">
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="#">Mới - Hot</a></li>
-                                        <li><a href="#">Nhạc Trẻ</a></li>
-                                        <li><a href="#">Trữ Tình</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Rock Việt</a></li>
-                                        <li><a href="#">Rap Việt</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="#">Nhạc Hoa</a></li>
-                                        <li><a href="#">Âu Mỹ</a></li>
-                                        <li><a href="#">Nhạc Hàn</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Hòa Tấu </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Thể Loại Khác</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href={{route('guest.playlists.index')}}>Playlist</a>
                         </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề</a>

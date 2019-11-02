@@ -17,7 +17,7 @@ class PlaylistController extends Controller
         $songs = Song::all();
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
-        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
+        return view('manager.playlists.list', compact('playlists', 'STT', 'songs'));
     }
 
     public function show($playlistId)
@@ -25,7 +25,7 @@ class PlaylistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $playlist = Playlist::find($playlistId);
-        return view('manager.playlists.show', compact('playlist', 'STT','songs'));
+        return view('manager.playlists.show', compact('playlist', 'STT', 'songs'));
     }
 
     public function playAll($playlistId)
@@ -35,7 +35,7 @@ class PlaylistController extends Controller
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
         $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
-        return view('playlists.show', compact('playlist', 'songs','STT','user', 'comments'));
+        return view('manager.playlists.playAll', compact('playlist', 'songs', 'STT', 'user', 'comments'));
     }
 
     public function store(Request $request)
@@ -67,5 +67,31 @@ class PlaylistController extends Controller
         $playlist = Playlist::find($id);
         $playlist->delete();
         return redirect()->back();
+    }
+
+    public function edit($id)
+    {
+
+    }
+
+    public function update(Request $request)
+    {
+
+    }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $playlists = Playlist::all();
+        return view('playlists.index',compact('playlists','songs','STT'));
+    }
+
+    public function guestShow($playlistId)
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $playlist = Playlist::find($playlistId);
+        return view('playlists.show', compact('playlist', 'STT', 'songs'));
     }
 }

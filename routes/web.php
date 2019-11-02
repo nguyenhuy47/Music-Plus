@@ -47,7 +47,11 @@ Route::group(['prefix' => 'guest.artists'], function () {
     Route::get('/{id}/play', 'ArtistController@guestShow')->name('guest.artists.play');
 });
 
-Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');
+Route::group(['prefix' => 'guest.playlists'], function () {
+    Route::get('/', 'PlaylistController@guestIndex')->name('guest.playlists.index');
+    Route::get('/{playlistId}/show', 'PlaylistController@guestShow')->name('guest.playlists.show');
+});
+
 
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
     Route::group(['prefix' => 'playlist'], function () {
@@ -56,6 +60,8 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
+        Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');
+
     });
 
     Route::group(['prefix' => 'singers'], function () {
