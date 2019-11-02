@@ -2,6 +2,19 @@
 @section('title', 'Chỉnh sửa bai hat')
 
 @section('content')
+    @if ($message = Session::get('success'))
+
+        <div class="alert alert-success alert-block">
+
+            <button type="button" class="close" data-dismiss="alert">×</button>
+
+            <strong>{{ $message }}</strong>
+
+        </div>
+
+    @endif
+
+
     {{--    <script>--}}
     {{--        $(document).ready(function () {--}}
     {{--            $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {--}}
@@ -39,6 +52,9 @@
                                value="{{ $song->name }}"
                                placeholder="Tên bài hát">
                     </div>
+                    @error('name')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label for="exampleFormControlFile1">File</label>
                         <input type="text" class="form-control-file" name="song_file" value="{{ $song->file_name }}" readonly>
@@ -60,17 +76,26 @@
 
                         >
                     </div>
+                    @error('image')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label>Ca sĩ</label>
                         <input type="text" id="list_singer" class="form-control" name="singer_ids"
                                placeholder="Tên ca sĩ"
                                value="@foreach($song->singers as $singer){{$singer->name.", "}}@endforeach">
                     </div>
+                    @error('singer_ids')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label>Nhạc sĩ</label>
                         <input type="text" id="list_artist" class="form-control" name="artist_ids" placeholder="Nhạc sĩ"
                                value="@foreach($song->artists as $artist){{$artist->name.", "}}@endforeach">
                     </div>
+                    @error('artist_ids')
+                    <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                     <div class="form-group">
                         <label>Thể loại</label>
                         <select name="category_id" class="custom-select">

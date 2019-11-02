@@ -31,7 +31,7 @@ class UserController extends Controller
         $user->save();
 
         return back()
-            ->with('success', 'Bạn đã tải lên thành công.');
+            ->with('success', 'Bạn đã cập nhập thành công.');
 
     }
 }

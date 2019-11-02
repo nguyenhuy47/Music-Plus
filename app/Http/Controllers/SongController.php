@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
+use App\Http\Requests\UploadSongValidate;
 use App\Jobs\SetPathFile;
 use App\Jobs\UploadFile;
 use App\Model\Artist;
@@ -123,7 +124,7 @@ class SongController extends Controller
         return view('manager.songs.edit', compact('song','categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UploadSongValidate $request, $id)
     {
         $song = Song::findOrFail($id);
         $songImage = $song->image;
@@ -145,7 +146,7 @@ class SongController extends Controller
         $song->category_id = $request->input('category_id');
         $song->lyric = $request->input('lyric');
         $song->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã tải lên thành công.');
     }
     public function songManager(){
         $STT = 0;
