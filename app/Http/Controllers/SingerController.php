@@ -72,7 +72,7 @@ class SingerController extends Controller
     {
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
-        $singers = Singer::all();
+        $singers = Singer::paginate(5);
         return view('guest.singers.index', compact('singers','songs','STT'));
     }
 

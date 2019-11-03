@@ -20,9 +20,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
+        csrfToken = <?php echo json_encode(['csrfToken' => csrf_token(),]); ?>
+        window.Laravel = csrfToken
     </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">

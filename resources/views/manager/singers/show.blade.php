@@ -35,7 +35,7 @@
                         @foreach($singer->songs as $key => $song)
                             <tr>
                                 <td>{{$key+1}}</td>
-                                <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
+                                <td style="text-align: left"><a href="{{route('guest.songs.play', $song->id)}}">{{$song->name}}</a></td>
                             </tr>
                         @endforeach
                         </tbody>

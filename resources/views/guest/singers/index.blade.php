@@ -23,6 +23,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    {{ $singers->links() }}
                 </div>
             </div>
             @include('pages.newsong')

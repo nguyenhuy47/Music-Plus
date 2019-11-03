@@ -35,8 +35,6 @@ class SongController extends Controller
         $song = Song::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
         return view('manager.songs.play', compact('song','songs','STT', 'user', 'comments'));
-
-
     }
 
     public function create()
@@ -163,4 +161,27 @@ class SongController extends Controller
        return redirect()->back();
     }
 
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $baihat = Song::paginate(4);
+        return view('guest.songs.index', compact('songs', 'STT','baihat'));
+    }
+
+    public function guestPlay($id)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $song = Song::findOrFail($id);
+        $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
+        return view('guest.songs.play', compact('song','songs','STT', 'comments'));
+    }
+
+    public function guestIndexNewSong()
+    {
+        $songs = Song::paginate(4);
+        $baihat = $songs->sortByDesc('created_at');
+        return view('guest.songs.indexNewSong', compact('songs','baihat'));
+    }
 }

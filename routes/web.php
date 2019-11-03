@@ -44,8 +44,16 @@ Route::group(['prefix' => 'guest'], function () {
         Route::get('/', 'PlaylistController@guestIndex')->name('guest.playlists.index');
         Route::get('/{playlistId}/show', 'PlaylistController@guestShow')->name('guest.playlists.show');
         Route::get('playlists/{id}/playAll', 'PlaylistController@guestPlayAll')->name('guest.playlists.playAll');
+    });
+
+    Route::group(['prefix' => 'songs'], function () {
+        Route::get('/', 'SongController@guestIndex')->name('guest.songs.index');
+        Route::get('/{id}/play', 'SongController@guestPlay')->name('guest.songs.play');
+        Route::get('/newSong', 'SongController@guestIndexNewSong')->name('guest.songs.indexNewSong');
 
     });
+
+
 
 
 });
