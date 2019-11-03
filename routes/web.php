@@ -50,6 +50,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
         Route::post('/update/{id}', 'PlaylistController@update')->name('playlists.update');
+        Route::post('/addSong/{id}', 'PlaylistController@addSong')->name('playlists.addSong');
     });
 
     Route::group(['prefix' => 'singers'], function () {

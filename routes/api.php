@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/songs', function (Request $request)
+{
+    $singers = \App\Model\Song::where('name', 'like', '%' . $request->get('q') . '%')->get();
+    return response()->json($singers);
+});
+
 Route::get('/singers', function (Request $request)
 {
     $singers = \App\Model\Singer::where('name', 'like', '%' . $request->get('q') . '%')->get();

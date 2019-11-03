@@ -75,7 +75,16 @@
                 theme: 'facebook',
                 preventDuplicates: true,
                 prePopulate: '',
-            })
+            });
+
+            $("#list_song").tokenInput("{{asset('api/songs?q=songs')}}", {
+                hintText: 'Nhập tên bài hát',
+                noResultsText: "Không tìm thấy bài hát.",
+                searchingText: 'Đang tìm kiếm...',
+                theme: 'facebook',
+                preventDuplicates: true,
+                prePopulate: '',
+            });
         });
 
     </script>

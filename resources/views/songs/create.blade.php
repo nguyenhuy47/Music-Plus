@@ -112,7 +112,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Tên c sỹ:
+                    Tên ca sỹ:
                     <input type="text" class="form-control" name="name" id="singer-name">
                     Ngày sinh:
                     <input type="date" class="form-control" name="dob" id="singer-dob">
@@ -149,7 +149,7 @@
                     error: function () {
                         $('#addArtist').modal('hide');
                         $('.modal-backdrop').remove();
-                        toastr.error("Tao moi khong thanh cong");
+                        toastr.error("Tạo mới không thành công");
                     }
                 })
             });
@@ -174,7 +174,7 @@
                     error: function () {
                         $('#addSinger').modal('hide');
                         $('.modal-backdrop').remove();
-                        toastr.error("Tao moi khong thanh cong");
+                        toastr.error("Tạo mới không thành công");
                     }
                 })
             });
