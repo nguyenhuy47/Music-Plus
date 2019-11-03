@@ -106,15 +106,6 @@ class SongController extends Controller
         return redirect()->route('songs.create');
     }
 
-    public function addToPlaylist(Request $request)
-    {
-        $playlistId = $request->playlist_id;
-        $songId = $request->song_id;
-        $playlist = Playlist::find($playlistId);
-        $playlist->songs()->attach($songId);
-        return redirect()->route('songs.play', $songId);
-    }
-
     public function edit($id)
     {
         $categories = Category::all()->groupBy('description');

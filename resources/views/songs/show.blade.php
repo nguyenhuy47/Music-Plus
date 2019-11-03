@@ -15,6 +15,7 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
     <link href="{{ asset('/vendor/laravelLikeComment/css/style.css') }}" rel="stylesheet">
@@ -169,7 +170,7 @@
 
         @include('laravelLikeComment::like', ['like_item_id' => 'song-'.$song->id])
 
-            <!-- Modal -->
+        <!-- Modal -->
             <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -181,23 +182,20 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('songs.addToPlaylist') }}" method="post">
-                                @csrf
-                                <div class="modal-body">
-                                    Bài hát: {{ $song->name }}
-                                    <input type="text" name="song_id" hidden value="{{ $song->id }}"><br><br>
-                                    Playlist:
-                                    <select name="playlist_id">
-                                        @foreach($user->playlists as $playlist)
-                                            <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
-                                    <button type="submit" class="btn btn-primary">Thêm</button>
-                                </div>
-                            </form>
+                            <div class="modal-body">
+                                Bài hát: {{ $song->name }}
+                                <input type="text" id="song_id" name="song_id" hidden value="{{ $song->id }}"><br><br>
+                                Playlist:
+                                <select id="playlist_id" name="playlist_id">
+                                    @foreach($user->playlists as $playlist)
+                                        <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
+                                <button type="button" id="btn-add-to-playlist" class="btn btn-primary">Thêm</button>
+                            </div>
                         @else
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">
@@ -297,8 +295,34 @@
 <script>
     var player = new MediaElementPlayer('player');
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="{{ asset('/vendor/laravelLikeComment/js/script.js') }}" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btn-add-to-playlist').click(function () {
+            $.ajax({
+                type: "post",
+                url: "{{route('ajax.songs.addToPlaylist')}}",
+                data: {
+                    songId: $("#song_id").val(),
+                    playlistId: $("#playlist_id").val(),
+                },
+                success: function (response) {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.success(response);
+                    $("#song_id").val();
+                    $("#playlist_id").val();
+                },
+                error: function () {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.error("Tạo mới không thành công");
+                }
+            })
+        });
+    });
+</script>
 </body>
 
 </html>

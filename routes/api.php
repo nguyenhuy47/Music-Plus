@@ -1,5 +1,6 @@
 <?php
 
+use App\Model\Playlist;
 use Illuminate\Http\Request;
 
 /*
@@ -54,3 +55,12 @@ Route::post('/artists/store', function (Request $request)
    $artist->save();
    return response()->json('Tạo mới nhac sỹ thành công.', 200);
 })->name('ajax.artists.store');
+
+Route::post('/songs/addToPlayList', function (Request $request)
+{
+    $playlistId = $request->playlistId;
+    $songId = $request->songId;
+    $playlist = Playlist::find($playlistId);
+    $playlist->songs()->attach($songId);
+    return response()->json('Thêm playList thành công', 200);
+})->name('ajax.songs.addToPlaylist');
