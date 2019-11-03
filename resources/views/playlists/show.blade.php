@@ -15,6 +15,10 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
+    <link href="{{ asset('/vendor/laravelLikeComment/css/style.css') }}" rel="stylesheet">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
@@ -106,6 +110,9 @@
         @include('pages.newsong')
     </div>
     <div class="col-md-9">
+        @include('laravelLikeComment::like', ['like_item_id' => 'playlist-'.$playlist->id])
+    </div>
+    <div class="col-md-9">
         @include('includes.commentfb', ['commentItem'=> 'playlist-'.$playlist->id])
     </div>
     <div class="row">
@@ -124,9 +131,8 @@
         features: ['prevtrack', 'playpause', 'nexttrack', 'current', 'progress', 'duration', 'volume', 'playlist', 'shuffle', 'loop', 'fullscreen'],
     });
 </script>
-<script src="/js/app.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{{ asset('/vendor/laravelLikeComment/js/script.js') }}" type="text/javascript"></script>
 @include('layouts.footer')
 </body>
 

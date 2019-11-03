@@ -28,3 +28,10 @@
         </tbody>
     </table>
 @endsection
+@section('script')
+    <script>
+        $(document).ready(function () {
+           alert('oke');
+        });
+    </script>
+@endsection

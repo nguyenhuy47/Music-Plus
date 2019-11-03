@@ -34,8 +34,7 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
-        $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
-        return view('playlists.show', compact('playlist', 'songs','STT','user', 'comments'));
+        return view('playlists.show', compact('playlist', 'songs','STT','user'));
     }
 
     public function store(Request $request)
@@ -47,9 +46,6 @@ class PlaylistController extends Controller
         $playlist = new Playlist();
         $playlist->name = $request->name;
         $playlist->user_id = $user->id;
-        $commentList = new CommentList();
-        $commentList->save();
-        $playlist->comment_list_id = $commentList->id;
         $playlist->save();
         return redirect()->back();
 
@@ -66,6 +62,14 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::find($id);
         $playlist->delete();
+        return redirect()->back();
+    }
+
+    public function update(Request $request, $id)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->name = $request->name;
+        $playlist->save();
         return redirect()->back();
     }
 }

@@ -32,8 +32,7 @@ class SongController extends Controller
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
-        return view('songs.show', compact('song','songs','STT', 'user', 'comments'));
+        return view('songs.show', compact('song','songs','STT', 'user'));
 
 
     }

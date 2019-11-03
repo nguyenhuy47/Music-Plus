@@ -24,16 +24,43 @@
                             <tr class="p-2">
                                 <td>{{$STT++}}</td>
                                 <td style="text-align: left"><a href="{{ route('playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a></td>
-                                <td><a href="{{ route('playlist.destroyAll', $playlist->id) }}"
-                                       onclick="return confirm('ban chac chan xoa?')">Xoa</a></td>
+                                <td><span data-toggle="modal" data-target="#updatePlaylist{{$playlist->id}}"><i class="fas fa-edit"></i></span>&emsp;
+                                    <a href="{{ route('playlist.destroyAll', $playlist->id) }}"
+                                       onclick="return confirm('ban chac chan xoa?')"><i class="fas fa-trash-alt"></i></a></td>
                             </tr>
+                            <!-- Modal Update Playlist-->
+                            <div class="modal fade" id="updatePlaylist{{$playlist->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                 aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">CẬP NHẬT PLAYLIST</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form action="{{route('playlists.update', $playlist->id)}}" method="post">
+                                            @csrf
+                                            <div class="modal-body">
+                                                Tên Playlist:
+                                                <input type="text" class="form-control" name="name" value="{{$playlist->name}}">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                                <button type="submit" class="btn btn-primary">Thêm</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         @endforeach
                         </tbody>
                     </table>
 
 
                 </div>
-                <!-- Modal -->
+
+                <!-- Modal Create Playlist-->
                 <div class="modal fade" id="addNewPlaylist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                      aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -58,6 +85,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
             @include('pages.newsong')
         </div>

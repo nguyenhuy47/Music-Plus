@@ -73,7 +73,7 @@
         </form>
     </div>
 
-    <!-- Modal -->
+    <!-- Modal Add Artist -->
     <div class="modal fade" id="addArtist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -84,24 +84,23 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('artists.store')}}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        Tên nhạc sỹ:
-                        <input type="text" class="form-control" name="name">
-                        Ngày sinh:
-                        <input type="date" class="form-control" name="dob">
-                        Tiểu sử:
-                        <textarea name="story" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    Tên nhạc sỹ:
+                    <input type="text" class="form-control" name="name" id="artist-name">
+                    Ngày sinh:
+                    <input type="date" class="form-control" name="dob" id="artist-dob">
+                    Tiểu sử:
+                    <textarea name="story" id="artist-story" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="btn-add-artist">Thêm</button>
+                </div>
             </div>
         </div>
     </div>
+
+    <!-- Modal Add Singer -->
     <div class="modal fade" id="addSinger" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -112,22 +111,73 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('singers.store')}}" method="post">
-                    @csrf
-                    <div class="modal-body">
-                        Tên ca sỹ:
-                        <input type="text" class="form-control" name="name">
-                        Ngày sinh:
-                        <input type="date" class="form-control" name="dob">
-                        Tiểu sử:
-                        <textarea name="story" class="form-control" rows="3"></textarea>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary">Thêm</button>
-                    </div>
-                </form>
+                <div class="modal-body">
+                    Tên c sỹ:
+                    <input type="text" class="form-control" name="name" id="singer-name">
+                    Ngày sinh:
+                    <input type="date" class="form-control" name="dob" id="singer-dob">
+                    Tiểu sử:
+                    <textarea name="story" id="singer-story" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="btn-add-singer">Thêm</button>
+                </div>
             </div>
         </div>
     </div>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#btn-add-artist').click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "{{route('ajax.artists.store')}}",
+                    data: {
+                        name: $("#artist-name").val(),
+                        dob: $("#artist-dob").val(),
+                        story: $("#artist-story").val(),
+                    },
+                    success: function (response) {
+                        $('#addArtist').modal('hide');
+                        $('.modal-backdrop').remove();
+                        toastr.success(response);
+                        $("#artist-name").val('');
+                        $("#artist-dob").val('');
+                        $("#artist-story").val('');
+                    },
+                    error: function () {
+                        $('#addArtist').modal('hide');
+                        $('.modal-backdrop').remove();
+                        toastr.error("Tao moi khong thanh cong");
+                    }
+                })
+            });
+
+            $('#btn-add-singer').click(function () {
+                $.ajax({
+                    type: "post",
+                    url: "{{route('ajax.singers.store')}}",
+                    data: {
+                        name: $("#singer-name").val(),
+                        dob: $("#singer-dob").val(),
+                        story: $("#singer-story").val(),
+                    },
+                    success: function (response) {
+                        $('#addSinger').modal('hide');
+                        $('.modal-backdrop').remove();
+                        toastr.success(response);
+                        $("#singer-name").val('');
+                        $("#singer-dob").val('');
+                        $("#singer-story").val('');
+                    },
+                    error: function () {
+                        $('#addSinger').modal('hide');
+                        $('.modal-backdrop').remove();
+                        toastr.error("Tao moi khong thanh cong");
+                    }
+                })
+            });
+        });
+    </script>
 @endsection
