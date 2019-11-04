@@ -57,7 +57,7 @@
                         <select class="form-control" id="exampleFormControlSelect1" name="gender">
                             <option>{{$user->gender}}</option>
                         @if($user->gender == 'NAM')
-                                <option>NỮ</option>
+                                <option>NỮ  </option>
                             @endif
                             @if($user->gender == 'NỮ')
                                 <option>NAM</option>
