@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FormUploadRequest;
+use App\Http\Requests\UploadSongValidate;
 use App\Jobs\SetPathFile;
 use App\Jobs\UploadFile;
 use App\Model\Artist;
@@ -33,15 +34,13 @@ class SongController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
-        return view('songs.show', compact('song','songs','STT', 'user', 'comments'));
-
-
+        return view('manager.songs.play', compact('song','songs','STT', 'user', 'comments'));
     }
 
     public function create()
     {
         $categories = Category::all()->groupBy('description');
-        return view('songs.create', compact('categories'));
+        return view('manager.songs.create', compact('categories'));
     }
 
     public function store(FormUploadRequest $request)
@@ -123,7 +122,7 @@ class SongController extends Controller
         return view('manager.songs.edit', compact('song','categories'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UploadSongValidate $request, $id)
     {
         $song = Song::findOrFail($id);
         $songImage = $song->image;
@@ -145,13 +144,15 @@ class SongController extends Controller
         $song->category_id = $request->input('category_id');
         $song->lyric = $request->input('lyric');
         $song->save();
-        return redirect()->back();
+        return redirect()->back()->with('success','Bạn đã tải lên thành công.');
     }
     public function songManager(){
         $STT = 0;
         $user = Auth::user();
-        $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.show',compact('songs','STT'));
+        $baihat = Song::where('user_id', $user->id)->get();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+
+        return view('manager.songs.list',compact('songs','baihat','STT'));
     }
 
     public function destroy($id){
@@ -160,4 +161,27 @@ class SongController extends Controller
        return redirect()->back();
     }
 
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $baihat = Song::paginate(4);
+        return view('guest.songs.index', compact('songs', 'STT','baihat'));
+    }
+
+    public function guestPlay($id)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $song = Song::findOrFail($id);
+        $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
+        return view('guest.songs.play', compact('song','songs','STT', 'comments'));
+    }
+
+    public function guestIndexNewSong()
+    {
+        $songs = Song::paginate(4);
+        $baihat = $songs->sortByDesc('created_at');
+        return view('guest.songs.indexNewSong', compact('songs','baihat'));
+    }
 }

@@ -14,14 +14,14 @@ class SingerController extends Controller
     public function index()
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $singers = Singer::all();
-        return view('singers.index', compact('singers','songs','STT'));
+        return view('manager.singers.index', compact('singers','songs','STT'));
     }
 
     public function create()
     {
-        return view('singers.create');
+        return view('manager.singers.create');
     }
 
     public function store(SingerValidate $request)
@@ -40,16 +40,16 @@ class SingerController extends Controller
     public function show($id)
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $singer = Singer::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $singer->comment_list_id)->get()->sortByDesc('created_at');
-        return view('singers.show', compact('singer','songs','STT', 'comments'));
+        return view('manager.singers.show', compact('singer','songs','STT', 'comments'));
     }
 
     public function edit($id)
     {
         $singer =  Singer::findOrfail($id);
-        return view('singers.edit', compact('singer'));
+        return view('manager.singers.edit', compact('singer'));
     }
 
 
@@ -66,5 +66,22 @@ class SingerController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $singers = Singer::paginate(5);
+        return view('guest.singers.index', compact('singers','songs','STT'));
+    }
+
+    public function guestShow($id)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $singer = Singer::findOrFail($id);
+        $comments = Comment::where('comment_list_id', '=', $singer->comment_list_id)->get()->sortByDesc('created_at');
+        return view('guest.singers.show', compact('singer','songs','STT', 'comments'));
     }
 }

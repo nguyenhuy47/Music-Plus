@@ -17,94 +17,13 @@
                     <ul class="nav navbar-nav">
                         <li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bài hát</a>
-                            <ul class="dropdown-menu multi-column columns-2">
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="{{URL::to('songnew')}}">Nhạc mới</a></li>
-                                        <li><a href="{{ URL::to('songvn') }}">Nhạc Trẻ</a></li>
-                                        <li><a href="{{ URL::to('trutinh') }}">Trữ Tình</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Rock Việt</a></li>
-                                        <li><a href="#">Rap Việt</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="#">Nhạc Hoa</a></li>
-                                        <li><a href="{{ URL::to('songuk') }}">Âu Mỹ</a></li>
-                                        <li><a href="#">Nhạc Hàn</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Hòa Tấu </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Thể Loại Khác</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                            <a href="{{route('guest.songs.index')}}">Bài hát</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Playlist</a>
-                            <ul class="dropdown-menu multi-column columns-2">
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="#">Mới - Hot</a></li>
-                                        <li><a href="#">Nhạc Trẻ</a></li>
-                                        <li><a href="#">Trữ Tình</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Rock Việt</a></li>
-                                        <li><a href="#">Rap Việt</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-6">
-                                        <li><a href="#">Nhạc Hoa</a></li>
-                                        <li><a href="#">Âu Mỹ</a></li>
-                                        <li><a href="#">Nhạc Hàn</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Hòa Tấu </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Thể Loại Khác</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href={{route('guest.playlists.index')}}>Playlist</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề</a>
-                            <ul class="dropdown-menu multi-column columns-3">
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">The Best Of 2017</a></li>
-                                        <li><a href="#">Coffe Time</a></li>
-                                        <li><a href="#">Acoustic</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Cover - Mashup</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Do You Travel</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">Nhạc Xuân</a></li>
-                                        <li><a href="#">Nhạc Vàng</a></li>
-                                        <li><a href="#">Cải Lương</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Nhạc V-POP</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Nhạc K-POP</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
-                                        <li><a href="#">EDM Sôi Động</a></li>
-                                        <li><a href="#">Nhạc Remix</a></li>
-                                        <li><a href="#">Nonstop</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Electronic</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">Tin tức âm nhạc</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li>
+                            <a href="{{route('guest.singers.index')}}">Ca sĩ</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav">
@@ -118,7 +37,7 @@
                                 <ul class="dropdown-menu multi-column columns-1">
                                     <li>
                                         <ul class="multi-column-dropdown col-sm-8">
-                                            <li><a href="{{ URL::to('/manage/songs') }}">Bài hát</a></li>
+                                            <li><a href="{{ URL::to('/manager/songs') }}">Bài hát</a></li>
                                             <li class="divider"></li>
 {{--                                            <li><a href="{{ URL::to('singers.store') }}">Ca sĩ</a></li>--}}
 
@@ -127,13 +46,12 @@
                                             <li class="divider"></li>
                                             <li><a href="{{ route('artists.index') }}">Nhạc sĩ</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="{{ URL::to('/manage/playlist') }}">Playlist</a></li>
+                                            <li><a href="{{ URL::to('/manager/playlist') }}">Playlist</a></li>
                                         </ul>
                                     </li>
                                 </ul>
                             </li>
                         @endif
-                        <li><a href="{{ route('songs.create') }}">Tải lên</a></li>
                     </ul> <!-- END_urQuanLy -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->

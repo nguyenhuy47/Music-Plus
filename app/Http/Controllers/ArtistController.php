@@ -12,9 +12,9 @@ class ArtistController extends Controller
     public function index()
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $artists = Artist::paginate(10);
-        return view('manager.artists.index', compact('artists','songs','STT'));
+        return view('manager.artists.index', compact('artists', 'songs', 'STT'));
     }
 
     public function create()
@@ -35,9 +35,9 @@ class ArtistController extends Controller
     public function show($id)
     {
         $STT = 1;
-        $songs = Song::all();
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
         $artist = Artist::findOrFail($id);
-        return view('manager.artists.show', compact('artist','songs','STT'));
+        return view('manager.artists.show', compact('artist', 'songs', 'STT'));
     }
 
     public function edit($id)
@@ -61,5 +61,22 @@ class ArtistController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $artists = Artist::paginate(10);
+        return view('guest.artists.index', compact('artists', 'songs', 'STT'));
+    }
+
+    public function guestShow($id)
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        $artist = Artist::findOrFail($id);
+        return view('guest.artists.show', compact('artist', 'songs', 'STT'));
+
     }
 }

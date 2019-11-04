@@ -44,7 +44,8 @@
                 @if($singer->comment_list_id)
                     <div class="comment col-md-9">
                         <div class="create-comment">
-                            <form action="{{route('comments.store', $singer->comment_list_id)}}" method="post">
+                            <form action="{{route('comments.store', $song->comment_list_id)}}"
+                                  method="post">
                                 @csrf
                                 <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
                                 <button class="btn btn-primary" type="submit">Bình luận</button>

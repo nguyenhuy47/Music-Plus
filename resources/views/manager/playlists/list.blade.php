@@ -22,7 +22,7 @@
                         <tbody>
                         @foreach($playlists as $key => $playlist)
                             <tr class="p-2">
-                                <td>{{$STT++}}</td>
+                                <td>{{$key++}}</td>
                                 <td style="text-align: left"><a href="{{ route('playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a></td>
                                 <td><a href="{{ route('playlist.destroyAll', $playlist->id) }}"
                                        onclick="return confirm('ban chac chan xoa?')">Xoa</a></td>
