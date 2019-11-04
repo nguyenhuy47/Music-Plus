@@ -164,10 +164,11 @@
     <div class="social-plugin">
         <div>
             <!-- Button trigger modal -->
+            @if(Auth::user())
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
                 Add Playlist
             </button>
-
+@endif
         @include('laravelLikeComment::like', ['like_item_id' => 'song-'.$song->id])
 
         <!-- Modal -->

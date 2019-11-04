@@ -23,7 +23,7 @@ class SongController extends Controller
     {
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('index', compact('songs', 'STT'));
+        return view('songs.index', compact('songs', 'STT'));
     }
 
     public function show($id)
@@ -92,9 +92,6 @@ class SongController extends Controller
         }
 
         $songFile->storeAs('/', $songFileName, 'public');
-        $commentList = new CommentList();
-        $commentList->save();
-        $song->comment_list_id = $commentList->id;
         $song->save();
 
         UploadFile::dispatch($songFileName);
@@ -138,7 +135,7 @@ class SongController extends Controller
         return redirect()->back();
     }
     public function songManager(){
-        $STT = 0;
+        $STT = 1;
         $user = Auth::user();
         $songs = Song::where('user_id', $user->id)->get();
         return view('manager.songs.show',compact('songs','STT'));
