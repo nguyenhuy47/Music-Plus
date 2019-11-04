@@ -31,7 +31,7 @@ class UserController extends Controller
         $user->save();
 
         return back()
-            ->with('success', 'You have successfully upload image.');
+            ->with('success', 'Cập nhật thành công.');
 
     }
 }

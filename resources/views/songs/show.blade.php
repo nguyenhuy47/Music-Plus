@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
-    <link href="{{ asset('/vendor/laravelLikeComment/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -165,11 +165,11 @@
         <div>
             <!-- Button trigger modal -->
             @if(Auth::user())
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
-                Add Playlist
-            </button>
-@endif
-        @include('laravelLikeComment::like', ['like_item_id' => 'song-'.$song->id])
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
+                    Add Playlist
+                </button>
+        @endif
+        @include('includes.like', ['like_item' => 'song-'.$song->id])
 
         <!-- Modal -->
             <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
@@ -296,7 +296,7 @@
 <script>
     var player = new MediaElementPlayer('player');
 </script>
-<script src="{{ asset('/vendor/laravelLikeComment/js/script.js') }}" type="text/javascript"></script>
+<script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 <script>
     $(document).ready(function () {

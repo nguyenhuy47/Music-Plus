@@ -30,9 +30,9 @@
                                 <td style="text-align: left"><a
                                         href="{{ route('playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a>
                                 </td>
-                                <td><span data-toggle="modal" data-target="#updatePlaylist{{$playlist->id}}"><i
+                                <td><span title="sửa" style="cursor: pointer" data-toggle="modal" data-target="#updatePlaylist{{$playlist->id}}"><i
                                             class="fas fa-edit"></i></span>&emsp;
-                                    <a href="{{ route('playlist.destroyAll', $playlist->id) }}"
+                                    <a title="xóa" href="{{ route('playlist.destroyAll', $playlist->id) }}"
                                        onclick="return confirm('ban chac chan xoa?')"><i
                                             class="fas fa-trash-alt"></i></a></td>
                             </tr>

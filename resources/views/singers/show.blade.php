@@ -1,5 +1,6 @@
 @extends ('../index')
 @section('content')
+    @include('includes.facebookSDK')
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
@@ -40,6 +41,9 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="comment">
+                    @include('includes.commentfb', ['commentItem' => 'singer-'.$singer->id])
                 </div>
             </div>
             @include('pages.newsong')
