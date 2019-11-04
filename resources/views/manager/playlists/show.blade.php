@@ -17,7 +17,9 @@
                 <td>TÊN BÀI HÁT</td>
                 <td>TÊN CA SĨ</td>
                 <td>TÊN NHẠC SĨ</td>
-                <td>CHỈNH SỬA</td>
+                @if(Auth::user())
+                    <td>CHỈNH SỬA</td>
+                @endif
             </tr>
             </thead>
             <tbody>
@@ -27,18 +29,22 @@
                     <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}"
                                                     style="color: black;">{{$song->name}}</a></td>
                     <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
-                    <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
-                    <td>
-                        <a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}"
-                           onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
-                                class="fas fa-trash-alt"></i></a></td>
+                    <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach<  /td>
+                    @if(Auth::user())
+                        <td>
+                            <a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}"
+                               onclick="return confirm('Bạn chắc chắn muốn xóa?')"><i
+                                    class="fas fa-trash-alt"></i></a></td>
+                    @endif
                 </tr>
             @endforeach
+            @if(Auth::user())
             <tr>
                 <td colspan="5">
                     <span id="show-form" style="cursor: pointer">Thêm bài hát</span>
                 </td>
             </tr>
+            @endif
             </tbody>
         </table>
         <div id="form" style="margin-left: 25%; display: none">

@@ -164,10 +164,11 @@
     <div class="social-plugin">
         <div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
-                Add Playlist
-            </button>
-
+            @if(Auth::user())
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
+                    Add Playlist
+                </button>
+        @endif
         @include('includes.like', ['like_item' => 'song-'.$song->id])
 
         <!-- Modal -->

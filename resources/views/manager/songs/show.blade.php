@@ -3,34 +3,22 @@
     <div  class="container pt-5">
         <div class="row">
             <div class="col-md-9">
+                @if (Auth::guest())
+                    @else
+                    <a class="btn btn-primary" href="{{ route('songs.create') }}">Tải lên</a>
+                @endif
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
                         <th colspan="7" style="text-align: center">DANH SÁCH BÀI HÁT</th>
                     </tr>
-                    <tr>
-                        <td>
-                            STT
-                        </td>
-                        <td>
-                            TÊN BÀI HÁT
-                        </td>
-                        <td>
-                            TÊN CA SĨ
-                        </td>
-                        <td>
-                            TÊN NHẠC SĨ
-                        </td>
-                        <td>
-                            CHỈNH SỬA
-                        </td>
-
-                    </tr>
                     </thead>
+                </table>
+                <table class="table">
                     <tbody>
                     @foreach($songs as $song)
                         <tr>
-                            <td>{{++$STT}}</td>
+                            <td><img height="50" width="50" src="{{asset('/storage/public/upload/images/'.$song->image)}}"></td>
                             <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
                             <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
                             <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>

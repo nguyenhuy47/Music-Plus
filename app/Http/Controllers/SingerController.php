@@ -21,7 +21,7 @@ class SingerController extends Controller
 
     public function create()
     {
-        return view('singers.create');
+        return view('manager.singers.create');
     }
 
     public function store(SingerValidate $request)
@@ -45,7 +45,7 @@ class SingerController extends Controller
     public function edit($id)
     {
         $singer =  Singer::findOrfail($id);
-        return view('singers.edit', compact('singer'));
+        return view('manager.singers.edit', compact('singer'));
     }
 
 
@@ -56,7 +56,7 @@ class SingerController extends Controller
         $singer->dob = $request->dob;
         $singer->story = $request->story;
         $singer->save();
-        return redirect()->route('singers.index');
+        return redirect()->back();
     }
 
     public function destroy($id)
