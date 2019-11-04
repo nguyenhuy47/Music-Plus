@@ -32,7 +32,7 @@ class SongController extends Controller
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        return view('songs.show', compact('song','songs','STT', 'user'));
+        return view('songs.show', compact('song', 'songs', 'STT', 'user'));
 
 
     }
@@ -110,44 +110,58 @@ class SongController extends Controller
     {
         $categories = Category::all()->groupBy('description');
         $song = Song::findOrFail($id);
-        return view('manager.songs.edit', compact('song','categories'));
+        return view('manager.songs.edit', compact('song', 'categories'));
     }
 
     public function update(Request $request, $id)
     {
         $song = Song::findOrFail($id);
         $songImage = $song->image;
-        $song->name = $request->input('name');
-        $song->file_name = $request->input('song_file');
+        if ($request->input('name')) {
+            $song->name = $request->input('name');
+        }
 
-        if($request->hasFile('image_file')){
+        if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
             $imageFileName = $imageFile->getClientOriginalName();
             $song->image = $imageFileName;
-        }else{
+            $imageFile->storeAs('public/upload/images', $imageFileName);
+        } else {
             $song->image = $songImage;
         }
 
-        $singerIds = explode(',',$request->input('singer_ids'));
-        $song->singers()->sync($singerIds);
-        $artistIds = explode(',',$request->input('artist_ids'));
-        $song->artists()->sync($artistIds);
+        if ($request->input('singer_ids')) {
+            $singerIds = explode(',', $request->input('singer_ids'));
+            $song->singers()->sync($singerIds);
+        }
+
+        if ($request->input('artist_ids')) {
+            $artistIds = explode(',', $request->input('artist_ids'));
+            $song->artists()->sync($artistIds);
+        }
+
         $song->category_id = $request->input('category_id');
-        $song->lyric = $request->input('lyric');
+        if ($request->input('lyric')) {
+            $song->lyric = $request->input('lyric');
+        }
+
         $song->save();
-        return redirect()->back();
+        return redirect()->back()->with('notification', 'Cập nhật thông tin bài hát thành công');
     }
-    public function songManager(){
+
+    public function songManager()
+    {
         $STT = 0;
         $user = Auth::user();
         $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.show',compact('songs','STT'));
+        return view('manager.songs.show', compact('songs', 'STT'));
     }
 
-    public function destroy($id){
-       $song = Song::find($id);
-       $song->delete();
-       return redirect()->back();
+    public function destroy($id)
+    {
+        $song = Song::find($id);
+        $song->delete();
+        return redirect()->back();
     }
 
 }
