@@ -4,24 +4,24 @@
         <div class="row">
             <div class="col-md-9">
                 <div>
-                    @if(Auth::check())
-                    <a class="btn btn-group bg-primary" href="{{route('singers.create')}}">THÊM CA SĨ</a>
-                    @endif
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
-                            <th colspan="2" style="text-align: center">DANH SÁCH CA SĨ</th>
+                            <th colspan="3" style="text-align: center">DANH SÁCH PLAYLIST</th>
                         </tr>
                         <tr>
                             <td>STT</td>
-                            <td>TÊN CA SĨ</td>
+                            <td>TÊN PLAYLIST</td>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($singers as $key => $singer)
-                            <tr>
-                                <td>{{$key+1}}</td>
-                                <td><a href="{{route('singers.show', $singer->id)}}">{{strtoupper($singer->name)}}</a>
+                        @foreach($playlists as $key => $playlist)
+                            <tr class="p-2">
+                                <td>{{$STT++}}</td>
+                                <td style="text-align: left"><a
+                                        href="{{ route('playlists.show', $playlist->id) }}">
+                                        {{strtoupper($playlist->name)}}</a>
+                                </td>
                             </tr>
                         @endforeach
                         </tbody>

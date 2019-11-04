@@ -36,7 +36,7 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
-        return view('playlists.show', compact('playlist', 'songs','STT','user'));
+        return view('playlists.playAll', compact('playlist', 'songs','STT','user'));
     }
 
     public function store(FormPlaylist $request)
@@ -53,7 +53,7 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::find($playlistId);
         $playlist->songs()->detach($songId);
-        return redirect()->route('playlists.show', $playlist->id);
+        return redirect()->route('playlists.playAll', $playlist->id);
     }
 
     public function destroyAll($id)
@@ -79,5 +79,13 @@ class PlaylistController extends Controller
             $playlist->songs()->attach($songId);
         }
         return redirect()->back();
+    }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $playlists = Playlist::all();
+        return view('playlists.index', compact('playlists', 'STT','songs'));
     }
 }
