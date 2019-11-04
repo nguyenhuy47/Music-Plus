@@ -15,6 +15,11 @@
 Route::get('/', function () {
     return view('index');
 });
+
+Route::get('/abcd', function () {
+    return view('home-new');
+});
+
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes(['verify'=>true]);
@@ -44,6 +49,8 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
+        Route::post('/update/{id}', 'PlaylistController@update')->name('playlists.update');
+        Route::post('/addSong/{id}', 'PlaylistController@addSong')->name('playlists.addSong');
     });
 
     Route::group(['prefix' => 'singers'], function () {
@@ -71,4 +78,10 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::post('/{id}/update', 'ArtistController@update')->middleware('login')->name('artists.update');
 
     });
+});
+
+Route::group(['prefix' => 'comment', 'middleware' => ['login']], function () {
+    Route::post('/store/{commentListId}', 'CommentController@store')->name('comments.store');
+    Route::get('/{id}/destroy', 'CommentController@destroy')->name('comments.destroy');
+    Route::post('/{id}/update', 'CommentController@update')->name('comments.update');
 });

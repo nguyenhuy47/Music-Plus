@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormAddPlaylist;
+use App\Http\Requests\FormPlaylist;
+use App\Model\Comment;
+use App\Model\CommentList;
 use App\Model\Playlist;
 use App\Model\Song;
 use Illuminate\Http\Request;
@@ -35,18 +39,14 @@ class PlaylistController extends Controller
         return view('playlists.show', compact('playlist', 'songs','STT','user'));
     }
 
-    public function store(Request $request)
+    public function store(FormPlaylist $request)
     {
-        if (!$request->name) {
-            return redirect()->back();
-        }
         $user = Auth::user();
         $playlist = new Playlist();
         $playlist->name = $request->name;
         $playlist->user_id = $user->id;
         $playlist->save();
         return redirect()->back();
-
     }
 
     public function destroy($playlistId, $songId)
@@ -60,6 +60,24 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::find($id);
         $playlist->delete();
+        return redirect()->back();
+    }
+
+    public function update(FormPlaylist $request, $id)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->name = $request->name;
+        $playlist->save();
+        return redirect()->back();
+    }
+
+    public function addSong(FormAddPlaylist $request, $id)
+    {
+        $songIds = explode(',', $request->songIds);
+        $playlist = Playlist::find($id);
+        foreach ($songIds as $songId) {
+            $playlist->songs()->attach($songId);
+        }
         return redirect()->back();
     }
 }

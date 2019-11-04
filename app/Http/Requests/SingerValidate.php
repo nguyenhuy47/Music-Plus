@@ -28,4 +28,12 @@ class SingerValidate extends FormRequest
             'dob' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên ca sỹ',
+            'dob.required' => 'Bạn chưa chọn ngày sinh của ca sỹ',
+        ];
+    }
 }

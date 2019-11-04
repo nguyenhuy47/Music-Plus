@@ -15,6 +15,11 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
+    <link href="{{ asset('/vendor/laravelLikeComment/css/style.css') }}" rel="stylesheet">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
@@ -23,12 +28,18 @@
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
     <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
-    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.min.css')}}" rel="stylesheet">
+    <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.css')}}" rel="stylesheet">
     <style>
         .song-info {
             color: #21f8f8;
             text-align: center;
             position: center;
+        }
+
+        .player-control {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
         }
 
         .thumb {
@@ -39,6 +50,7 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: cover;
+            position: relative;
 
         }
 
@@ -88,6 +100,7 @@
     </style>
 </head>
 <body data-vide-bg="video/snow">
+@include(' includes.facebookSDK')
 @include(' layouts.top-nav')
 <div class="container pt-5">
     @if(!$song->path)
@@ -109,48 +122,43 @@
             </div>
         </div>
     @else
-    <div class="row">
-        <div class="col-md-9">
-            <div class="thumb">
-                <div class="row">
-                    <div class="col-5">
-                        <img class="dia-cd" src="https://drive.google.com/uc?id=14_VgXAjKeCQ5MLsBsMA2hqJfr-DTObXd"
-                             alt="">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="thumb">
+                    <div class="row">
+                        <div class="col-5">
+                            <img class="dia-cd" src="https://drive.google.com/uc?id=14_VgXAjKeCQ5MLsBsMA2hqJfr-DTObXd"
+                                 alt="">
+                        </div>
+                        <div class="col-7 song-info">
+                            <h2>
+                                <div>{{$song->name}}</div>
+                            </h2>
+                            <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
+                            <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
+                        </div>
                     </div>
-                    <div class="col-7 song-info">
-                        <h2>
-                            <div>{{$song->name}}</div>
-                        </h2>
-                        <div>Ca sĩ: @foreach($song->singers as $singer) {{$singer->name}}@endforeach</div>
-                        <div>Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach</div>
+                    <div class="player-control">
+                        <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
+                            <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
+                        </audio>
                     </div>
                 </div>
-                <div>
-                    <audio controls autoplay loop id="player" class="mejs__container" style="width: 100%">
-                        <source src="https://docs.google.com/uc?id={{ $song->path }}" type="audio/mpeg">
-                    </audio>
+                <div class="social-plugin"></div>
+            </div>
+            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
+                <div class="thumbnail" style="border-color: blue;">
+                    <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
+                    <hr>
+                    @foreach($songs as $key => $baihat)
+                        <div class="caption">
+                            <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
+                                        style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
+                        </div>
+                    @endforeach
                 </div>
             </div>
-            {{--            <div class="player">--}}
-            {{--                <audio controls autoplay>--}}
-            {{--                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">--}}
-            {{--                </audio>--}}
-            {{--            </div>--}}
-            <div class="social-plugin"></div>
         </div>
-        <div class="col-md-3" id="bxh" style="margin-top: 2px;">
-            <div class="thumbnail" style="border-color: blue;">
-                <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
-                <hr>
-                @foreach($songs as $key => $baihat)
-                    <div class="caption">
-                        <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
-                                    style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div>
     @endif
 
     <div class="social-plugin">
@@ -160,7 +168,9 @@
                 Add Playlist
             </button>
 
-            <!-- Modal -->
+        @include('laravelLikeComment::like', ['like_item_id' => 'song-'.$song->id])
+
+        <!-- Modal -->
             <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -172,23 +182,20 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('songs.addToPlaylist') }}" method="post">
-                                @csrf
-                                <div class="modal-body">
-                                    Bài hát: {{ $song->name }}
-                                    <input type="text" name="song_id" hidden value="{{ $song->id }}"><br><br>
-                                    Playlist:
-                                    <select name="playlist_id">
-                                        @foreach($user->playlists as $playlist)
-                                            <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
-                                    <button type="submit" class="btn btn-primary">Thêm</button>
-                                </div>
-                            </form>
+                            <div class="modal-body">
+                                Bài hát: {{ $song->name }}
+                                <input type="text" id="song_id" name="song_id" hidden value="{{ $song->id }}"><br><br>
+                                Playlist:
+                                <select id="playlist_id" name="playlist_id">
+                                    @foreach($user->playlists as $playlist)
+                                        <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
+                                <button type="button" id="btn-add-to-playlist" class="btn btn-primary">Thêm</button>
+                            </div>
                         @else
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">
@@ -267,38 +274,57 @@
             </div>
         </div>
     </div>
-        <div class="row">
-            <div class="col-md-9">
-                <div class="lyric" id="_divLyricHtml">
-                    <div class="pd_name_lyric">
-                        <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
-                        <p class="name_post">
-                            Nhạc sĩ:
-                            @foreach($song->artists as $artist) {{$artist->name}}@endforeach
-                        </p>
-                        <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
+    <div class="lyric" id="_divLyricHtml">
+        <div class="pd_name_lyric">
+            <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
+            <p class="name_post">
+                Nhạc sĩ:
+                @foreach($song->artists as $artist) {{$artist->name}}@endforeach
+            </p>
+            <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
 
-                        <div>
-                            <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-md-9">
+                <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
             </div>
-            @include('pages.topic')
+            <div class="col-md-9">
+                @include('includes.commentfb', ['commentItem'=> 'song-'.$song->id])
+            </div>
         </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
-        </div>
+    </div>
 </div>
-@include('layouts.footer')
 <script>
     var player = new MediaElementPlayer('player');
 </script>
-<script src="/js/app.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+<script src="{{ asset('/vendor/laravelLikeComment/js/script.js') }}" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btn-add-to-playlist').click(function () {
+            $.ajax({
+                type: "post",
+                url: "{{route('ajax.songs.addToPlaylist')}}",
+                data: {
+                    songId: $("#song_id").val(),
+                    playlistId: $("#playlist_id").val(),
+                },
+                success: function (response) {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.success(response);
+                    $("#song_id").val();
+                    $("#playlist_id").val();
+                },
+                error: function () {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.error("Tạo mới không thành công");
+                }
+            })
+        });
+    });
+</script>
 </body>
 
 </html>
+
 

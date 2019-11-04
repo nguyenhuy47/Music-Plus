@@ -12,7 +12,7 @@
                     </tr>
                     <tr>
                         <td>STT</td>
-                        <td>Nhạc sĩ</td>
+                        <td>TÊN NHẠC SĨ</td>
                     </tr>
                     </thead>
                     <tbody>
@@ -24,6 +24,8 @@
                     @endforeach
                     </tbody>
                 </table>
+                {{ $artists->links() }}
+
             </div>
             @include('pages.newsong')
         </div>
