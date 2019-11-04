@@ -120,10 +120,7 @@
                                         <ul class="multi-column-dropdown col-sm-8">
                                             <li><a href="{{ URL::to('/manage/songs') }}">Bài hát</a></li>
                                             <li class="divider"></li>
-                                            {{--                                            <li><a href="{{ URL::to('singers.store') }}">Ca sĩ</a></li>--}}
-
                                             <li><a href="{{route('singers.index')}}">Ca sĩ</a></li>
-
                                             <li class="divider"></li>
                                             <li><a href="{{ route('artists.index') }}">Nhạc sĩ</a></li>
                                             <li class="divider"></li>
@@ -147,7 +144,6 @@
                                    aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ url('/logout') }}"
@@ -155,7 +151,6 @@
                                                      document.getElementById('logout-form').submit();">
                                             Đăng xuất
                                         </a>
-
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST"
                                               style="display: none;">
                                             {{ csrf_field() }}

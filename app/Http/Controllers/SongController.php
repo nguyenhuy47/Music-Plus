@@ -12,15 +12,20 @@ use App\Model\CommentList;
 use App\Model\Playlist;
 use App\Model\Singer;
 use App\Model\Song;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
     public function index()
     {
+
+
+
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         return view('index', compact('songs', 'STT'));
@@ -33,9 +38,7 @@ class SongController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
         $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
-        return view('songs.show', compact('song','songs','STT', 'user', 'comments'));
-
-
+        return view('songs.show', compact('song', 'songs', 'STT', 'user', 'comments'));
     }
 
     public function create()
@@ -120,7 +123,7 @@ class SongController extends Controller
     {
         $categories = Category::all()->groupBy('description');
         $song = Song::findOrFail($id);
-        return view('manager.songs.edit', compact('song','categories'));
+        return view('manager.songs.edit', compact('song', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -130,40 +133,44 @@ class SongController extends Controller
         $song->name = $request->input('name');
         $song->file_name = $request->input('song_file');
 
-        if($request->hasFile('image_file')){
+        if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
             $imageFileName = $imageFile->getClientOriginalName();
             $song->image = $imageFileName;
-        }else{
+        } else {
             $song->image = $songImage;
         }
 
-        $singerIds = explode(',',$request->input('singer_ids'));
+        $singerIds = explode(',', $request->input('singer_ids'));
         $song->singers()->sync($singerIds);
-        $artistIds = explode(',',$request->input('artist_ids'));
+        $artistIds = explode(',', $request->input('artist_ids'));
         $song->artists()->sync($artistIds);
         $song->category_id = $request->input('category_id');
         $song->lyric = $request->input('lyric');
         $song->save();
         return redirect()->back();
     }
-    public function songManager(){
+
+    public function songManager()
+    {
         $STT = 0;
         $user = Auth::user();
         $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.show',compact('songs','STT'));
+        return view('manager.songs.show', compact('songs', 'STT'));
     }
 
-    public function destroy($id){
-       $song = Song::find($id);
-       $song->delete();
-       return redirect()->back();
+    public function destroy($id)
+    {
+        $song = Song::find($id);
+        $song->delete();
+        return redirect()->back();
     }
 
-    public function searchByName(Request $request){
+    public function searchByName(Request $request)
+    {
         $STT = 1;
-        $songs = Song::where('name','LIKE','%'.$request->keySearch.'%')->get();
-        return view('songs.search',compact('songs','STT'));
+        $songs = Song::where('name', 'LIKE', '%' . $request->keySearch . '%')->get();
+        return view('songs.search', compact('songs', 'STT'));
 
     }
 

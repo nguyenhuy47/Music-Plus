@@ -9,6 +9,6 @@ $factory->define(Singer::class, function (Faker $faker) {
     return [
         'name'=>$faker->name,
         'dob'=>$faker->date('Y-m-d','now'),
-        'story'=>$faker->address
+        'story'=>$faker->sentence
     ];
 });

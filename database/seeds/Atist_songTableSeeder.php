@@ -1,9 +1,8 @@
 <?php
 
-use App\Model\Artist;
 use Illuminate\Database\Seeder;
 
-class ArtistsTableSeeder extends Seeder
+class Atist_songTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +11,6 @@ class ArtistsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Artist::class,10)->create();
+        //
     }
 }

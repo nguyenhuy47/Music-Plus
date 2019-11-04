@@ -11,11 +11,13 @@
 |
 */
 
-
 Route::get('/', function () {
-    return view('index');
+    return view('home-new');
 });
-Route::get('/', 'SongController@index')->name('songs.index');
+//Route::get('/', function () {
+//    return view('index');
+//});
+//Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes(['verify'=>true]);
 

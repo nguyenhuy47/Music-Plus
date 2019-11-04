@@ -12,6 +12,6 @@ class SingersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Singer::class,100)->create();
+        factory(Singer::class,10)->create();
     }
 }
