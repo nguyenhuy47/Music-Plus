@@ -37,7 +37,6 @@ class ProfileValidate extends FormRequest
             'name.max' => 'Tên người dùng có tối đa 30 kí tự',
             'avatar.image' => 'Ảnh đại diện phải là một ảnh',
             'avatar.mimes' => 'Ảnh đại diện phải là :jpeg,png,jpg,gif,svg',
-
         ];
     }
 }
