@@ -31,7 +31,7 @@
             <div class="col-2">
                 <div class="profile-header-container">
                     <div class="profile-header-img">
-                        @if($user->image == '')
+                        @if($user->avatar == '')
                             <img id="image" height="150" width="150" class="rounded-circle"
                                  src="https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121231710-stock-illustration-male-default-avatar-profile-gray.jpg"/>
                         @else
@@ -75,8 +75,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        @if('file' == '' )
-                            @endif
                             <input type="file" class="form-control-file" name="avatar" id="avatarFile"
                                    aria-describedby="fileHelp"
                                    onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
