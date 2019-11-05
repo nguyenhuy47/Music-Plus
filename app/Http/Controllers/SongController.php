@@ -5,12 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormUploadRequest;
 use App\Jobs\SetPathFile;
 use App\Jobs\UploadFile;
-use App\Model\Artist;
 use App\Model\Category;
-use App\Model\Comment;
 use App\Model\CommentList;
-use App\Model\Playlist;
-use App\Model\Singer;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -163,5 +159,10 @@ class SongController extends Controller
         $song->delete();
         return redirect()->back();
     }
-
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all()->sortByDesc('created_at')->take(5);
+        return view('songs.index', compact('songs', 'STT'));
+    }
 }
