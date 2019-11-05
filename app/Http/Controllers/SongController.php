@@ -12,20 +12,15 @@ use App\Model\CommentList;
 use App\Model\Playlist;
 use App\Model\Singer;
 use App\Model\Song;
-use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
     public function index()
     {
-
-
-
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         return view('index', compact('songs', 'STT'));
@@ -37,8 +32,9 @@ class SongController extends Controller
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        $comments = Comment::where('comment_list_id', '=', $song->comment_list_id)->get()->sortByDesc('created_at');
-        return view('songs.show', compact('song', 'songs', 'STT', 'user', 'comments'));
+        return view('songs.show', compact('song', 'songs', 'STT', 'user'));
+
+
     }
 
     public function create()
@@ -96,9 +92,6 @@ class SongController extends Controller
         }
 
         $songFile->storeAs('/', $songFileName, 'public');
-        $commentList = new CommentList();
-        $commentList->save();
-        $song->comment_list_id = $commentList->id;
         $song->save();
 
         UploadFile::dispatch($songFileName);
@@ -108,15 +101,6 @@ class SongController extends Controller
         $song->singers()->attach($singerIds);
         Session::flash('success', 'Tải bài hát thành công');
         return redirect()->route('songs.create');
-    }
-
-    public function addToPlaylist(Request $request)
-    {
-        $playlistId = $request->playlist_id;
-        $songId = $request->song_id;
-        $playlist = Playlist::find($playlistId);
-        $playlist->songs()->attach($songId);
-        return redirect()->route('songs.play', $songId);
     }
 
     public function edit($id)
@@ -130,25 +114,36 @@ class SongController extends Controller
     {
         $song = Song::findOrFail($id);
         $songImage = $song->image;
-        $song->name = $request->input('name');
-        $song->file_name = $request->input('song_file');
+        if ($request->input('name')) {
+            $song->name = $request->input('name');
+        }
 
         if ($request->hasFile('image_file')) {
             $imageFile = $request->file('image_file');
             $imageFileName = $imageFile->getClientOriginalName();
             $song->image = $imageFileName;
+            $imageFile->storeAs('public/upload/images', $imageFileName);
         } else {
             $song->image = $songImage;
         }
 
-        $singerIds = explode(',', $request->input('singer_ids'));
-        $song->singers()->sync($singerIds);
-        $artistIds = explode(',', $request->input('artist_ids'));
-        $song->artists()->sync($artistIds);
+        if ($request->input('singer_ids')) {
+            $singerIds = explode(',', $request->input('singer_ids'));
+            $song->singers()->sync($singerIds);
+        }
+
+        if ($request->input('artist_ids')) {
+            $artistIds = explode(',', $request->input('artist_ids'));
+            $song->artists()->sync($artistIds);
+        }
+
         $song->category_id = $request->input('category_id');
-        $song->lyric = $request->input('lyric');
+        if ($request->input('lyric')) {
+            $song->lyric = $request->input('lyric');
+        }
+
         $song->save();
-        return redirect()->back();
+        return redirect()->back()->with('notification', 'Cập nhật thông tin bài hát thành công');
     }
 
     public function songManager()
@@ -164,14 +159,6 @@ class SongController extends Controller
         $song = Song::find($id);
         $song->delete();
         return redirect()->back();
-    }
-
-    public function searchByName(Request $request)
-    {
-        $STT = 1;
-        $songs = Song::where('name', 'LIKE', '%' . $request->keySearch . '%')->get();
-        return view('songs.search', compact('songs', 'STT'));
-
     }
 
 }

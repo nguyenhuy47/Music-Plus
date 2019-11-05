@@ -1,44 +1,35 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>Music Plus</title>
-
-    <!-- Styles -->
-    <link href="/css/app.css" rel="stylesheet">
-
-    <!-- Scripts -->
-    <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-    </script>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="{{asset('js/css3-mediaqueries.js')}}"></script>
-    <script type="text/javascript" href="js/Search.js"></script>
-    <link rel="stylesheet" href="{{asset('css/style_menu.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('css/slider.css')}}">
-    <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
-</head>
-<body data-vide-bg="video/snow">
-@include(' layouts.top-nav')
-<div class="container pt-5">
-    <div class="row">
-        <div class="col-md-9">
-            <div class="player">
-                <audio controls autoplay>
-                    <source src="{{asset('/storage/upload/songs/'.$song->file_name)}}" type="audio/mpeg">
-                </audio>
+@extends('pages.index')
+@section('content')
+    <div  class="container pt-5">
+        <div class="row">
+            <div class="col-md-9">
+                <table class="table">
+                    <thead class="thead-light">
+                    <tr>
+                        <th colspan="7" style="text-align: center">DANH SÁCH BÀI HÁT</th>
+                    </tr>
+                    </thead>
+                </table>
+                <table class="table">
+                    <tbody>
+                    @foreach($songs as $song)
+                        <tr>
+                            <td><img height="50" width="50" src="{{asset('/storage/public/upload/images/'.$song->image)}}"></td>
+                            <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>
+                            <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
+                            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </div>
+            @include('pages.newsong')
         </div>
+        <div class="row">
+            @include('pages.album')
+            @include('pages.topic')
         </div>
+{{--<<<<<<< HEAD--}}
         <div class="col-md-3" id="bxh" style="margin-top: 2px;">
             <div class="thumbnail" style="border-color: blue;">
                 <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
@@ -49,20 +40,6 @@
                                     style="color: red;">{{$STT++ . '. '}}</strong>{{$song->name}}</a></h5>
                     </div>
                 @endforeach
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: green;">02.</strong> Em--}}
-                {{--                            ơi</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;"><strong style="color: yellow;">03.</strong> Nơi--}}
-                {{--                            này có anh</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">04. Lá vàng rơi gió</a></h5>--}}
-                {{--                </div>--}}
-                {{--                <div class="caption">--}}
-                {{--                    <h5><a href="" target="_blank" style="color: black;">05. Ta là cho nhau</a></h5>--}}
-                {{--                </div>--}}
             </div>
         </div>
     </div>
@@ -200,19 +177,11 @@
                 </div>
             </div>
             <hr>
+{{--=======--}}
+        <div class="row">
+            @include('pages.mv')
+            @include('pages.media')
+{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
         </div>
     </div>
-</div>
-{{--<div id="player">--}}
-{{--    <audio controls autoplay hidden>--}}
-{{--        <source src="{{URL::asset('uploads/music.mp3')}}" type="audio/mpeg">--}}
-{{--        unsupported !!--}}
-{{--    </audio>--}}
-{{--</div>--}}
-@include('layouts.footer')
-
-<script src="{{asset('/js/jquery-ui/app.js')}}"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
-</body>
-</html>
+@endsection

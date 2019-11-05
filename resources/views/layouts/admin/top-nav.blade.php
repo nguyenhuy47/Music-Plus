@@ -15,7 +15,7 @@
                     <!-- Left side of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link active" href="{{ URL::to('/') }}">Home <span
+                            <a class="nav-link active" href="{{ URL::to('/') }}">Trang Chủ <span
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
@@ -34,7 +34,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Songs
+                                Bài Hát
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="#">V-pop</a>
@@ -51,18 +51,17 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Management
+                                    Quản Lý
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">Songs</a>
+                                    <a class="dropdown-item" href="{{route('songs.index')}}">Bài hát</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Singers</a>
+                                    <a class="dropdown-item" href="{{route('singers.index')}}">Ca sĩ</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Artists</a>
+                                    <a class="dropdown-item" href="{{ route('artists.index') }}">Nhạc sĩ</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Playlists</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Upload</a>
+                                    <a class="dropdown-item" href="{{ route('playlists.index') }}">Playlists</a>
+
                                 </div>
                             </li>
                         @endif

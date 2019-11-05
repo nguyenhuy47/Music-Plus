@@ -2,30 +2,11 @@
 @section('title', 'Chỉnh sửa bai hat')
 
 @section('content')
-    {{--    <script>--}}
-    {{--        $(document).ready(function () {--}}
-    {{--            $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {--}}
-    {{--                hintText: 'Nhập tên ca sỹ',--}}
-    {{--                noResultsText: "Không tìm thấy ca sỹ ",--}}
-    {{--                searchingText: 'Đang tìm kiếm...',--}}
-    {{--                theme: 'facebook',--}}
-    {{--                preventDuplicates: true,--}}
-    {{--                prePopulate: '',--}}
-    {{--            })--}}
-    {{--        });--}}
-    {{--        $(document).ready(function () {--}}
-    {{--            $("#list_artist").tokenInput("{{asset('api/artists?q=artist')}}", {--}}
-    {{--                hintText: 'Nhập tên ca sỹ',--}}
-    {{--                noResultsText: "Không tìm thấy ca sỹ ",--}}
-    {{--                searchingText: 'Đang tìm kiếm...',--}}
-    {{--                theme: 'facebook',--}}
-    {{--                preventDuplicates: true,--}}
-    {{--                prePopulate: '',--}}
-    {{--            })--}}
-    {{--        });--}}
-
-    {{--    </script>--}}
-
+    @if(Session::has('notification'))
+        <p style="text-align: center;" class="alert alert-success">
+            {{Session::get('notification')}}
+        </p>
+    @endif
     <div class="col-12 col-md-12" style="margin-left: 35%">
         <div class="row" style="margin: auto">
             <form method="post" action="{{route('songs.update', $song->id)}}" enctype="multipart/form-data">
@@ -41,29 +22,29 @@
                                placeholder="Tên bài hát">
                     </div>
                     <div class="form-group">
-                        <label for="exampleFormControlFile1">File</label>
-                        <input type="text" class="form-control-file" name="song_file" value="{{ $song->file_name }}">
-                    </div>
-                    <div class="form-group">
                         <label>Ảnh bài hát</label><br>
-                        <img id="blaha" src="{{asset('storage/upload/images/'.$song->image)}}" alt=""
+                        <img id="image-song" src="{{asset('storage/public/upload/images/'.$song->image)}}" alt=""
                              style="width: 80px">
                         <br>
+
                         <input
                             onchange="document.getElementById('blaha').src = window.URL.createObjectURL(this.files[0])"
                             id="imgInp" type="file" class="form-control-file" name="image_file"
                                value="{{$song->image}}">
+
+                        <input id="imgInp" type="file" class="form-control-file" name="image_file"
+                               value="{{$song->image}}" onchange="document.getElementById('image-song').src = window.URL.createObjectURL(this.files[0])">
                     </div>
                     <div class="form-group">
                         <label>Ca sĩ</label>
                         <input type="text" id="list_singer" class="form-control" name="singer_ids"
                                placeholder="Tên ca sĩ"
-                               value="@foreach($song->singers as $singer){{$singer->name.", "}}@endforeach">
+                               value="">
                     </div>
                     <div class="form-group">
                         <label>Nhạc sĩ</label>
                         <input type="text" id="list_artist" class="form-control" name="artist_ids" placeholder="Nhạc sĩ"
-                               value="@foreach($song->artists as $artist){{$artist->name.", "}}@endforeach">
+                               value="">
                     </div>
                     <div class="form-group">
                         <label>Thể loại</label>
@@ -144,6 +125,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

@@ -2,35 +2,36 @@
 
 @section('content')
     <div class="container">
+        @if ($message = Session::get('success'))
+
+            <div class="alert alert-success alert-block">
+
+                <button type="button" class="close" data-dismiss="alert">×</button>
+
+                <strong>{{ $message }}</strong>
+
+            </div>
+
+        @endif
+
+        @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Rất tiếc!</strong> Có một số vấn đề với đầu vào của bạn.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="row">
-            @if ($message = Session::get('success'))
 
-                <div class="alert alert-success alert-block">
-
-                    <button type="button" class="close" data-dismiss="alert">×</button>
-
-                    <strong>{{ $message }}</strong>
-
-                </div>
-
-            @endif
-
-            @if (count($errors) > 0)
-                <div class="alert alert-danger">
-                    <strong>Rất tiếc!</strong> Có một số vấn đề với đầu vào của bạn.<br><br>
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
         </div>
         <div class="row">
             <div class="col-2">
                 <div class="profile-header-container">
                     <div class="profile-header-img">
-                        @if($user->image == '')
+                        @if($user->avatar == '')
                             <img id="image" height="150" width="150" class="rounded-circle"
                                  src="https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121231710-stock-illustration-male-default-avatar-profile-gray.jpg"/>
                         @else
@@ -74,9 +75,6 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        @if('file' == '' )
-
-                            @endif
                             <input type="file" class="form-control-file" name="avatar" id="avatarFile"
                                    aria-describedby="fileHelp"
                                    onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"

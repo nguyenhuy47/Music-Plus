@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('home-new');
+    return view('index1');
 });
 //Route::get('/', function () {
 //    return view('index');
@@ -23,8 +23,6 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/search', 'SearchController@searchByName')->name('search.searchByName');
-//Route::get('/search', 'SingerController@searchByName')->name('singers.searchByName');
-//Route::get('/search', 'PlaylistController@searchByName')->name('playlists.searchByName');
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
@@ -61,7 +59,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
 
     });
     Route::group(['prefix' => 'songs'], function () {
-        Route::get('/', 'SongController@songManager')->name('songs.index');
+        Route::get('/', 'SongController@songManager')->name('songs.show');
         Route::get('/{id}/edit', 'SongController@edit')->name('songs.edit');
         Route::post('/{id}/edit', 'SongController@update')->name('songs.update');
         Route::get('/{id}/destroy', 'SongController@destroy')->name('songs.destroy');

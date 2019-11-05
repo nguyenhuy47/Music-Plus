@@ -15,6 +15,10 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
@@ -88,6 +92,7 @@
     </style>
 </head>
 <body data-vide-bg="video/snow">
+@include('includes.facebookSDK')
 @include(' layouts.top-nav')
 <div class="container pt-5">
     <div class="row">
@@ -104,30 +109,12 @@
         </div>
         @include('pages.newsong')
     </div>
-    @if($playlist->comment_list_id)
-        <div class="comment col-md-9">
-            <div class="create-comment">
-                <form action="{{route('comments.store', $playlist->comment_list_id)}}" method="post">
-                    @csrf
-                    <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
-                    <button class="btn btn-primary" type="submit">Bình luận</button>
-                </form>
-            </div>
-            <hr>
-            <div class="show-comment col-md-12">
-                @foreach($comments as $comment)
-                    <div class="row">
-                        <div class="col-md-3"><b>avatar</b></div>
-                        <div class="col-md-9">
-                            <div class="col-md-12"><b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
-                            <div class="col-md-12">{{$comment->content}}</div>
-                        </div>
-                    </div>
-                    <hr>
-                @endforeach
-            </div>
-        </div>
-    @endif
+    <div class="col-md-9">
+        @include('includes.like', ['like_item' => 'playlist-'.$playlist->id])
+    </div>
+    <div class="col-md-9">
+        @include('includes.commentfb', ['commentItem'=> 'playlist-'.$playlist->id])
+    </div>
     <div class="row">
         @include('pages.album')
         @include('pages.topic')
@@ -144,9 +131,8 @@
         features: ['prevtrack', 'playpause', 'nexttrack', 'current', 'progress', 'duration', 'volume', 'playlist', 'shuffle', 'loop', 'fullscreen'],
     });
 </script>
-<script src="/js/app.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 @include('layouts.footer')
 </body>
 

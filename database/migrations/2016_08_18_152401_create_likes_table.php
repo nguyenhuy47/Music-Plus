@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentListsTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +12,11 @@ class CreateCommentListsTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_lists', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id');
+            $table->string('item_id'); // ModelName_modelId
+            $table->smallInteger('vote');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ class CreateCommentListsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_lists');
+        Schema::drop('laravellikecomment_likes');
     }
 }

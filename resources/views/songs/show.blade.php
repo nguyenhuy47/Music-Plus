@@ -15,6 +15,18 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{{--<<<<<<< HEAD--}}
+{{--=======--}}
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
+    <script type="text/javascript" href="js/Search.js"></script>
+{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
@@ -92,6 +104,7 @@
     </style>
 </head>
 <body data-vide-bg="video/snow">
+@include(' includes.facebookSDK')
 @include(' layouts.top-nav')
 <div class="container pt-5">
     @if(!$song->path)
@@ -155,11 +168,14 @@
     <div class="social-plugin">
         <div>
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
-                Add Playlist
-            </button>
+            @if(Auth::user())
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPlaylistModal">
+                    Add Playlist
+                </button>
+        @endif
+        @include('includes.like', ['like_item' => 'song-'.$song->id])
 
-            <!-- Modal -->
+        <!-- Modal -->
             <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -171,23 +187,20 @@
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <form action="{{ route('songs.addToPlaylist') }}" method="post">
-                                @csrf
-                                <div class="modal-body">
-                                    Bài hát: {{ $song->name }}
-                                    <input type="text" name="song_id" hidden value="{{ $song->id }}"><br><br>
-                                    Playlist:
-                                    <select name="playlist_id">
-                                        @foreach($user->playlists as $playlist)
-                                            <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
-                                    <button type="submit" class="btn btn-primary">Thêm</button>
-                                </div>
-                            </form>
+                            <div class="modal-body">
+                                Bài hát: {{ $song->name }}
+                                <input type="text" id="song_id" name="song_id" hidden value="{{ $song->id }}"><br><br>
+                                Playlist:
+                                <select id="playlist_id" name="playlist_id">
+                                    @foreach($user->playlists as $playlist)
+                                        <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Trở về</button>
+                                <button type="button" id="btn-add-to-playlist" class="btn btn-primary">Thêm</button>
+                            </div>
                         @else
                             <div class="card-body">
                                 <form method="POST" action="{{ route('login') }}">
@@ -278,30 +291,9 @@
             <div class="col-md-9">
                 <textarea name="" id="" cols="100" rows="10" disabled>{!! nl2br($song->lyric) !!}</textarea>
             </div>
-            @if($song->comment_list_id)
-                <div class="comment col-md-9">
-                    <div class="create-comment">
-                        <form action="{{route('comments.store', $song->comment_list_id)}}" method="post">
-                            @csrf
-                            <textarea name="content" cols="30" rows="3" class="form-control"></textarea>
-                            <button class="btn btn-primary" type="submit">Bình luận</button>
-                        </form>
-                    </div>
-                    <hr>
-                    <div class="show-comment col-md-12">
-                        @foreach($comments as $comment)
-                            <div class="row">
-                                <div class="col-md-3"><b>avatar</b></div>
-                                <div class="col-md-9">
-                                    <div class="col-md-12"><b>{{$comment->user->name}}</b>{{' - ' . $comment->created_at}}</div>
-                                    <div class="col-md-12">{{$comment->content}}</div>
-                                </div>
-                            </div>
-                            <hr>
-                        @endforeach
-                    </div>
-                </div>
-            @endif
+            <div class="col-md-9">
+                @include('includes.commentfb', ['commentItem'=> 'song-'.$song->id])
+            </div>
         </div>
     </div>
 </div>
@@ -317,6 +309,37 @@
 <script>
     var player = new MediaElementPlayer('player');
 </script>
+{{--<<<<<<< HEAD--}}
+{{--=======--}}
+<script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#btn-add-to-playlist').click(function () {
+            $.ajax({
+                type: "post",
+                url: "{{route('ajax.songs.addToPlaylist')}}",
+                data: {
+                    songId: $("#song_id").val(),
+                    playlistId: $("#playlist_id").val(),
+                },
+                success: function (response) {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.success(response);
+                    $("#song_id").val();
+                    $("#playlist_id").val();
+                },
+                error: function () {
+                    $('#addPlaylistModal').modal('hide');
+                    $('.modal-backdrop').remove();
+                    toastr.error("Tạo mới không thành công");
+                }
+            })
+        });
+    });
+</script>
+{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
 </body>
 </html>
 

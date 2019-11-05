@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FormAddPlaylist;
+use App\Http\Requests\FormPlaylist;
 use App\Model\Comment;
 use App\Model\CommentList;
 use App\Model\Playlist;
@@ -11,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
+
     public function index()
     {
         $STT = 1;
@@ -34,9 +37,9 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
-        $comments = Comment::where('comment_list_id', '=', $playlist->comment_list_id)->get()->sortByDesc('created_at');
-        return view('playlists.show', compact('playlist', 'songs','STT','user', 'comments'));
+        return view('playlists.playAll', compact('playlist', 'songs','STT','user'));
     }
+
 
     public function showHotPlaylist($id){
         $STT = 1;
@@ -46,28 +49,23 @@ class PlaylistController extends Controller
 
     }
 
-    public function store(Request $request)
+
+    public function store(FormPlaylist $request)
+
     {
-        if (!$request->name) {
-            return redirect()->back();
-        }
         $user = Auth::user();
         $playlist = new Playlist();
         $playlist->name = $request->name;
         $playlist->user_id = $user->id;
-        $commentList = new CommentList();
-        $commentList->save();
-        $playlist->comment_list_id = $commentList->id;
         $playlist->save();
         return redirect()->back();
-
     }
 
     public function destroy($playlistId, $songId)
     {
         $playlist = Playlist::find($playlistId);
         $playlist->songs()->detach($songId);
-        return redirect()->route('playlists.show', $playlist->id);
+        return redirect()->route('playlists.playAll', $playlist->id);
     }
 
     public function destroyAll($id)
@@ -76,6 +74,7 @@ class PlaylistController extends Controller
         $playlist->delete();
         return redirect()->back();
     }
+
 
     public function countPlaylist()
     {
@@ -91,4 +90,30 @@ class PlaylistController extends Controller
 
     }
 
+
+    public function update(FormPlaylist $request, $id)
+    {
+        $playlist = Playlist::find($id);
+        $playlist->name = $request->name;
+        $playlist->save();
+        return redirect()->back();
+    }
+
+    public function addSong(FormAddPlaylist $request, $id)
+    {
+        $songIds = explode(',', $request->songIds);
+        $playlist = Playlist::find($id);
+        foreach ($songIds as $songId) {
+            $playlist->songs()->attach($songId);
+        }
+        return redirect()->back();
+    }
+
+    public function guestIndex()
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $playlists = Playlist::all();
+        return view('playlists.index', compact('playlists', 'STT','songs'));
+    }
 }
