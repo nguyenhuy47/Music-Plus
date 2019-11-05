@@ -27,7 +27,7 @@ Route::get('/', 'SongController@index')->name('songs.index');
 Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('profile', 'UserController@profile');
+Route::get('profile', 'UserController@profile')->middleware('login');
 Route::post('profile', 'UserController@update_avatar');
 
 
@@ -38,6 +38,8 @@ Route::get('/callback/{social}', 'SocialAuthController@callback');
 
 Route::group(['prefix' => 'songs'], function () {
     Route::get('/', 'SongController@guestIndex')->name('guest.songs.index');
+    Route::get('/newSong', 'SongController@indexNewSong')->name('guest.songs.indexNewSong');
+
     Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');

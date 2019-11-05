@@ -12,7 +12,7 @@
                 </table>
                 <table class="table">
                     <tbody>
-                    @foreach($songs as $song)
+                    @foreach($baihat as $song)
                         <tr>
                             <td><a href="{{route('songs.play', $song->id)}}"><img height="50" width="50" src="{{asset('/storage/public/upload/images/'.$song->image)}}"></a></td>
                             <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}" style="color: black;">{{$song->name}}</a></td>

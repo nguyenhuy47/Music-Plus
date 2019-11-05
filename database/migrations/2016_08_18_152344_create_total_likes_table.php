@@ -16,7 +16,6 @@ class CreateTotalLikesTable extends Migration
             $table->increments('id');
             $table->string('item_id'); // ModelName_modelId
             $table->integer('total_like');
-            $table->integer('total_dislike');
             $table->timestamps();
         });
     }
