@@ -16,6 +16,8 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/like/vote', 'LikeController@vote')->middleware('auth');
+
 Route::get('/abcd', function () {
     return view('home-new');
 });
