@@ -21,27 +21,26 @@ class SearchController extends Controller
         $STT = 1;
         $STT1 = 1;
         $STT2 = 1;
+        $keyword = trim($request->keySearch);
         if($request->search === 'songs'){
-
-            $songs = Song::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            return view('songs.search',compact('songs','STT'));
-//            return response()->json($songs);
+            $songs = Song::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            return view('songs.search',compact('songs','STT','keyword'));
 
         }elseif ($request->search === 'singers'){
-            $singers = Singer::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            return view('singers.search',compact('singers','STT'));
-//            return response()->json($singers);
+            $singers = Singer::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            return view('singers.search',compact('singers','STT','keyword'));
+
 
         }elseif ($request->search === 'playlists'){
-            $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            return view('manager.playlists.search',compact('playlists','STT'));
-//            return response()->json($playlists);
+            $playlists = Playlist::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            return view('manager.playlists.search',compact('playlists','STT','keyword'));
+
         }
         else{
-            $songs = Song::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            $singers = Singer::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
-            return view('searchAll',compact('songs','singers','playlists','STT','STT1','STT2'));
+            $songs = Song::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            $singers = Singer::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            $playlists = Playlist::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+            return view('searchAll',compact('songs','singers','playlists','STT','STT1','STT2','keyword'));
         }
     }
 

@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    public function profile()
+    public function show()
     {
         $user = Auth::user();
-        return view('profile', compact('user'));
+        return view('profile.show', compact('user'));
     }
 
     public function update_avatar(ProfileValidate $request)
@@ -30,8 +30,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return back()
-            ->with('success', 'Cập nhật thành công.');
+        return redirect()->back()->with('success', 'Cập nhật thông tin cá nhân thành công.');
 
     }
 }

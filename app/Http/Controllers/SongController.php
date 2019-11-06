@@ -21,9 +21,8 @@ class SongController extends Controller
 {
     public function index()
     {
-        $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('index', compact('songs', 'STT'));
+        return view('index1', compact('songs'));
     }
 
     public function show($id)
@@ -40,7 +39,7 @@ class SongController extends Controller
     public function create()
     {
         $categories = Category::all()->groupBy('description');
-        return view('songs.create', compact('categories'));
+        return view('manager.songs.create', compact('categories'));
     }
 
     public function store(FormUploadRequest $request)
@@ -151,7 +150,7 @@ class SongController extends Controller
         $STT = 0;
         $user = Auth::user();
         $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.show', compact('songs', 'STT'));
+        return view('manager.songs.list', compact('songs', 'STT'));
     }
 
     public function destroy($id)

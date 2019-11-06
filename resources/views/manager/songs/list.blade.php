@@ -1,16 +1,18 @@
-@extends('pages.index')
+@extends('layouts.master')
 @section('content')
     <div  class="container pt-5">
         <div class="row">
             <div class="col-md-9">
-                @if (Auth::guest())
-                    @else
-                    <a class="btn btn-primary" href="{{ route('songs.create') }}">Tải lên</a>
-                @endif
+
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
-                        <th colspan="7" style="text-align: center">DANH SÁCH BÀI HÁT</th>
+                        <th colspan="7" style="text-align: center"><b>DANH SÁCH BÀI HÁT</b>
+                            @if (Auth::guest())
+                            @else
+                                <a class="btn btn-primary float-right" href="{{ route('songs.create') }}">Tải lên</a>
+                            @endif
+                        </th>
                     </tr>
                     </thead>
                 </table>
@@ -32,15 +34,6 @@
                     </tbody>
                 </table>
             </div>
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection

@@ -14,7 +14,7 @@ class ArtistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $artists = Artist::paginate(10);
-        return view('manager.artists.index', compact('artists','songs','STT'));
+        return view('manager.artists.list', compact('artists','songs','STT'));
     }
 
     public function create()
@@ -58,7 +58,7 @@ class ArtistController extends Controller
         $artist->dob = $request->dob;
         $artist->story = $request->story;
         $artist->save();
-        return redirect()->route('manager.artists.index');
+        return redirect()->back()->with('notification', 'Cập nhật thông tin nhạc sĩ thành công');
     }
 
 
