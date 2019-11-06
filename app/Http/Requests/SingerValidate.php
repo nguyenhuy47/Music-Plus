@@ -26,6 +26,8 @@ class SingerValidate extends FormRequest
         return [
             'name' => 'required',
             'dob' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
         ];
     }
 
