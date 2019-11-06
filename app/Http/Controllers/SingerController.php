@@ -15,7 +15,7 @@ class SingerController extends Controller
     public function index()
     {
         $singers = Singer::all()->sortByDesc('created_ad')->take(5);
-        return view('index1', compact('singers'));
+        return view('singers.index', compact('singers'));
     }
 
     public function create()

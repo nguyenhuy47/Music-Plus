@@ -1,16 +1,16 @@
-@extends ('../index')
+@extends ('layouts.master')
 @section('content')
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
                 <div>
                     @if(Auth::check())
-                    <a class="btn btn-group bg-primary" href="{{route('singers.create')}}">THÊM CA SĨ</a>
+
                     @endif
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
-                            <th colspan="2" style="text-align: center">DANH SÁCH CA SĨ</th>
+                            <th colspan="3git" style="text-align: center"> <a class="btn btn-info float-right" href="{{route('singers.create')}}">THÊM CA SĨ</a>DANH SÁCH CA SĨ</th>
                         </tr>
                         <tr>
                             <td>STT</td>
@@ -28,15 +28,6 @@
                     </table>
                 </div>
             </div>
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection
