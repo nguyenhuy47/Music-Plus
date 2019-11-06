@@ -11,12 +11,10 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('index');
-//});
-//Route::get('/', function () {
-//    return view('index');
-//});
+Route::get('/abcd', function (){
+    return view('welcome');
+});
+
 Route::get('/', 'SongController@index')->name('songs.index');
 
 Auth::routes(['verify'=>true]);
@@ -51,6 +49,7 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::get('/{playlistId}/destroy/{songId}', 'PlaylistController@destroy')->name('playlists.destroy');
         Route::post('/', 'PlaylistController@store')->name('playlists.store');
         Route::post('/update/{id}', 'PlaylistController@update')->name('playlists.update');
+        Route::post('/addSong/{playlistId}', 'PlaylistController@addSong')->name('playlists.addSong');
         Route::get('/{id}/destroyAll', 'PlaylistController@destroyAll')->name('playlist.destroyAll');
         Route::get('/{id}/showHotPlaylist', 'PlaylistController@showHotPlaylist')->name('playlists.showHotPlaylist');
     });
