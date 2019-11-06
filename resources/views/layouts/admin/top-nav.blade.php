@@ -18,31 +18,15 @@
                         <a class="nav-link active" href="{{ URL::to('/') }}">Trang Chủ <span
                                 class="sr-only">(current)</span></a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
                             Playlists
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">V-pop</a>
-                            <a class="dropdown-item" href="#">US - UK</a>
-                            <a class="dropdown-item" href="#">K-pop</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Others</a>
-                        </div>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
                             Bài Hát
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">V-pop</a>
-                            <a class="dropdown-item" href="#">US - UK</a>
-                            <a class="dropdown-item" href="#">K-pop</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Others</a>
-                        </div>
                     </li>
                     @if (Auth::guest())
                         {{--                        <li><a href="{{ url('/login') }}">Login</a></li>--}}
