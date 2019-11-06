@@ -1,4 +1,4 @@
-@extends ('../index')
+@extends ('layouts.master')
 @section('content')
     <div class="container pt-5">
         <div class="row">
@@ -7,15 +7,15 @@
                     @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
-                <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addNewPlaylist">
-                        THÊM MỚI PLAYLIST
-                    </button>
                     <table class="table">
                         <thead class="thead-light">
                         <tr>
-                            <th colspan="3" style="text-align: center">DANH SÁCH PLAYLIST</th>
+                            <th colspan="3" style="text-align: center">DANH SÁCH PLAYLIST
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addNewPlaylist">
+                                    THÊM MỚI PLAYLIST
+                                </button>
+                            </th>
                         </tr>
                         <tr>
                             <td>STT</td>
@@ -68,8 +68,6 @@
                         @endforeach
                         </tbody>
                     </table>
-
-
                 </div>
 
                 <!-- Modal Create Playlist-->
@@ -100,15 +98,5 @@
                 </div>
 
             </div>
-            @include('pages.newsong')
         </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
-        </div>
-    </div>
 @endsection

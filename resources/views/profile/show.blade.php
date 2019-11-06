@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.master')
 @section('content')
     <div class="container">
         @if ($message = Session::get('success'))
@@ -36,9 +35,9 @@
                                  src="https://st2.depositphotos.com/4111759/12123/v/950/depositphotos_121231710-stock-illustration-male-default-avatar-profile-gray.jpg"/>
                         @else
                             <img id="image" height="150" width="150" class="rounded-circle"
-                             src="{{asset('/storage/avatars/'.$user->avatar) }}"/>
-                        @endif
-                        <!-- badge -->
+                                 src="{{asset('/storage/avatars/'.$user->avatar) }}"/>
+                    @endif
+                    <!-- badge -->
                         <div class="rank-label-container">
                         </div>
                     </div>
@@ -62,7 +61,7 @@
                         <label for="exampleFormControlSelect1">GIỚI TÍNH</label>
                         <select class="form-control" id="exampleFormControlSelect1" name="gender">
                             <option>{{$user->gender}}</option>
-                        @if($user->gender == 'NAM')
+                            @if($user->gender == 'NAM')
                                 <option>NỮ</option>
                             @endif
                             @if($user->gender == 'NỮ')
@@ -75,12 +74,10 @@
                         </select>
                     </div>
                     <div class="form-group">
-                            <input type="file" class="form-control-file" name="avatar" id="avatarFile"
-                                   aria-describedby="fileHelp"
-                                   onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
-                                   class="form-control-file"
-
-                            >
+                        <input type="file" class="form-control-file" name="avatar" id="avatarFile"
+                               aria-describedby="fileHelp"
+                               onchange="document.getElementById('image').src = window.URL.createObjectURL(this.files[0])"
+                               class="form-control-file">
                         <small id="fileHelp" class="form-text text-muted">Vui lòng tải lên một tập tin hình ảnh hợp lệ.
                             Kích thước của hình ảnh không được quá 2MB.</small>
                         <button type="submit" class="btn btn-primary">Cập nhập</button>

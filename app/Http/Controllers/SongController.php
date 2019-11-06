@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\FormUploadRequest;
 use App\Jobs\SetPathFile;
 use App\Jobs\UploadFile;
+use App\Model\Artist;
 use App\Model\Category;
+use App\Model\Comment;
 use App\Model\CommentList;
+use App\Model\Playlist;
+use App\Model\Singer;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +21,8 @@ class SongController extends Controller
 {
     public function index()
     {
-        $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('index', compact('songs', 'STT'));
+        return view('index1', compact('songs'));
     }
 
     public function show($id)
@@ -36,7 +39,7 @@ class SongController extends Controller
     public function create()
     {
         $categories = Category::all()->groupBy('description');
-        return view('songs.create', compact('categories'));
+        return view('manager.songs.create', compact('categories'));
     }
 
     public function store(FormUploadRequest $request)
@@ -144,12 +147,10 @@ class SongController extends Controller
 
     public function songManager()
     {
-        $STT = 1;
+        $STT = 0;
         $user = Auth::user();
-        $baihat = Song::where('user_id', $user->id)->get();
-        $songs = Song::all()->sortByDesc('created_at')->take(5);
-
-        return view('manager.songs.show', compact('songs', 'STT','baihat'));
+        $songs = Song::where('user_id', $user->id)->get();
+        return view('manager.songs.list', compact('songs', 'STT'));
     }
 
     public function destroy($id)
@@ -158,18 +159,5 @@ class SongController extends Controller
         $song->delete();
         return redirect()->back();
     }
-    public function guestIndex()
-    {
-        $STT = 1;
-        $songs = Song::all()->sortByDesc('created_at')->take(5);
-        $baihat = Song::all();
-        return view('songs.index', compact('songs', 'STT','baihat'));
-    }
 
-    public function indexNewSong()
-    {
-        $STT = 1;
-        $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('songs.newSong', compact('songs', 'STT'));
-    }
 }

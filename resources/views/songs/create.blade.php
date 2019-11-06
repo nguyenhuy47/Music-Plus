@@ -8,6 +8,9 @@
         @if (Session::has('errorSongInfo'))
             <p class="alert alert-danger">{{Session::get('errorSongInfo')}}</p>
         @endif
+        @if (Session::has('errorDob'))
+            <p class="text-danger">{{Session::get('errorDob')}}</p>
+        @endif
         <form method="post" action="{{route('songs.store')}}" enctype="multipart/form-data">
             @csrf
             <div>

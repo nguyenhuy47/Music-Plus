@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class PlaylistController extends Controller
 {
+
     public function index()
     {
         $STT = 1;
@@ -39,7 +40,18 @@ class PlaylistController extends Controller
         return view('playlists.playAll', compact('playlist', 'songs','STT','user'));
     }
 
+
+    public function showHotPlaylist($id){
+        $STT = 1;
+        $hotPlaylists = Playlist::all()->sortByDesc('create_at')->take(5);
+        $hotPlaylist = Playlist::findOrFail($id);
+        return view('manager.playlists.hot-playlist', compact('STT','hotPlaylists', 'hotPlaylist'));
+
+    }
+
+
     public function store(FormPlaylist $request)
+
     {
         $user = Auth::user();
         $playlist = new Playlist();
@@ -62,6 +74,22 @@ class PlaylistController extends Controller
         $playlist->delete();
         return redirect()->back();
     }
+
+
+    public function countPlaylist()
+    {
+        $playlist = Playlist::all();
+        $countByName = $playlist->count($playlist->name);
+        return view('manager.playlists.hot-playlist', compact('playlist', 'countByName'));
+    }
+
+    public function searchByName(Request $request){
+        $STT = 1;
+        $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
+        return view('manager.playlists.search',compact('playlists','STT'));
+
+    }
+
 
     public function update(FormPlaylist $request, $id)
     {

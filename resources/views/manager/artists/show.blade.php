@@ -1,15 +1,16 @@
-@extends('pages.index')
+@extends('layouts.master')
 @section('content')
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
-                <a class="btn btn-primary" href="{{route('artists.edit', $artist->id)}}">THAY ĐỔI THÔNG TIN NHẠC SĨ</a>
                 <table class="table">
                     <thead class="thead-light">
                     <tr>
                         <th colspan="3" style="text-align: center"><b>{{strtoupper($artist->name) }}</b></th>
                     </thead>
-                    <td colspan="3"><b>THÔNG TIN</b></td>
+                    <td colspan="3"><b>THÔNG TIN</b>
+                        <a class="btn btn-primary float-right" href="{{route('artists.edit', $artist->id)}}">CHỈNH SỬA</a>
+                    </td>
                     </tr>
                     <tbody>
                     <tr>
@@ -42,18 +43,7 @@
                     @endforeach
                     </tbody>
                 </table>
-
             </div>
-
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection

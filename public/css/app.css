@@ -10642,5 +10642,11 @@ a.text-dark:focus {
     color: inherit;
     border-color: #dee2e6;
   }
+  .search-list{
+      display: none;
+  }
+  .search-list.active{
+      display: block;
+  }
 }
 
