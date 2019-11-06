@@ -155,8 +155,7 @@ $('.button').click(function () {
 function playMusic() {
     $('.play-btn').removeClass("fa-play").addClass("fa-pause");
     player.removeClass('paused').addClass('playing');
-    // audio[0].play();
-    fetchAudioAndPlay();
+    audio[0].play();
     getCurrentTime();
 }
 
@@ -180,19 +179,5 @@ function playTrack(id) {
     playMusic();
 }
 
-function fetchAudioAndPlay() {
-    fetch(audio[0].src)
-        .then(response => response.blob())
-        .then(blob => {
-            audio[0].srcObject = blob;
-            return audio[0].play();
-        })
-        .then(_ => {
-            // Video playback started ;)
-        })
-        .catch(e => {
-            // Video playback failed ;(
-        })
-}
 
 

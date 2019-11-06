@@ -2,6 +2,7 @@
 @section('style')
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
     <link rel="stylesheet" href="{{asset('css/player.css')}}">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 @endsection
@@ -53,13 +54,21 @@
             @endif
             <div class="social-plugin col-md-12">
                 <div>
-                    <!-- Button trigger modal -->
-                    @if(Auth::user())
-                        <button type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#addPlaylistModal">
-                            Add Playlist
-                        </button>
-                @endif @include('includes.like', ['like_item' => 'song-'.$song->id])
+                    <div class="row">
+                        @if(Auth::user())
+                            <!-- Button trigger modal -->
+                            <div class="col-md-3">
+                               <span style="cursor: pointer" data-toggle="modal"
+                                     data-target="#addPlaylistModal"><i class="fa fa-plus"></i>Thêm Playlist</span>
+                            </div>
+                        @endif
+                            <div class="col-md-2">
+                                @include('includes.like', ['like_item' => 'song-'.$song->id])
+                            </div>
+                            <div class="col-md-2">
+                                <span><i class="headphone icon"></i>{{$song->listen_count}}</span>
+                            </div>
+                    </div>
 
                 <!-- Modal -->
                     <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
@@ -78,7 +87,7 @@
                                         <input type="text" id="song_id" name="song_id" hidden value="{{ $song->id }}">
                                         <br>
                                         <br> Playlist:
-                                        <select id="playlist_id" name="playlist_id">
+                                        <select class="form-control" id="playlist_id" name="playlist_id">
                                             @foreach($user->playlists as $playlist)
                                                 <option value="{{ $playlist->id }}">{{ $playlist->name }}</option>
                                             @endforeach
@@ -156,6 +165,7 @@
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="lyric col-md-12" id="_divLyricHtml">
                 <div class="pd_name_lyric">
                     <h2 class="name_lyric"><b>Lời bài hát: {{ $song->name }}</b></h2>
@@ -163,7 +173,7 @@
                         Nhạc sĩ: @foreach($song->artists as $artist) {{$artist->name}}@endforeach
                     </p>
                     <p class="name_post">Lời đăng bởi: {{ $song->user->name }}</p>
-
+                    <hr>
                     <div class="lyric-detail">
                         {!! nl2br($song->lyric) !!}
                     </div>
@@ -182,6 +192,7 @@
     </script>
     <script src="{{ asset('js/player.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
     <script>
         $(document).ready(function () {
             $('#btn-add-to-playlist').click(function () {
