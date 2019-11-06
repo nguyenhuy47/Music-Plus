@@ -26,7 +26,7 @@
     </script>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
     <script type="text/javascript" href="js/Search.js"></script>
@@ -85,29 +85,32 @@
             50%    {transform: translateX(-31px)}
         }
     </style>
-    <script>
-        let run;
 
-        function countDown() {
-            let second = 3;
-            let loading = document.getElementById('loading');
-            let countDown = document.getElementById('count-down');
-            countDown.innerHTML = 'Quay về trang chủ sau: ' + second + ' giây!';
-            run = setInterval(function () {
-                second--;
+    <script>
+        $(document).ready(function () {
+            $(document).onload(countDown());
+            let run;
+            function countDown() {
+                let second = 3;
+                let loading = document.getElementById('loading');
+                let countDown = document.getElementById('count-down');
                 countDown.innerHTML = 'Quay về trang chủ sau: ' + second + ' giây!';
-                if (second <= 0) {
-                    countDown.setAttribute("style", "display: none;");
-                    loading.setAttribute('style', 'display:block');
-                }
-                if (second <= -3) {
-                    clearInterval(run);
-                }
-            }, 1000);
-        }
+                run = setInterval(function () {
+                    second--;
+                    countDown.innerHTML = 'Quay về trang chủ sau: ' + second + ' giây!';
+                    if (second <= 0) {
+                        countDown.setAttribute("style", "display: none;");
+                        loading.setAttribute('style', 'display:block');
+                    }
+                    if (second <= -3) {
+                        clearInterval(run);
+                    }
+                }, 1000);
+            }
+        });
     </script>
 </head>
-<body onload="countDown()">
+<body>
 <div id="app">
     @include('layouts.top-nav')
     <main class="py-4">

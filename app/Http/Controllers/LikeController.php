@@ -56,12 +56,12 @@ class LikeController extends Controller
         return response()->json(['flag' => 1, 'vote' => $vote, 'totalLike' => $totalLike->total_like]);
     }
 
-    public static function getLikeViewData($itemId)
+    public static function getLikeViewData($item)
     {
-        $totalCount = TotalLike::where('item_id', $itemId)->first();
+        $totalCount = TotalLike::where('item_id', $item)->first();
         if ($totalCount == NULL) {
             $totalCount = new TotalLike;
-            $totalCount->item_id = $itemId;
+            $totalCount->item_id = $item;
             $totalCount->total_like = 0;
 
             $totalCount->save();
@@ -71,7 +71,7 @@ class LikeController extends Controller
         if (Auth::check()) {
             $checkYourVote = Like::where([
                 'user_id' => Auth::user()->id,
-                'item_id' => $itemId
+                'item_id' => $item
             ])->first();
             if ($checkYourVote != NULL) {
                 $yourVote = $checkYourVote->vote;
@@ -86,9 +86,9 @@ class LikeController extends Controller
         $likeIconOutlined = $yourVote == 1 ? "" : "outline";
 
         return [
-            $itemId . 'likeDisabled' => $likeDisabled,
-            $itemId . 'likeIconOutlined' => $likeIconOutlined,
-            $itemId . 'total_like' => $totalCount->total_like,
+            $item . 'likeDisabled' => $likeDisabled,
+            $item . 'likeIconOutlined' => $likeIconOutlined,
+            $item . 'total_like' => $totalCount->total_like,
         ];
     }
 }

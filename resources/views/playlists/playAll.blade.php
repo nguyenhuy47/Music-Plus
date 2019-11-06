@@ -133,6 +133,10 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
+<script>
+    let tracks = <?php echo $playlist->songs ?>;
+    console.log(tracks);
+</script>
 @include('layouts.footer')
 </body>
 
