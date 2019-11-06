@@ -16,14 +16,95 @@
                 <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-2">
                     <ul class="nav navbar-nav">
                         <li><a href="{{ URL::to('/') }}">Trang chủ</a></li>
-                        <li>
-                            <a href="{{route('guest.songs.index')}}" >Bài hát</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bài hát</a>
+                            <ul class="dropdown-menu multi-column columns-2">
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-6">
+                                        <li><a href="{{URL::to('songnew')}}">Nhạc mới</a></li>
+                                        <li><a href="{{ URL::to('songvn') }}">Nhạc Trẻ</a></li>
+                                        <li><a href="{{ URL::to('trutinh') }}">Trữ Tình</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Rock Việt</a></li>
+                                        <li><a href="#">Rap Việt</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-6">
+                                        <li><a href="#">Nhạc Hoa</a></li>
+                                        <li><a href="{{ URL::to('songuk') }}">Âu Mỹ</a></li>
+                                        <li><a href="#">Nhạc Hàn</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Hòa Tấu </a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Thể Loại Khác</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="{{route('guets.playlists.index')}}">Playlist</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Playlist</a>
+                            <ul class="dropdown-menu multi-column columns-2">
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-6">
+                                        <li><a href="#">Mới - Hot</a></li>
+                                        <li><a href="#">Nhạc Trẻ</a></li>
+                                        <li><a href="#">Trữ Tình</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Rock Việt</a></li>
+                                        <li><a href="#">Rap Việt</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-6">
+                                        <li><a href="#">Nhạc Hoa</a></li>
+                                        <li><a href="#">Âu Mỹ</a></li>
+                                        <li><a href="#">Nhạc Hàn</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Hòa Tấu </a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Thể Loại Khác</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="{{route('singers.index')}}">Ca sĩ</a>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Chủ đề</a>
+                            <ul class="dropdown-menu multi-column columns-3">
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
+                                        <li><a href="#">The Best Of 2017</a></li>
+                                        <li><a href="#">Coffe Time</a></li>
+                                        <li><a href="#">Acoustic</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Cover - Mashup</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Do You Travel</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
+                                        <li><a href="#">Nhạc Xuân</a></li>
+                                        <li><a href="#">Nhạc Vàng</a></li>
+                                        <li><a href="#">Cải Lương</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Nhạc V-POP</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Nhạc K-POP</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="multi-column-dropdown col-sm-4 col-xs-12">
+                                        <li><a href="#">EDM Sôi Động</a></li>
+                                        <li><a href="#">Nhạc Remix</a></li>
+                                        <li><a href="#">Nonstop</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Electronic</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#">Tin tức âm nhạc</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav">
@@ -39,10 +120,7 @@
                                         <ul class="multi-column-dropdown col-sm-8">
                                             <li><a href="{{ URL::to('/manage/songs') }}">Bài hát</a></li>
                                             <li class="divider"></li>
-{{--                                            <li><a href="{{ URL::to('singers.store') }}">Ca sĩ</a></li>--}}
-
                                             <li><a href="{{route('singers.index')}}">Ca sĩ</a></li>
-
                                             <li class="divider"></li>
                                             <li><a href="{{ route('artists.index') }}">Nhạc sĩ</a></li>
                                             <li class="divider"></li>
@@ -52,6 +130,7 @@
                                 </ul>
                             </li>
                         @endif
+                        <li><a href="{{ route('songs.create') }}">Tải lên</a></li>
                     </ul> <!-- END_urQuanLy -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
@@ -65,7 +144,6 @@
                                    aria-expanded="false">
                                     {{ Auth::user()->name }}
                                 </a>
-
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a href="{{ url('/logout') }}"
@@ -73,43 +151,61 @@
                                                      document.getElementById('logout-form').submit();">
                                             Đăng xuất
                                         </a>
-
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST"
                                               style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
                                     <li>
-                                    <a class="dropdown-item" href="/profile">
-                                        Thông tin người dùng
-                                    </a>
+                                        <a class="dropdown-item" href="/profile">
+                                            Thông tin người dùng
+                                        </a>
                                     </li>
                                 </ul>
                             </li>
                         @endif
                     </ul> <!-- END_urLOGIN -->
-                    <div class="row" style="float: right; margin-right: 1em">
-                        <div class="input-group" style="margin-top: 10px;padding-left: 50px; width: 48em;">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Tìm kiếm theo</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#contains">Bài hát</a></li>
-                                    <li><a href="#its_equal">Ca sĩ</a></li>
-                                    <li><a href="#greather_than">Album</a></li>
-                                    <li><a href="#less_than">Playlist</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#all">Tất cả</a></li>
-                                </ul>
+
+                    <div class="nav navbar-nav" style="float: right; margin-right: 1em">
+                        <form action="{{route('search.searchByName')}}" method="get" class="row">
+                            {{--                            <div class="input-group" style="margin-top: 10px;padding-left: 50px; width: 48em;">--}}
+                            {{--                                <div class="input-group-btn search-panel">--}}
+                            {{--                                    <button type="button" class="btn btn-default dropdown-toggle"--}}
+                            {{--                                            data-toggle="dropdown">--}}
+                            {{--                                        <span id="search_concept">Tìm kiếm theo</span>--}}
+                            {{--                                    </button>--}}
+
+                            {{--                                <ul class="dropdown-menu" role="menu">--}}
+
+                            {{--                                    <li><a href="#contains">Bài hát</a></li>--}}
+                            {{--                                    <li><a href="#its_equal">Ca sĩ</a></li>--}}
+                            {{--                                    <li><a href="#less_than">Playlist</a></li>--}}
+                            {{--                                    <li class="divider"></li>--}}
+                            {{--                                    <li><a href="#all">Tất cả</a></li>--}}
+                            <div>
+                                <input type="hidden" name="search_param" value="all" id="search_param">
+                                <input type="text" class="form-control" name="keySearch"
+                                       placeholder="Tìm kiếm...">
+                                <span class="input-group-btn"></span>
                             </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control" name="x" placeholder="Search term...">
-                            <span class="input-group-btn">
-				                    <button class="btn btn-default" type="button"><span
-                                            class="glyphicon glyphicon-search"></span></button>
-				                </span>
-                        </div>
+                            <div>
+                                <select class="form-control" name="search" id="">
+                                    <option value="songs">Bài hát</option>
+                                    <option value="singers">Ca sĩ</option>
+                                    <option value="playlists">Playlist</option>
+                                    <option value="all">ALL</option>
+                                </select>
+                            </div>
+                            <div class="bg">
+                                <button class="btn btn-primary" type="submit"><span
+                                        class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div>
+                            {{--                                </ul>--}}
+                            {{--                            </div>--}}
+                            {{--                            </div>--}}
+                        </form>
+
                     </div>
                 </div>
                 <!--/.navbar-collapse-->

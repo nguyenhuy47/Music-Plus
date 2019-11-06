@@ -15,6 +15,8 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{{--<<<<<<< HEAD--}}
+{{--=======--}}
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
@@ -24,12 +26,14 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
     <script type="text/javascript" href="js/Search.js"></script>
+{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>
+
     <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
     <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.css')}}" rel="stylesheet">
-    <style>
+   <style>
         .song-info {
             color: #21f8f8;
             text-align: center;
@@ -293,9 +297,20 @@
         </div>
     </div>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="http://vodkabears.github.io/vide/js/jquery.vide.min.js"></script>
+<script src="{{asset('js/app.js')}}"></script>
+
+<script type="text/javascript" src="{{asset('js/css3-mediaqueries.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/Search.js')}}"></script>
+<script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
 <script>
     var player = new MediaElementPlayer('player');
 </script>
+{{--<<<<<<< HEAD--}}
+{{--=======--}}
 <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
 <script>
@@ -324,8 +339,8 @@
         });
     });
 </script>
+{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
 </body>
-
 </html>
 
 

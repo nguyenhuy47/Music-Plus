@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.master')
 @section('title', 'Chỉnh sửa bai hat')
 
 @section('content')
@@ -26,6 +26,11 @@
                         <img id="image-song" src="{{asset('storage/public/upload/images/'.$song->image)}}" alt=""
                              style="width: 80px">
                         <br>
+                        <input
+                            onchange="document.getElementById('blaha').src = window.URL.createObjectURL(this.files[0])"
+                            id="imgInp" type="file" class="form-control-file" name="image_file"
+                               value="{{$song->image}}">
+
                         <input id="imgInp" type="file" class="form-control-file" name="image_file"
                                value="{{$song->image}}" onchange="document.getElementById('image-song').src = window.URL.createObjectURL(this.files[0])">
                     </div>
@@ -58,7 +63,7 @@
                         <textarea class="form-control" name="lyric" rows="4">{{$song->lyric}}</textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary">Chỉnh sửa</button>
+                <button type="submit" class="btn btn-primary">Lưu</button>
                 <button class="btn btn-secondary" onclick="window.history.go(-1); return false;">Hủy</button>
             </form>
         </div>
@@ -119,6 +124,4 @@
             </div>
         </div>
     </div>
-
-
 @endsection

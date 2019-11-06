@@ -10,9 +10,11 @@ use App\Model\Playlist;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PlaylistController extends Controller
 {
+
     public function index()
     {
         $STT = 1;
@@ -32,6 +34,11 @@ class PlaylistController extends Controller
 
     public function playAll($playlistId)
     {
+        $playlistKey = 'song_' . $playlistId;
+        if (!Session::has($playlistKey)) {
+            Playlist::where('id', $playlistId)->increment('listen_count');
+            Session::put($playlistKey, 1);
+        }
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
@@ -39,7 +46,18 @@ class PlaylistController extends Controller
         return view('playlists.playAll', compact('playlist', 'songs','STT','user'));
     }
 
+
+    public function showHotPlaylist($id){
+        $STT = 1;
+        $hotPlaylists = Playlist::all()->sortByDesc('create_at')->take(5);
+        $hotPlaylist = Playlist::findOrFail($id);
+        return view('manager.playlists.hot-playlist', compact('STT','hotPlaylists', 'hotPlaylist'));
+
+    }
+
+
     public function store(FormPlaylist $request)
+
     {
         $user = Auth::user();
         $playlist = new Playlist();
@@ -62,6 +80,22 @@ class PlaylistController extends Controller
         $playlist->delete();
         return redirect()->back();
     }
+
+
+    public function countPlaylist()
+    {
+        $playlist = Playlist::all();
+        $countByName = $playlist->count($playlist->name);
+        return view('manager.playlists.hot-playlist', compact('playlist', 'countByName'));
+    }
+
+    public function searchByName(Request $request){
+        $STT = 1;
+        $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
+        return view('manager.playlists.search',compact('playlists','STT'));
+
+    }
+
 
     public function update(FormPlaylist $request, $id)
     {
