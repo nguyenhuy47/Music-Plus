@@ -26,12 +26,16 @@ Route::get('/search', 'SearchController@searchByName')->name('search.searchByNam
 
 Route::get('/redirect/{social}', 'SocialAuthController@redirect')->name('facebook.login');
 Route::get('/callback/{social}', 'SocialAuthController@callback');
+
+
 Route::group(['prefix' => 'songs'], function () {
     Route::get('/', 'SongController@index')->name('songs.index');
     Route::get('/create', 'SongController@create')->middleware('login')->name('songs.create');
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
+
+
 
 
 
@@ -42,6 +46,7 @@ Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playli
 Route::get('singers/{id}/playAll', 'SingerController@playAll')->name('singers.playAll');
 Route::get('/singerList', 'SingerController@index')->name('guest.singers.list');
 Route::get('singer/{id}/show', 'SingerController@show')->name('singers.show');
+Route::get('/songGuestIndex', 'SongController@showAll')->name('guest.songs.list');
 
 
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {

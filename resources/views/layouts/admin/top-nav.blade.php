@@ -23,11 +23,11 @@
                             Playlists
                         </a>
                     </li>
-{{--                    <li class="nav-item">--}}
-{{--                        <a class="nav-link" href="guest.playlists.list" aria-haspopup="true" aria-expanded="false">--}}
-{{--                            Bài Hát--}}
-{{--                        </a>--}}
-{{--                    </li>--}}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('guest.songs.list')}}" aria-haspopup="true" aria-expanded="false">
+                            Bài Hát
+                        </a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('guest.singers.list')}}" aria-haspopup="true" aria-expanded="false">
                             Ca sĩ
