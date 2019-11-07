@@ -5,9 +5,9 @@
                 <h3>New Songs</h3>
             </div>
             <div class="ml-4">
-                <div class="ml-5 mb-3">
-                    <div class="row">
-                        @foreach($songs as $key => $song)
+                @foreach($songs as $key => $song)
+                    <div class="ml-5 mb-3">
+                        <div class="row">
                             <div class="col-1">
                                 <img src="{{asset('/storage/public/upload/images/'.$song->image)}}"
                                      style="width: 50px; height: 50px" href="">
@@ -21,9 +21,9 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
             <div class="text-center">
                 <a class="btn btn-outline-info" href="">Show more</a>

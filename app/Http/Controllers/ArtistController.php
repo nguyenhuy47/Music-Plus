@@ -22,6 +22,10 @@ class ArtistController extends Controller
         return view('manager.artists.create');
     }
 
+    /** save artist
+     * @param ArtistValidate $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(ArtistValidate $request)
     {
         if($request->dob >= now('Asia/Ho_Chi_Minh')) {
@@ -36,6 +40,10 @@ class ArtistController extends Controller
         return redirect()->route('songs.create')->with('createdArtistSuccess','Thêm mới nhạc sĩ thành công');
     }
 
+    /**
+     * @param $id integer field of artist
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($id)
     {
         $STT = 1;

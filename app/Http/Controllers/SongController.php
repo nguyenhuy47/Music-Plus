@@ -28,11 +28,16 @@ class SongController extends Controller
 
     public function show($id)
     {
+        $songKey = 'song_' . $id;
+        if (!Session::has($songKey)) {
+            Song::where('id', $id)->increment('listen_count');
+            Session::put($songKey, 1);
+        }
         $STT = 1;
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        return view('songs.show', compact('song', 'songs', 'STT', 'user'));
+        return view('admin.pages.song.show', compact('song', 'songs', 'STT', 'user'));
 
 
     }

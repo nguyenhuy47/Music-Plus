@@ -12,7 +12,7 @@
                         <th colspan="3" style="text-align: center">{{strtoupper($playlist->name)}}</th>
                         <th colspan="2" style="text-align: center"><a
                                 href="{{ route('playlists.playAll', $playlist->id) }}">{{'Nghe tất cả  '}}<i
-                                    class="fas fa-play-circle"></i></a></th>
+                                    class="fa fa-play-circle"></i></a></th>
                     </tr>
                     <tr>
                         <td>STT</td>
@@ -31,7 +31,7 @@
                             <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}"
                                                             style="color: black;">{{$song->name}}</a></td>
                             <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
-                            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach<  /td>
+                            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
                             @if(Auth::user())
                                 <td>
                                     <a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}"

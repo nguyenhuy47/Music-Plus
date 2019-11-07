@@ -33,75 +33,6 @@
 
     <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.min.js')}}"></script>
     <link href="{{asset('js/mediaelementJs/build/mediaelementplayer.css')}}" rel="stylesheet">
-   <style>
-        .song-info {
-            color: #21f8f8;
-            text-align: center;
-            position: center;
-        }
-
-        .player-control {
-            position: absolute;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .thumb {
-            width: 100%;
-            height: 360px;
-            background-color: #3e3e3e;
-            background-image: none;
-            background-repeat: no-repeat;
-            background-position: center center;
-            background-size: cover;
-            position: relative;
-
-        }
-
-        img {
-            display: block;
-            max-width: 100%
-        }
-
-        .dia-cd {
-            width: 400px;
-            margin: 0 auto;
-            border-radius: 50%;
-            overflow: hidden;
-            animation: xoayvong 20s linear 0s infinite;
-            -webkit-animation: xoayvong 20s linear 0s infinite;
-            -moz-animation: xoayvong 20s linear 0s infinite;
-            -o-animation: xoayvong 20s linear 0s infinite;
-        }
-
-        /*Chrome, Safari, Opera*/
-        @-webkit-keyframes xoayvong {
-            from {
-                -webkit-transform: rotate(0deg);
-                -moz-transform: rotate(0deg);
-                -o-transform: rotate(0deg);
-            }
-            to {
-                -webkit-transform: rotate(360deg);
-                -moz-transform: rotate(360deg);
-                -o-transform: rotate(360deg);
-            }
-        }
-
-        /* Standard syntax */
-        @keyframes xoayvong {
-            from {
-                -webkit-transform: rotate(0deg);
-                -moz-transform: rotate(0deg);
-                -o-transform: rotate(0deg);
-            }
-            to {
-                -webkit-transform: rotate(360deg);
-                -moz-transform: rotate(360deg);
-                -o-transform: rotate(360deg);
-            }
-        }
-    </style>
 </head>
 <body data-vide-bg="video/snow">
 @include(' includes.facebookSDK')
@@ -111,18 +42,6 @@
         <div class="row">
             <div class="col-md-9">
                 <p class="alert alert-primary"> Bài hát đang được xử lý...</p>
-            </div>
-            <div class="col-md-3" id="bxh" style="margin-top: 2px;">
-                <div class="thumbnail" style="border-color: blue;">
-                    <a href="#"><h3 style="text-align: center;color: blue;">BÀI HÁT MỚI NHẤT</h3></a>
-                    <hr>
-                    @foreach($songs as $key => $baihat)
-                        <div class="caption">
-                            <h5><a href="{{route('songs.play', $baihat->id)}}" style="color: black;"><strong
-                                        style="color: red;">{{$STT++ . '. '}}</strong>{{$baihat->name}}</a></h5>
-                        </div>
-                    @endforeach
-                </div>
             </div>
         </div>
     @else

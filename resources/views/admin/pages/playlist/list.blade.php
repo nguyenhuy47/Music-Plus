@@ -93,4 +93,6 @@
 </div>
 
 <!-- space -->
-<div style="background-color: #EEEEEE; height: 50px"></div>
+<div>
+    <hr>
+</div>
