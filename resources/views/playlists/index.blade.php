@@ -1,4 +1,4 @@
-@extends ('../index')
+@extends ('layouts.master')
 @section('content')
     <div class="container pt-5">
         <div class="row">
@@ -19,7 +19,7 @@
                             <tr class="p-2">
                                 <td>{{$STT++}}</td>
                                 <td style="text-align: left"><a
-                                        href="{{ route('playlists.show', $playlist->id) }}">
+                                        href="{{ route('guest.playlists.show', $playlist->id) }}">
                                         {{strtoupper($playlist->name)}}</a>
                                 </td>
                             </tr>
@@ -28,15 +28,6 @@
                     </table>
                 </div>
             </div>
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection

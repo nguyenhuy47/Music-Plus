@@ -1,5 +1,5 @@
-<div class="col-md-3">
-    <div class="thumbnail" style="margin-top: 20px;border-color: green;">
+<div class="col-md-12">
+    <div class="thumbnail" style="border-color: green;">
         <h3 align="center"><a href="">CHỦ ĐỀ HOT</a></h3>
         <hr>
         <div class="row" style="margin-bottom: 7px;">

@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterSideBar')
 @section('style')
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
@@ -8,8 +8,6 @@
 @endsection
 @section('content')
     @include('includes.facebookSDK')
-    <div class="container pt-5">
-        <div class="col-md-9">
             @if(!$song->path)
                 <div class="col-md-12">
                     <p class="alert alert-primary">Bài hát đang được xử lý...</p>
@@ -55,22 +53,22 @@
             <div class="social-plugin col-md-12">
                 <div>
                     <div class="row">
-                        @if(Auth::user())
-                            <!-- Button trigger modal -->
+                    @if(Auth::user())
+                        <!-- Button trigger modal -->
                             <div class="col-md-3">
                                <span style="cursor: pointer" data-toggle="modal"
                                      data-target="#addPlaylistModal"><i class="fa fa-plus"></i>Thêm Playlist</span>
                             </div>
                         @endif
-                            <div class="col-md-2">
-                                @include('includes.like', ['like_item' => 'song-'.$song->id])
-                            </div>
-                            <div class="col-md-2">
-                                <span><i class="headphone icon"></i>{{$song->listen_count}}</span>
-                            </div>
+                        <div class="col-md-2">
+                            @include('includes.like', ['like_item' => 'song-'.$song->id])
+                        </div>
+                        <div class="col-md-2">
+                            <span><i class="headphone icon"></i>{{$song->listen_count}}</span>
+                        </div>
                     </div>
 
-                <!-- Modal -->
+                    <!-- Modal -->
                     <div class="modal fade" id="addPlaylistModal" tabindex="-1" role="dialog"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -182,8 +180,6 @@
             <div class="col-md-12 comment-facebook">
                 @include('includes.commentfb', ['commentItem'=> 'song-'.$song->id])
             </div>
-        </div>
-    </div>
 @endsection
 @section('script')
     <script>

@@ -18,7 +18,8 @@
                     @foreach($singers as $singer)
                     <div class="col-3">
                         <img
-                            src="{{asset('/storage/singer_image/'.$singer->image)}}"
+{{--                            src="{{asset('/storage/singer_image/'.$singer->image)}}"--}}
+                            src="https://avatar-nct.nixcdn.com/singer/avatar/2016/01/25/4/1/1/7/1453716962284_600.jpg"
                             height="150" width="150"
                             class="border rounded-circle">
                         <p class="mt-1">{{$singer->name}}</p>
@@ -31,7 +32,8 @@
                     @foreach($singers as $singer)
                         <div class="col-3">
                             <img
-                                src="{{asset('/storage/singer_image/'.$singer->image)}}"
+{{--                                src="{{asset('/storage/singer_image/'.$singer->image)}}"--}}
+                                src="https://nguoi-noi-tieng.com/photo/tieu-su-ca-si-trong-tan-2077.jpg"
                                 height="150" width="150"
                                 class="border rounded-circle">
                             <p class="mt-1">{{$singer->name}}</p>

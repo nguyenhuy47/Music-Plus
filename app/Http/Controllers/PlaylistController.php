@@ -32,6 +32,15 @@ class PlaylistController extends Controller
         return view('manager.playlists.show', compact('playlist', 'STT','songs'));
     }
 
+    public function guestShow($playlistId)
+    {
+        $STT = 1;
+        $songs = Song::all();
+        $playlist = Playlist::find($playlistId);
+        return view('admin.pages.playlist.show', compact('playlist', 'STT','songs'));
+    }
+
+
     public function playAll($playlistId)
     {
         $playlistKey = 'song_' . $playlistId;
@@ -55,6 +64,15 @@ class PlaylistController extends Controller
 
     }
 
+    public function showListPlaylist(){
+        $STT = 1;
+        $songs = Song::all();
+        $userId = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $userId)->get();
+        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
+
+    }
+
 
     public function store(FormPlaylist $request)
 
@@ -71,7 +89,7 @@ class PlaylistController extends Controller
     {
         $playlist = Playlist::find($playlistId);
         $playlist->songs()->detach($songId);
-        return redirect()->route('playlists.playAll', $playlist->id);
+        return redirect()->route('playlists.show', $playlist->id);
     }
 
     public function destroyAll($id)

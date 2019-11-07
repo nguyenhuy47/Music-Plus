@@ -15,8 +15,8 @@
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-{{--<<<<<<< HEAD--}}
-{{--=======--}}
+    {{--<<<<<<< HEAD--}}
+    {{--=======--}}
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/css3-mediaqueries.js"></script>
     <script type="text/javascript" href="js/Search.js"></script>
-{{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
+    {{-->>>>>>> c103bf27818df678aaf0e67a8db001adfca0003a--}}
     <link rel="stylesheet" href="css/style_menu.css" type="text/css">
     <link rel="stylesheet" href="css/slider.css">
     <script src="https://kit.fontawesome.com/1cd0cba936.js" crossorigin="anonymous"></script>

@@ -1,11 +1,10 @@
-@extends ('layouts.master')
+@extends ('layouts.masterSideBar')
 @section('content')
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
                     @if(Auth::check())
-
                     @endif
                     <table class="table">
                         <thead class="thead-light">
@@ -14,7 +13,6 @@
                         </tr>
                         </thead>
                     </table>
-
                     @foreach($singers as $key => $singer)
                         <div class="col-3 text-center">
                                 <a href="{{route('singers.show', $singer->id)}}">

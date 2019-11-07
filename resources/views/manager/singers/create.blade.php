@@ -1,17 +1,18 @@
 @extends ('layouts.master')
 @section('content')
     <div class="container">
-        @if ($message = Session::get('success'))
-
+        @if (Session::has('success'))
             <div class="alert alert-success alert-block">
-
                 <button type="button" class="close" data-dismiss="alert">×</button>
-
-                <strong>{{ $message }}</strong>
-
+                <strong>{{ Session::get('success') }}</strong>
             </div>
-
         @endif
+            @if (Session::has('errorDob'))
+                <div class="alert alert-danger alert-block">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    <strong>{{ Session::get('errorDob') }}</strong>
+                </div>
+            @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -21,7 +22,6 @@
                 </ul>
             </div>
         @endif
-
         <form method="post" action="{{route('singers.store')}}" enctype="multipart/form-data">
             @csrf
             <div>
@@ -37,11 +37,11 @@
                     <input type="text" class="form-control" name="name" placeholder="Tên ca sĩ">
                 </div>
                 <div class="form-group">
-                    <label>Sinh nhật</label>
+                    <label>Ngày sinh</label>
                     <input type="date" class="form-control" name="dob">
                 </div>
                 <div class="form-group">
-                    <label>Ảnh đại diện</label>
+                    <label>Ảnh ca sĩ</label>
                     <input type="file" class="form-control-file" id="" name="image">
                 </div>
                 <div class="form-group">

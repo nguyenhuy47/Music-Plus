@@ -19,13 +19,18 @@
                                 class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="{{route('guest.playlists.list')}}" aria-haspopup="true" aria-expanded="false">
                             Playlists
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link" href="{{route('guest.songs.list')}}" aria-haspopup="true" aria-expanded="false">
                             Bài Hát
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('guest.singers.list')}}" aria-haspopup="true" aria-expanded="false">
+                            Ca sĩ
                         </a>
                     </li>
                     @if (Auth::guest())
@@ -50,7 +55,6 @@
                     @endif
                     <li><a href="{{ route('songs.create') }}" class="nav-link">Tải lên</a></li>
                 </ul>
-
                 <ul class="navbar-nav navbar-right">
                     <!-- search bar -->
                     <form class="form-inline my-3 my-lg-0" action="{{route('search.searchByName')}}"
@@ -60,7 +64,7 @@
                             <option value="songs">Bài hát</option>
                             <option value="playlists">Playlist</option>
                             <option value="singers">Ca sĩ</option>
-                            <option value="all">Tất cả</option>
+{{--                            <option value="all">Tất cả</option>--}}
                         </select>
                             </span>
                         <span>

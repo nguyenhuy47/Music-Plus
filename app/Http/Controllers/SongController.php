@@ -26,6 +26,12 @@ class SongController extends Controller
         return view('index1', compact('songs','singers'));
     }
 
+    public function showAll()
+    {
+        $songs = Song::all()->sortByDesc('created_at');
+        return view('songs.index', compact('songs'));
+    }
+
     public function show($id)
     {
         $songKey = 'song_' . $id;
