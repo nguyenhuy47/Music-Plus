@@ -93,7 +93,7 @@
 </head>
 <body data-vide-bg="video/snow">
 @include('includes.facebookSDK')
-@include(' layouts.top-nav')
+{{--@include(' layouts.top-nav')--}}
 <div class="container pt-5">
     <div class="row">
         <div class="col-md-9">
@@ -107,21 +107,21 @@
                 </audio>
             </div>
         </div>
-        @include('pages.newsong')
+{{--        @include('pages.newsong')--}}
     </div>
-    <div class="col-md-9">
-        @include('includes.like', ['like_item' => 'playlist-'.$playlist->id])
-    </div>
-    <div class="col-md-9">
-        @include('includes.commentfb', ['commentItem'=> 'playlist-'.$playlist->id])
-    </div>
-    <div class="row">
-        @include('pages.album')
-        @include('pages.topic')
-    </div>
-    <div class="row">
-        @include('pages.mv')
-        @include('pages.media')
+{{--    <div class="col-md-9">--}}
+{{--        @include('includes.like', ['like_item' => 'playlist-'.$playlist->id])--}}
+{{--    </div>--}}
+{{--    <div class="col-md-9">--}}
+{{--        @include('includes.commentfb', ['commentItem'=> 'playlist-'.$playlist->id])--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        @include('pages.album')--}}
+{{--        @include('pages.topic')--}}
+{{--    </div>--}}
+{{--    <div class="row">--}}
+{{--        @include('pages.mv')--}}
+{{--        @include('pages.media')--}}
     </div>
 </div>
 <script src="{{asset('js/mediaelementJs/build/mediaelement-and-player.js')}}"></script>

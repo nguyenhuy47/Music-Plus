@@ -4,7 +4,7 @@
     @include('admin.pages.song.listOfHotSong')
 
     <!-- new playlists -->
-    @include('admin.pages.playlist.list')
+    @include('admin.pages.playlist.listOfNewPlaylist')
 
     <!-- popular playlist -->
     @include('admin.pages.popular.list')

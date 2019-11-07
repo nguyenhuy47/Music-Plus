@@ -5,7 +5,7 @@
     @include('layouts.admin.title')
     @include('layouts.admin.link-css')
     @include('layouts.admin.link-script')
-
+    @yield('style')
 </head>
 <body>
 <!-- header -->

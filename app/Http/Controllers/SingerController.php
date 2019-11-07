@@ -14,8 +14,14 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::all()->sortByDesc('created_ad')->take(5);
+        $singers = Singer::all()->sortByDesc('created_ad');
         return view('index1', compact('singers'));
+    }
+
+    public function manageSinger()
+    {
+        $singers = Singer::all();
+        return view('manager.singers.list', compact('singers'));
     }
 
     public function create()
@@ -41,7 +47,6 @@ class SingerController extends Controller
     {
         $singer = Singer::findOrFail($id);
         return view('manager.singers.show', compact('singer','songs','STT'));
-
     }
 
     public function edit($id)

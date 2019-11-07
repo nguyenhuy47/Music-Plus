@@ -1,4 +1,4 @@
-@extends('pages.index')
+@extends('layouts.master')
 @section('content')
     <div  class="container pt-5">
         <div class="row">
@@ -6,7 +6,7 @@
                 @error('songIds')
                 <div style="width: 50%; margin-left: 25%" class="alert alert-danger">{{ $message }}</div>
                 @enderror
-                <table border="1" class="table table-bordered text-center" style="width: 50%; margin-left: 25%; ">
+                <table border="1" class="table table-bordered text-center" style="width: 100%; ">
                     <thead class="thead-light">
                     <tr>
                         <th colspan="3" style="text-align: center">{{strtoupper($playlist->name)}}</th>
@@ -31,7 +31,7 @@
                             <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}"
                                                             style="color: black;">{{$song->name}}</a></td>
                             <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
-                            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach<  /td>
+                            <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
                             @if(Auth::user())
                                 <td>
                                     <a href="{{ route('playlists.destroy', ['playlistId' => $playlist->id, 'songId' => $song->id]) }}"
@@ -57,15 +57,6 @@
                     </form>
                 </div>
             </div>
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection

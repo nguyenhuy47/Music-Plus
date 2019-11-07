@@ -1,6 +1,10 @@
 @extends('layouts.master')
+@section('style')
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script src="{{asset('js/jquery.tokeninput.js')}}"></script>
+    <link rel="stylesheet" href="{{asset('css/token-input.css')}} ">
+@endsection
 @section('content')
-
     <div class="container pt-5">
         @if (Session::has('success'))
             <p class="text-success">{{Session::get('success')}}</p>
@@ -69,7 +73,7 @@
                 </div>
                 <div class="form-group">
                     <label>Lời bài hát</label>
-                    <textarea class="form-control" name="lyric" rows="3"></textarea>
+                    <textarea class="form-control" name="editor" rows="3"></textarea>
                 </div>
             </div>
             <button type="submit">Tải lên</button>
@@ -129,6 +133,21 @@
             </div>
         </div>
     </div>
+
+@endsection
+@section('script')
+{{--    CKeditor--}}
+    <script>
+        CKEDITOR.replace( 'editor', {
+            filebrowserBrowseUrl: '{{ asset('ckfinder/ckfinder.html') }}',
+            filebrowserImageBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Images') }}',
+            filebrowserFlashBrowseUrl: '{{ asset('ckfinder/ckfinder.html?type=Flash') }}',
+            filebrowserUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files') }}',
+            filebrowserImageUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images') }}',
+            filebrowserFlashUploadUrl: '{{ asset('ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash') }}'
+        } );
+    </script>
+{{--modal create artist, singer--}}
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
     <script>
         $(document).ready(function () {

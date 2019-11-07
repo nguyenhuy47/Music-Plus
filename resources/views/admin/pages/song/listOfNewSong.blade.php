@@ -5,25 +5,27 @@
                 <h3>New Songs</h3>
             </div>
             <div class="ml-4">
-                <div class="ml-5 mb-3">
-                    <div class="row">
-                        @foreach($songs as $key => $song)
-                            <div class="col-1">
-                                <img src="{{asset('/storage/public/upload/images/'.$song->image)}}"
-                                     style="width: 50px; height: 50px" href="">
-                            </div>
-                            <div class="col-11">
-                                <div class="ml-3">
-                                    <div><a href="{{route('songs.play', $song->id)}}"></strong>{{$song->name}}</a></div>
-                                    <div>      @foreach($song->singers as $singer)
-                                            <div>{{$singer->name}}</div>
-                                        @endforeach
+                @foreach($songs as $key => $song)
+                    <div class="ml-5 mb-3">
+                        <div class="row">
+                                <div class="col-1">
+                                    <img src="{{asset('/storage/public/upload/images/'.$song->image)}}"
+                                         style="width: 50px; height: 50px" href="">
+                                </div>
+                                <div class="col-11">
+                                    <div class="ml-3">
+                                        <div><a href="{{route('songs.play', $song->id)}}"></strong>{{$song->name}}</a>
+                                        </div>
+                                        <div>
+                                            @foreach($song->singers as $singer)
+                                                <div>{{$singer->name}}</div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach
+                        </div>
                     </div>
-                </div>
+                @endforeach
             </div>
             <div class="text-center">
                 <a class="btn btn-outline-info" href="">Show more</a>

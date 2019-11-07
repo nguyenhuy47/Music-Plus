@@ -49,6 +49,15 @@ class PlaylistController extends Controller
 
     }
 
+    public function showListPlaylist(){
+        $STT = 1;
+        $songs = Song::all();
+        $userId = Auth::user()->id;
+        $playlists = Playlist::where('user_id', $userId)->get();
+        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
+
+    }
+
 
     public function store(FormPlaylist $request)
 

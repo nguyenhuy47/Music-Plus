@@ -60,13 +60,12 @@
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="{{ route('artists.list') }}">Nhạc sĩ</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{{ route('playlists.list') }}">Playlists</a>
+                                <a class="dropdown-item" href="{{ route('playlists.showList') }}">Playlists</a>
                             </div>
                         </li>
                     @endif
                     <li><a href="{{ route('songs.create') }}" class="nav-link">Tải lên</a></li>
                 </ul>
-
                 <ul class="navbar-nav navbar-right">
                     <!-- search bar -->
                     <form class="form-inline my-3 my-lg-0" action="{{route('search.searchByName')}}"

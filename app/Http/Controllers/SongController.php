@@ -19,11 +19,12 @@ use Illuminate\Support\Str;
 
 class SongController extends Controller
 {
-    public function index()
-    {
-        $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('index1', compact('songs'));
-    }
+//    public function index()
+//    {
+//
+//        $songs = Song::all()->sortByDesc('created_at')->take(5);
+//        return view('index1', compact('songs'));
+//    }
 
     public function show($id)
     {
@@ -31,7 +32,7 @@ class SongController extends Controller
         $user = Auth::user();
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $song = Song::findOrFail($id);
-        return view('songs.show', compact('song', 'songs', 'STT', 'user'));
+        return view('admin.pages.song.show', compact('song', 'songs', 'STT', 'user'));
 
 
     }
@@ -145,7 +146,7 @@ class SongController extends Controller
         return redirect()->back()->with('notification', 'Cập nhật thông tin bài hát thành công');
     }
 
-    public function songManager()
+    public function manageSong()
     {
         $STT = 0;
         $user = Auth::user();
