@@ -18,7 +18,7 @@ class UserController extends Controller
         $user = Auth::user();
         $userAvatar = $user->avatar;
         if ($request->hasFile('avatar')) {
-            $avatarName = $user->id . '_avatar' . time() . '.' . request()->avatar->getClientOriginalExtension();
+            $avatarName = $user->id . 'avatar' . time() . '.' . request()->avatar->getClientOriginalExtension();
             $request->avatar->storeAs('avatars', $avatarName);
             $user->avatar = $avatarName;
         } else {

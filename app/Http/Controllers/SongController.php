@@ -21,8 +21,9 @@ class SongController extends Controller
 {
     public function index()
     {
+        $singers =  Singer::all()->sortByDesc('created_at')->take(4);
         $songs = Song::all()->sortByDesc('created_at')->take(5);
-        return view('index1', compact('songs'));
+        return view('index1', compact('songs','singers'));
     }
 
     public function show($id)
@@ -152,10 +153,9 @@ class SongController extends Controller
 
     public function songManager()
     {
-        $STT = 0;
         $user = Auth::user();
         $songs = Song::where('user_id', $user->id)->get();
-        return view('manager.songs.list', compact('songs', 'STT'));
+        return view('manager.songs.list', compact('songs'));
     }
 
     public function destroy($id)

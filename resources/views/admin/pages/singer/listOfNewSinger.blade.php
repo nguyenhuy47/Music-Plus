@@ -15,58 +15,28 @@
         <div class="carousel-inner">
             <div class="carousel-item active text-center">
                 <div class="row ml-5 mr-5">
+                    @foreach($singers as $singer)
                     <div class="col-3">
                         <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/10/23/5/b/0/b/1571802458800.jpg"
+                            src="{{asset('/storage/singer_image/'.$singer->image)}}"
+                            height="150" width="150"
                             class="border rounded-circle">
-                        <p class="mt-1">Hoàng Thùy Linh</p>
+                        <p class="mt-1">{{$singer->name}}</p>
                     </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/09/12/c/3/c/7/1568279069160.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Bích Phương</p>
-                    </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/09/26/1/d/b/5/1569474237302.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Hari Won</p>
-                    </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2018/02/13/b/9/3/2/1518508910343.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Khắc Việt</p>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="carousel-item text-center">
                 <div class="row ml-5 mr-5">
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/10/23/5/b/0/b/1571802458800.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Hoàng Thùy Linh</p>
-                    </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/09/12/c/3/c/7/1568279069160.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Bích Phương</p>
-                    </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2019/09/26/1/d/b/5/1569474237302.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Hari Won</p>
-                    </div>
-                    <div class="col-3">
-                        <img
-                            src="https://avatar-nct.nixcdn.com/singer/avatar/2018/02/13/b/9/3/2/1518508910343.jpg"
-                            class="border rounded-circle">
-                        <p class="mt-1">Khắc Việt</p>
-                    </div>
+                    @foreach($singers as $singer)
+                        <div class="col-3">
+                            <img
+                                src="{{asset('/storage/singer_image/'.$singer->image)}}"
+                                height="150" width="150"
+                                class="border rounded-circle">
+                            <p class="mt-1">{{$singer->name}}</p>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
