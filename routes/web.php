@@ -11,11 +11,8 @@
 |
 */
 
-Route::get('/abcd', function (){
-    return view('welcome');
-});
 
-Route::get('/', 'SongController@index')->name('songs.index');
+Route::get('/', 'IndexController@index')->name('index');
 
 Auth::routes(['verify'=>true]);
 
@@ -39,9 +36,12 @@ Route::group(['prefix' => 'songs'], function () {
 
 
 });
-
+Route::get('/guestIndexPlayList', 'PlaylistController@guestIndex')->name('guest.playlists.list');
+Route::get('/guestShowPlayList/{id}', 'PlaylistController@guestShow')->name('guest.playlists.show');
 Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');
 Route::get('singers/{id}/playAll', 'SingerController@playAll')->name('singers.playAll');
+Route::get('/singerList', 'SingerController@index')->name('guest.singers.list');
+Route::get('singer/{id}/show', 'SingerController@show')->name('singers.show');
 
 
 Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
@@ -60,7 +60,6 @@ Route::group(['prefix' => 'manage', 'middleware' => ['login']], function () {
         Route::get('/', 'SingerController@index')->name('singers.list');
         Route::get('/create', 'SingerController@create')->middleware('login')->name('singers.create');
         Route::post('/store', 'SingerController@store')->middleware('login')->name('singers.store');
-        Route::get('/{id}/show', 'SingerController@show')->name('singers.show');
         Route::get('/{id}/edit', 'SingerController@edit')->middleware('login')->name('singers.edit');
         Route::post('/{id}/update', 'SingerController@update')->middleware('login')->name('singers.update');
 

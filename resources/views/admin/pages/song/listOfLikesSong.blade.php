@@ -1,7 +1,7 @@
 
         <div class="col-6 border-right">
             <div class="font-weight-bold ml-5 mb-3">
-                <h3>Bài Hát Mới Nhất</h3>
+                <h3>Bài Hát Được Yêu Thích Nhất</h3>
             </div>
             <div class="ml-4">
                 @foreach($songs as $key => $song)
@@ -30,3 +30,5 @@
         </div>
 
 
+
+<!-- space -->

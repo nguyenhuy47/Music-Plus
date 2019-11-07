@@ -24,24 +24,24 @@ class SearchController extends Controller
         $keyword = trim($request->keySearch);
         if($request->search === 'songs'){
             $songs = Song::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            return view('songs.search',compact('songs','STT','keyword'));
+            return view('admin.pages.song.search',compact('songs','STT','keyword'));
 
         }elseif ($request->search === 'singers'){
             $singers = Singer::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            return view('singers.search',compact('singers','STT','keyword'));
+            return view('admin.pages.singer.search',compact('singers','STT','keyword'));
 
 
         }elseif ($request->search === 'playlists'){
             $playlists = Playlist::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            return view('manager.playlists.search',compact('playlists','STT','keyword'));
+            return view('admin.pages.playlist.search',compact('playlists','STT','keyword'));
 
         }
-        else{
-            $songs = Song::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            $singers = Singer::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            $playlists = Playlist::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
-            return view('searchAll',compact('songs','singers','playlists','STT','STT1','STT2','keyword'));
-        }
+//        else{
+//            $songs = Song::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+//            $singers = Singer::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+//            $playlists = Playlist::where('name','LIKE','%'.$keyword.'%')->get()->toArray();
+//            return view('searchAll',compact('songs','singers','playlists','STT','STT1','STT2','keyword'));
+//        }
     }
 
 }

@@ -2,15 +2,10 @@
 @section('content')
     <div class="container">
         @if ($message = Session::get('success'))
-
             <div class="alert alert-success alert-block">
-
                 <button type="button" class="close" data-dismiss="alert">×</button>
-
                 <strong>{{ $message }}</strong>
-
             </div>
-
         @endif
 
         @if (count($errors) > 0)
@@ -24,7 +19,6 @@
             </div>
         @endif
         <div class="row">
-
         </div>
         <div class="row">
             <div class="col-2">

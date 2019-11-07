@@ -19,8 +19,12 @@ class IndexController extends Controller
     public function index()
     {
         $songs = Song::paginate(5);
-        $singers = Singer::all()->sortByDesc('created_at')->take(8);
-        $playlists = Playlist::all()->sortByDesc('created_at')->take(8);
+        $singers = Singer::all()->sortByDesc('created_at')->take(4);
+        $playlists = Playlist::where('listen_count','>', 0)
+            ->get()
+//            ->sortByDesc('listen_count')
+            ->take(8);
+//        dd($playlists);
         $artists = Artist::all();
         return view('index1', compact('songs','singers','playlists','artists'));
     }

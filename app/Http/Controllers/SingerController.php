@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Str;
 
 class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::paginate(10);
+        $singers = Singer::paginate(8);
         return view('manager.singers.list', compact('singers'));
     }
 
@@ -25,28 +26,33 @@ class SingerController extends Controller
 
     public function store(SingerValidate $request)
     {
-        if($request->dob >= now('Asia/Ho_Chi_Minh')) {
-            return redirect()->back()->with('errorDob','Ngày sinh của ca sĩ không hợp lệ');
+        if ($request->dob >= now('Asia/Ho_Chi_Minh')) {
+            return redirect()->back()->with('errorDob', 'Ngày sinh của ca sĩ không hợp lệ');
         }
-        $singer = new Singer();
-        $singer->name = $request->name;
-        $singer->dob = $request->dob;
-        $singer->story = $request->story;
-        $singer->save();
-        return redirect()->route('songs.create')->with('createdSingerSuccess','Thêm mới ca sĩ thành công');
-
+        if ($request->hasFile('image')) {
+            $singer = new Singer();
+            $imageName ='singer' . time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->storeAs('images/singer', $imageName);
+            $singer->image = $imageName;
+            $singer->name = $request->name;
+            $singer->dob = $request->dob;
+            $singer->story = $request->story;
+            $singer->save();
+            return redirect()->route('singers.create')->with('success', 'Thêm mới ca sĩ thành công');
+        } else {
+            return redirect()->back()->with('errorFile', 'Bạn chưa chọn ảnh');
+        }
     }
-
     public function show($id)
     {
         $singer = Singer::findOrFail($id);
-        return view('manager.singers.show', compact('singer','songs','STT'));
+        return view('manager.singers.show', compact('singer', 'songs', 'STT'));
 
     }
 
     public function edit($id)
     {
-        $singer =  Singer::findOrfail($id);
+        $singer = Singer::findOrfail($id);
         return view('manager.singers.edit', compact('singer'));
     }
 

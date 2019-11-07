@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterSideBar')
 @section('content')
     <div>
         <h4>Tìm kiếm</h4>

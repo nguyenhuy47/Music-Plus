@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.masterSideBar')
 @section('style')
     <link href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/components/icon.min.css" rel="stylesheet">
     <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
@@ -8,8 +8,6 @@
 @endsection
 @section('content')
     @include('includes.facebookSDK')
-    <div class="container pt-5">
-        <div class="col-md-9">
             @if(!$song->path)
                 <div class="col-md-12">
                     <p class="alert alert-primary">Bài hát đang được xử lý...</p>
@@ -182,8 +180,6 @@
             <div class="col-md-12 comment-facebook">
                 @include('includes.commentfb', ['commentItem'=> 'song-'.$song->id])
             </div>
-        </div>
-    </div>
 @endsection
 @section('script')
     <script>

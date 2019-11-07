@@ -19,7 +19,7 @@
                             <tr class="p-2">
                                 <td>{{$STT++}}</td>
                                 <td style="text-align: left"><a
-                                        href="{{ route('playlists.show', $playlist->id) }}">
+                                        href="{{ route('guest.playlists.show', $playlist->id) }}">
                                         {{strtoupper($playlist->name)}}</a>
                                 </td>
                             </tr>

@@ -2,7 +2,7 @@
     <div class="row mt-5">
         <div class="col-6">
                         <span class="float-left font-weight-bold ml-5">
-                            <h3>Playlist Được Nghe Nhiều</h3>
+                            <h3>Playlist Được Yêu Thích Nhất</h3>
                         </span>
         </div>
         <div class="col-6">

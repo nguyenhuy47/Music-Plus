@@ -7,10 +7,19 @@
     @include('admin.pages.playlist.listOfNewPlaylist')
 
     <!-- popular playlist -->
-    @include('admin.pages.popular.list')
-
+    @include('admin.pages.playlist.listOfLikesPlaylist')
     <!-- new song & popular song -->
-    @include('admin.pages.song.listOfNewSong')
+    <div style="background-color: white">
+        <div class="row mt-5 mb-4">
+            @include('admin.pages.song.listOfNewSong')
+            @include('admin.pages.song.listOfLikesSong')
+
+        </div>
+    </div>
+    <div>
+        <hr>
+    </div>
+
     <!-- singers -->
     @include('admin.pages.singer.listOfNewSinger')
     <!-- footer -->
