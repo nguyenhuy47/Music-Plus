@@ -14,8 +14,8 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::all()->sortByDesc('created_ad')->take(5);
-        return view('index1', compact('singers'));
+        $singers = Singer::paginate(10);
+        return view('manager.singers.list', compact('singers'));
     }
 
     public function create()
@@ -61,9 +61,10 @@ class SingerController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function playAll($id)
     {
-
+        $singer = Singer::find($id);
+        return view('singers.playAll', compact('singer'));
     }
 
 

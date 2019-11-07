@@ -188,7 +188,6 @@
 @section('script')
     <script>
         var tracks = [<?php echo $song ?>];
-        console.log(tracks)
     </script>
     <script src="{{ asset('js/player.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/script.js') }}" type="text/javascript"></script>

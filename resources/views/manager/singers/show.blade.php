@@ -27,7 +27,17 @@
                             <td>{{$singer->story}}</td>
                         </tr>
                         <tr style="text-align: left">
-                            <td COLSPAN="2"><b>DANH SÁCH BÀI HÁT</b></td>
+                            <td colspan="2">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <b>DANH SÁCH BÀI HÁT</b>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <a href="{{ route('singers.playAll', $singer->id) }}">{{'Nghe tất cả  '}}
+                                            <i class="fa fa-play-circle"></i></a>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>STT</td>
