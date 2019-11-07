@@ -13,6 +13,8 @@
                         <tr style="text-align: left">
                         </tr>
                         </thead>
+                    </table>
+                    <table>
                             <td COLSPAN="2"><b>THÔNG TIN</b></td>
                         </tr>
 
@@ -26,6 +28,10 @@
                             <td>Tiểu sử</td>
                             <td>{{$singer->story}}</td>
                         </tr>
+                        </tbody>
+
+                    </table>
+                    <table>
                         <tr style="text-align: left">
                             <td COLSPAN="2"><b>DANH SÁCH BÀI HÁT</b></td>
                         </tr>
@@ -35,7 +41,7 @@
                         </tr>
                         @foreach($singer->songs as $key => $song)
                             <tr>
-                                <td>{{$key+1}}</td>
+                                <td><img src="{{asset('/storage/public/upload/images/'.$song->image)}}"></td>
                                 <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
                             </tr>
                         @endforeach

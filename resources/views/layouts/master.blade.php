@@ -1,7 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-    {{--<<<<<<< HEAD--}}
     @include('layouts.admin.title')
     @include('layouts.admin.link-css')
     @include('layouts.admin.link-script')
