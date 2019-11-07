@@ -1,17 +1,4 @@
 <div>
-    <div class="row mt-5">
-        <div class="col-6">
-                        <span class="float-left font-weight-bold ml-5">
-                            <h3>Hot songs</h3>
-                        </span>
-        </div>
-        <div class="col-6">
-                        <span class="float-right mb-3 mr-5">
-                            <a class="btn btn-outline-info" href="">Show all</a>
-                        </span>
-        </div>
-    </div>
-
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -42,4 +29,6 @@
         </a>
     </div>
 </div>
-<div style="background-color: #EEEEEE; height: 50px"></div>
+<div>
+    <hr>
+</div>

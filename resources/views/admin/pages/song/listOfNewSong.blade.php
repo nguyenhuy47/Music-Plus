@@ -8,21 +8,19 @@
                 @foreach($songs as $key => $song)
                     <div class="ml-5 mb-3">
                         <div class="row">
-                                <div class="col-1">
-                                    <img src="{{asset('/storage/public/upload/images/'.$song->image)}}"
-                                         style="width: 50px; height: 50px" href="">
-                                </div>
-                                <div class="col-11">
-                                    <div class="ml-3">
-                                        <div><a href="{{route('songs.play', $song->id)}}"></strong>{{$song->name}}</a>
-                                        </div>
-                                        <div>
-                                            @foreach($song->singers as $singer)
-                                                <div>{{$singer->name}}</div>
-                                            @endforeach
-                                        </div>
+                            <div class="col-1">
+                                <img src="{{asset('/storage/public/upload/images/'.$song->image)}}"
+                                     style="width: 50px; height: 50px" href="">
+                            </div>
+                            <div class="col-11">
+                                <div class="ml-3">
+                                    <div><a href="{{route('songs.play', $song->id)}}"></strong>{{$song->name}}</a></div>
+                                    <div>      @foreach($song->singers as $singer)
+                                            <div>{{$singer->name}}</div>
+                                        @endforeach
                                     </div>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 @endforeach

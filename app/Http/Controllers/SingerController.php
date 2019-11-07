@@ -14,8 +14,8 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::all()->sortByDesc('created_ad')->take(5);
-        return view('singers.index', compact('singers'));
+        $singers = Singer::paginate(10);
+        return view('manager.singers.list', compact('singers'));
     }
 
     public function create()
@@ -29,14 +29,11 @@ class SingerController extends Controller
             return redirect()->back()->with('errorDob','Ngày sinh của ca sĩ không hợp lệ');
         }
         $singer = new Singer();
-        $imageName = $singer->id.'singer'.time().'.'.request()->image->getClientOriginalExtension();
-        $request->image->storeAs('singer_image',$imageName);
-        $singer->image = $imageName;
         $singer->name = $request->name;
         $singer->dob = $request->dob;
         $singer->story = $request->story;
         $singer->save();
-        return redirect()->route('singers.create')->with('success','Thêm mới ca sĩ thành công');
+        return redirect()->route('songs.create')->with('createdSingerSuccess','Thêm mới ca sĩ thành công');
 
     }
 
@@ -64,9 +61,10 @@ class SingerController extends Controller
         return redirect()->back();
     }
 
-    public function destroy($id)
+    public function playAll($id)
     {
-
+        $singer = Singer::find($id);
+        return view('singers.playAll', compact('singer'));
     }
 
 

@@ -10,6 +10,7 @@ use App\Model\Playlist;
 use App\Model\Song;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class PlaylistController extends Controller
 {
@@ -33,6 +34,11 @@ class PlaylistController extends Controller
 
     public function playAll($playlistId)
     {
+        $playlistKey = 'song_' . $playlistId;
+        if (!Session::has($playlistKey)) {
+            Playlist::where('id', $playlistId)->increment('listen_count');
+            Session::put($playlistKey, 1);
+        }
         $STT = 1;
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();

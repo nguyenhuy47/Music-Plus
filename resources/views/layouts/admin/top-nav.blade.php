@@ -69,7 +69,7 @@
                         <span>
                             <button class="btn btn-info my-2 my-sm-0"
                                     style="border-radius: 0px 25px 25px 0px" type="submit">
-                                <i class="fas fa-search"></i>
+                                <i class="fa fa-search"></i>
                             </button>
                     </span>
                     </form>

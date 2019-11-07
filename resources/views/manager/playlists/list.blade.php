@@ -31,10 +31,10 @@
                                         href="{{ route('playlists.show', $playlist->id) }}">{{strtoupper($playlist->name)}}</a>
                                 </td>
                                 <td><span title="sửa" style="cursor: pointer" data-toggle="modal" data-target="#updatePlaylist{{$playlist->id}}"><i
-                                            class="fas fa-edit"></i></span>&emsp;
+                                            class="fa fa-edit"></i></span>&emsp;
                                     <a title="xóa" href="{{ route('playlist.destroyAll', $playlist->id) }}"
                                        onclick="return confirm('ban chac chan xoa?')"><i
-                                            class="fas fa-trash-alt"></i></a></td>
+                                            class="fa fa-trash"></i></a></td>
                             </tr>
                             <!-- Modal Update Playlist-->
                             <div class="modal fade" id="updatePlaylist{{$playlist->id}}" tabindex="-1" role="dialog"

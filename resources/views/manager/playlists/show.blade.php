@@ -12,7 +12,7 @@
                         <th colspan="3" style="text-align: center">{{strtoupper($playlist->name)}}</th>
                         <th colspan="2" style="text-align: center"><a
                                 href="{{ route('playlists.playAll', $playlist->id) }}">{{'Nghe tất cả  '}}<i
-                                    class="fas fa-play-circle"></i></a></th>
+                                    class="fa fa-play-circle"></i></a></th>
                     </tr>
                     <tr>
                         <td>STT</td>
