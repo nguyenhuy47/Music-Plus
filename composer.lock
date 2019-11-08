@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ca47e71817c55e6caab27bcdd5c8b306",
+    "content-hash": "9c3ed0c2de7fc2d719c03814cded1cab",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -853,7 +853,6 @@
         },
         {
             "name": "laravel/framework",
-<<<<<<< HEAD
             "version": "v6.5.0",
             "source": {
                 "type": "git",
@@ -864,18 +863,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/framework/zipball/6d120a21ef0c69630e92dec67932ef434c746019",
                 "reference": "6d120a21ef0c69630e92dec67932ef434c746019",
-=======
-            "version": "v6.4.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "ebd8fcc038effa8c5f8791346c48047f7d0ed320"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/ebd8fcc038effa8c5f8791346c48047f7d0ed320",
-                "reference": "ebd8fcc038effa8c5f8791346c48047f7d0ed320",
->>>>>>> ef1ca647758a39b80dd96add376137257c24c59f
                 "shasum": ""
             },
             "require": {
@@ -1008,11 +995,7 @@
                 "framework",
                 "laravel"
             ],
-<<<<<<< HEAD
             "time": "2019-11-05T14:32:58+00:00"
-=======
-            "time": "2019-10-29T14:30:39+00:00"
->>>>>>> ef1ca647758a39b80dd96add376137257c24c59f
         },
         {
             "name": "laravel/socialite",
@@ -5904,7 +5887,8 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2"
+        "php": "^7.2",
+        "ext-json": "*"
     },
     "platform-dev": []
 }
