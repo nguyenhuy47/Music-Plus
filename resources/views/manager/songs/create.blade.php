@@ -119,6 +119,8 @@
                     <input type="text" class="form-control" name="name" id="singer-name">
                     Ngày sinh:
                     <input type="date" class="form-control" name="dob" id="singer-dob">
+                    Ảnh ca sĩ:
+                    <input type="file" class="form-control" name="image" id="singer-image">
                     Tiểu sử:
                     <textarea name="story" id="singer-story" class="form-control" rows="3"></textarea>
                 </div>
@@ -179,10 +181,10 @@
                         $('.modal-backdrop').remove();
                         toastr.error("Tạo mới không thành công");
                     }
-                })
+                });
             });
 
-            $('#btn-add-singer').click(function () {
+            $('#btn-add-singer').click(function () {;
                 $.ajax({
                     type: "post",
                     url: "{{route('ajax.singers.store')}}",
@@ -204,7 +206,7 @@
                         $('.modal-backdrop').remove();
                         toastr.error("Tạo mới không thành công");
                     }
-                })
+                });
             });
         });
     </script>

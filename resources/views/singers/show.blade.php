@@ -41,7 +41,7 @@
                         </tr>
                         @foreach($singer->songs as $key => $song)
                             <tr>
-                                <td><img src="{{asset('/storage/public/upload/images/'.$song->image)}}"></td>
+                                <td><img src="{{asset('/storage/public/images/'.$song->image)}}"></td>
                                 <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
                             </tr>
                         @endforeach
