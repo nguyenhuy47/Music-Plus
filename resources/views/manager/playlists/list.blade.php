@@ -80,11 +80,13 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{route('playlists.store')}}" method="post">
+                <form action="{{route('playlists.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         Tên Playlist:
                         <input type="text" class="form-control" name="name">
+                        Ảnh Playlist:
+                        <input type="file" class="form-control" name="image">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>

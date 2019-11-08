@@ -21,7 +21,7 @@ class PlaylistController extends Controller
         $songs = Song::all();
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
-        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
+        return view('manager.playlists.list', compact('playlists', 'STT', 'songs'));
     }
 
     public function show($playlistId)
@@ -29,7 +29,7 @@ class PlaylistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $playlist = Playlist::find($playlistId);
-        return view('manager.playlists.show', compact('playlist', 'STT','songs'));
+        return view('manager.playlists.show', compact('playlist', 'STT', 'songs'));
     }
 
     public function guestShow($playlistId)
@@ -37,7 +37,7 @@ class PlaylistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $playlist = Playlist::find($playlistId);
-        return view('admin.pages.playlist.show', compact('playlist', 'STT','songs'));
+        return view('admin.pages.playlist.show', compact('playlist', 'STT', 'songs'));
     }
 
 
@@ -52,37 +52,43 @@ class PlaylistController extends Controller
         $songs = Song::all()->sortByDesc('created_at')->take(5);
         $user = Auth::user();
         $playlist = Playlist::find($playlistId);
-        return view('playlists.playAll', compact('playlist', 'songs','STT','user'));
+        return view('playlists.playAll', compact('playlist', 'songs', 'STT', 'user'));
     }
 
 
-    public function showHotPlaylist($id){
+    public function showHotPlaylist($id)
+    {
         $STT = 1;
         $hotPlaylists = Playlist::all()->sortByDesc('create_at')->take(5);
         $hotPlaylist = Playlist::findOrFail($id);
-        return view('manager.playlists.hot-playlist', compact('STT','hotPlaylists', 'hotPlaylist'));
+        return view('manager.playlists.hot-playlist', compact('STT', 'hotPlaylists', 'hotPlaylist'));
 
     }
 
-    public function showListPlaylist(){
+    public function showListPlaylist()
+    {
         $STT = 1;
         $songs = Song::all();
         $userId = Auth::user()->id;
         $playlists = Playlist::where('user_id', $userId)->get();
-        return view('manager.playlists.list', compact('playlists', 'STT','songs'));
+        return view('manager.playlists.list', compact('playlists', 'STT', 'songs'));
 
     }
 
 
     public function store(FormPlaylist $request)
-
     {
         $user = Auth::user();
         $playlist = new Playlist();
-        $playlist->name = $request->name;
-        $playlist->user_id = $user->id;
-        $playlist->save();
-        return redirect()->back();
+        if ($request->hasFile('image')) {
+            $imageName = 'playlist' . time() . '.' . $request->image->getClientOriginalExtension();
+            $request->image->storeAs('images/playlist', $imageName);
+            $playlist->image = $imageName;
+            $playlist->name = $request->name;
+            $playlist->user_id = $user->id;
+            $playlist->save();
+            return redirect()->back();
+        }
     }
 
     public function destroy($playlistId, $songId)
@@ -107,10 +113,11 @@ class PlaylistController extends Controller
         return view('manager.playlists.hot-playlist', compact('playlist', 'countByName'));
     }
 
-    public function searchByName(Request $request){
+    public function searchByName(Request $request)
+    {
         $STT = 1;
-        $playlists = Playlist::where('name','LIKE','%'.$request->keySearch.'%')->get();
-        return view('manager.playlists.search',compact('playlists','STT'));
+        $playlists = Playlist::where('name', 'LIKE', '%' . $request->keySearch . '%')->get();
+        return view('manager.playlists.search', compact('playlists', 'STT'));
 
     }
 
@@ -138,6 +145,6 @@ class PlaylistController extends Controller
         $STT = 1;
         $songs = Song::all();
         $playlists = Playlist::all();
-        return view('playlists.index', compact('playlists', 'STT','songs'));
+        return view('playlists.index', compact('playlists', 'STT', 'songs'));
     }
 }
