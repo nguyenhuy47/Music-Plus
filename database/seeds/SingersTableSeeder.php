@@ -12,10 +12,6 @@ class SingersTableSeeder extends Seeder
      */
     public function run()
     {
-        $singer = new Singer();
-        $singer->name = 'Huy Tuấn';
-        $singer->dob = '1990/01/02';
-        $singer->story = 'quê ở đâu đó';
-        $singer->save();
+        factory(Singer::class,10)->create();
     }
 }

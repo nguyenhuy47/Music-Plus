@@ -28,4 +28,12 @@ class ArtistValidate extends FormRequest
             'dob' => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên nhạc sỹ',
+            'dob.required' => 'Bạn chưa chọn ngày sinh của nhạc sỹ',
+        ];
+    }
 }
