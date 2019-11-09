@@ -14,34 +14,30 @@
     <div class="ml-5 mr-5 mb-5">
         <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-
-{{--                <div class="carousel-item active">--}}
-{{--                    <div class="row">--}}
-
-{{--                        @for($i = 0; $i < 4; $i++)--}}
-{{--                            <div class="col">--}}
-{{--                                <a href="{{route('guest.playlists.show',$playlists[$i]->id)}}"><img width="90px" height="240px"--}}
-{{--                                    src="{{asset('/storage/public/upload/images/'.$playlists[$i]->songs[0]->image)}}"--}}
-{{--                                    class="d-block w-100" alt="...">--}}
-{{--                                <p class="mb-0">{{$playlists[$i]->name}}</p></a>--}}
-{{--                            </div>--}}
-{{--                        @endfor--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="carousel-item">--}}
-{{--                    <div class="row">--}}
-
-{{--                        @for($i = 4; $i < 8; $i++)--}}
-{{--                            <div class="col">--}}
-{{--                                <a href="{{route('guest.playlists.show',$playlists[$i]->id)}}"><img width="90px" height="240px"--}}
-{{--                                    src="{{asset('/storage/public/upload/images/'.$playlists[$i]->songs[0]->image)}}"--}}
-{{--                                    class="d-block w-100" alt="...">--}}
-{{--                                <p class="mb-0">{{$playlists[$i]->name}}</p></a>--}}
-{{--                            </div>--}}
-{{--                        @endfor--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
+                <div class="carousel-item active">
+                    <div class="row">
+                        @for($i = 0; $i < 4; $i++)
+                            <div class="col">
+                                <a href="{{route('guest.playlists.show',$favoritePlaylists[$i]->id)}}"><img width="90px" height="240px"
+                                    src="{{asset('/storage/public/upload/images/'.$favoritePlaylists[$i]->image)}}"
+                                    class="d-block w-100" alt="Playlist chưa có ảnh">
+                                <p class="mb-0">{{$favoritePlaylists[$i]->name}}</p></a>
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        @for($i = 4; $i < 8; $i++)
+                            <div class="col">
+                                <a href="{{route('guest.playlists.show',$favoritePlaylists[$i]->id)}}"><img width="90px" height="240px"
+                                    src="{{asset('/storage/public/upload/images/'.$favoritePlaylists[$i]->image)}}"
+                                    class="d-block w-100" alt="Playlist chưa có ảnh">
+                                <p class="mb-0">{{$favoritePlaylists[$i]->name}}</p></a>
+                            </div>
+                        @endfor
+                    </div>
+                </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>

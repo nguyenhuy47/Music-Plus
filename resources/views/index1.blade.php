@@ -13,13 +13,11 @@
         <div class="row mt-5 mb-4">
             @include('admin.pages.song.listOfNewSong')
             @include('admin.pages.song.listOfLikesSong')
-
         </div>
     </div>
     <div>
         <hr>
     </div>
-
     <!-- singers -->
     @include('admin.pages.singer.listOfNewSinger')
     <!-- footer -->

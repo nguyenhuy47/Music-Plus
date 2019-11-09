@@ -20,9 +20,9 @@ class IndexController extends Controller
     public function index()
     {
 //        song-moi-nhat
-        $newSongs = Song::all()->sortByDesc('id')->take(5);
+        $newSongs = Song::all()->sortByDesc('id')->take(4);
 //        song-like nhieu
-        $songIds = \App\Model\TotalLike::where('item_id', 'like', 'song-%')->orderBy('total_like', 'Desc')->get('item_id')->take(5);
+        $songIds = TotalLike::where('item_id', 'like', 'song-%')->orderBy('total_like', 'Desc')->get('item_id')->take(4);
         $favoriteSongs = [];
         foreach ($songIds as $songId) {
             $song = Song::find(str_replace('song-', '', $songId->item_id));
@@ -30,6 +30,7 @@ class IndexController extends Controller
         }
 //        songs nghe nhieu
         $popularSongs = song::all()->sortByDesc('listen_count')->take(5);
+//        dd($popularSongs);
 
         $singers = Singer::all()->sortByDesc('created_at')->take(4);
         $artists = Artist::all();
@@ -41,24 +42,26 @@ class IndexController extends Controller
         /*
          * playlist-nghe-nhieu
          */
-        $popularPlaylists = Playlist::all()->sortByDesc('listen_count')->take(8);
-
+        $popularPlaylists = Playlist::all()->sortByDesc('listen_count')->take(4);
         /*
          * playlist-like-nhieu
          */
 
         $playlistIds = TotalLike::where('item_id', 'like', 'playlist-%')->orderBy('total_like', 'Desc')->get('item_id')->take(8);
+
         $favoritePlaylists = [];
+
         foreach ($playlistIds as $playlistId) {
             $playlist = Playlist::find(str_replace('playlist-', '', $playlistId->item_id));
             array_push($favoritePlaylists, $playlist);
         }
+//        dd($favoritePlaylists);
         /*
          * playlist-moi-nhat
          */
         $newPlaylists = Playlist::all()->sortByDesc('id')->take(8);
 
-        return view('index1', compact('newSongs', 'singers', 'newPlaylists', 'artists', 'popularPlaylists'));
+        return view('index1', compact('newSongs', 'popularSongs', 'favoriteSongs', 'singers', 'artists', 'popularPlaylists', 'favoritePlaylists'));
     }
 
     /**
