@@ -15,7 +15,7 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::where('id','>',0)->orderBy('created_at','Desc')->paginate(8);
+        $singers = Singer::where('id', '>', 0)->orderBy('created_at', 'Desc')->paginate(8);
         return view('manager.singers.list', compact('singers'));
     }
 
@@ -31,7 +31,7 @@ class SingerController extends Controller
         }
         if ($request->hasFile('image')) {
             $singer = new Singer();
-            $imageName ='singer' . time() . '.' . $request->image->getClientOriginalExtension();
+            $imageName = 'singer' . time() . '.' . $request->image->getClientOriginalExtension();
             $request->image->storeAs('images/singer', $imageName);
             $singer->image = $imageName;
             $singer->name = $request->name;
@@ -43,21 +43,25 @@ class SingerController extends Controller
             return redirect()->back()->with('errorFile', 'Bạn chưa chọn ảnh');
         }
     }
-    public function show($id)
+
+    public
+    function show($id)
     {
         $singer = Singer::findOrFail($id);
         return view('manager.singers.show', compact('singer', 'songs', 'STT'));
 
     }
 
-    public function edit($id)
+    public
+    function edit($id)
     {
         $singer = Singer::findOrfail($id);
         return view('manager.singers.edit', compact('singer'));
     }
 
 
-    public function update(SingerValidate $request, $id)
+    public
+    function update(SingerValidate $request, $id)
     {
         $singer = Singer::findOrFail($id);
         $singer->name = $request->name;
@@ -67,7 +71,8 @@ class SingerController extends Controller
         return redirect()->back();
     }
 
-    public function playAll($id)
+    public
+    function playAll($id)
     {
         $singer = Singer::find($id);
         return view('singers.playAll', compact('singer'));

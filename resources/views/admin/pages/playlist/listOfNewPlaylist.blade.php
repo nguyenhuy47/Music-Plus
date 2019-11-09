@@ -14,16 +14,28 @@
     <div class="ml-5 mr-5 mb-5">
         <div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
-
+                <div class="carousel-item active">
+                                        <div class="row">
+                                           @foreach($popularPlaylists as $playlist)
+                                                <div class="col">
+                                                    <a href="{{route('guest.playlists.show',$playlist->id)}}"><img width="90px" height="240px"
+                                                        src="{{asset('/storage/public/upload/images/'.$playlist->image)}}"
+                                                        class="d-block w-100" alt="Playlist chưa có ảnh">
+                                                    <p class="mb-0">{{$playlist->name}}</p></a>
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+{{--{{dd($popularPlaylists)}}--}}
 {{--                <div class="carousel-item active">--}}
 {{--                    <div class="row">--}}
 
 {{--                        @for($i = 0; $i < 4; $i++)--}}
 {{--                            <div class="col">--}}
-{{--                                <a href="{{route('guest.playlists.show',$playlists[$i]->id)}}"><img width="90px" height="240px"--}}
-{{--                                    src="{{asset('/storage/public/upload/images/'.$playlists[$i]->songs[0]->image)}}"--}}
+{{--                                <a href="{{route('guest.playlists.show',$popularPlaylists[$i]->id)}}"><img width="90px" height="240px"--}}
+{{--                                    src="{{asset('/storage/public/upload/images/'.$popularPlaylists[$i]->songs[0]->image)}}"--}}
 {{--                                    class="d-block w-100" alt="...">--}}
-{{--                                <p class="mb-0">{{$playlists[$i]->name}}</p></a>--}}
+{{--                                <p class="mb-0">{{$popularPlaylists[$i]->name}}</p></a>--}}
 {{--                            </div>--}}
 {{--                        @endfor--}}
 {{--                    </div>--}}
@@ -33,10 +45,10 @@
 
 {{--                        @for($i = 4; $i < 8; $i++)--}}
 {{--                            <div class="col">--}}
-{{--                                <a href="{{route('guest.playlists.show',$playlists[$i]->id)}}"><img width="90px" height="240px"--}}
-{{--                                    src="{{asset('/storage/public/upload/images/'.$playlists[$i]->songs[0]->image)}}"--}}
+{{--                                <a href="{{route('guest.playlists.show',$popularPlaylists[$i]->id)}}"><img width="90px" height="240px"--}}
+{{--                                    src="{{asset('/storage/public/upload/images/'.$popularPlaylists[$i]->songs[0]->image)}}"--}}
 {{--                                    class="d-block w-100" alt="...">--}}
-{{--                                <p class="mb-0">{{$playlists[$i]->name}}</p></a>--}}
+{{--                                <p class="mb-0">{{$popularPlaylists[$i]->name}}</p></a>--}}
 {{--                            </div>--}}
 {{--                        @endfor--}}
 {{--                    </div>--}}

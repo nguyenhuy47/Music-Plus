@@ -6,6 +6,7 @@ use App\Model\Artist;
 use App\Model\Playlist;
 use App\Model\Singer;
 use App\Model\Song;
+use App\Model\TotalLike;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -18,15 +19,49 @@ class IndexController extends Controller
      */
     public function index()
     {
-        $songs = Song::paginate(5);
+//        song-moi-nhat
+        $newSongs = Song::all()->sortByDesc('id')->take(4);
+//        song-like nhieu
+        $songIds = TotalLike::where('item_id', 'like', 'song-%')->orderBy('total_like', 'Desc')->get('item_id')->take(4);
+        $favoriteSongs = [];
+        foreach ($songIds as $songId) {
+            $song = Song::find(str_replace('song-', '', $songId->item_id));
+            array_push($favoriteSongs, $song);
+        }
+//        songs nghe nhieu
+        $popularSongs = song::all()->sortByDesc('listen_count')->take(5);
+//        dd($popularSongs);
+
         $singers = Singer::all()->sortByDesc('created_at')->take(4);
-        $playlists = Playlist::where('listen_count','>', 0)
+        $artists = Artist::all();
+        $playlists = Playlist::where('listen_count', '>', 0)
             ->get()
 //            ->sortByDesc('listen_count')
             ->take(8);
-//        dd($playlists);
-        $artists = Artist::all();
-        return view('index1', compact('songs','singers','playlists','artists'));
+
+        /*
+         * playlist-nghe-nhieu
+         */
+        $popularPlaylists = Playlist::all()->sortByDesc('listen_count')->take(4);
+        /*
+         * playlist-like-nhieu
+         */
+
+        $playlistIds = TotalLike::where('item_id', 'like', 'playlist-%')->orderBy('total_like', 'Desc')->get('item_id')->take(8);
+
+        $favoritePlaylists = [];
+
+        foreach ($playlistIds as $playlistId) {
+            $playlist = Playlist::find(str_replace('playlist-', '', $playlistId->item_id));
+            array_push($favoritePlaylists, $playlist);
+        }
+//        dd($favoritePlaylists);
+        /*
+         * playlist-moi-nhat
+         */
+        $newPlaylists = Playlist::all()->sortByDesc('id')->take(8);
+
+        return view('index1', compact('newSongs', 'popularSongs', 'favoriteSongs', 'singers', 'artists', 'popularPlaylists', 'favoritePlaylists'));
     }
 
     /**
