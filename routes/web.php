@@ -34,12 +34,9 @@ Route::group(['prefix' => 'songs'], function () {
     Route::post('/store', 'SongController@store')->name('songs.store');
     Route::get('/{id}/play', 'SongController@show')->name('songs.play');
     Route::post('/addToPlaylist', 'SongController@addToPlaylist')->name('songs.addToPlaylist');
-
-
-
-
-
 });
+
+
 Route::get('/guestIndexPlayList', 'PlaylistController@guestIndex')->name('guest.playlists.list');
 Route::get('/guestShowPlayList/{id}', 'PlaylistController@guestShow')->name('guest.playlists.show');
 Route::get('playlists/{id}/playAll', 'PlaylistController@playAll')->name('playlists.playAll');

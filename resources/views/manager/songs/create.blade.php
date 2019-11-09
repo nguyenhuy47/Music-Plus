@@ -114,14 +114,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    Tên ca sỹ:
-                    <input type="text" class="form-control" name="name" id="singer-name">
-                    Ngày sinh:
-                    <input type="date" class="form-control" name="dob" id="singer-dob">
-                    Tiểu sử:
-                    <textarea name="story" id="singer-story" class="form-control" rows="3"></textarea>
-                </div>
+                <form enctype="multipart/form-data" id="upload_form" role="form" method="POST" action="">
+                    @csrf
+                    <div class="modal-body">
+                        Tên ca sỹ:
+                        <input type="text" class="form-control" name="name" id="singer-name">
+                        Ngày sinh:
+                        <input type="date" class="form-control" name="dob" id="singer-dob">
+                        Ảnh ca sĩ:
+                        <input type="file" class="form-control" name="image" id="singer-image">
+                        Tiểu sử:
+                        <textarea name="story" id="singer-story" class="form-control" rows="3"></textarea>
+                    </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
                     <button type="button" class="btn btn-primary" id="btn-add-singer">Thêm</button>
@@ -179,18 +184,16 @@
                         $('.modal-backdrop').remove();
                         toastr.error("Tạo mới không thành công");
                     }
-                })
+                });
             });
 
             $('#btn-add-singer').click(function () {
                 $.ajax({
                     type: "post",
                     url: "{{route('ajax.singers.store')}}",
-                    data: {
-                        name: $("#singer-name").val(),
-                        dob: $("#singer-dob").val(),
-                        story: $("#singer-story").val(),
-                    },
+                    data:new FormData($("#upload_form")[0]),
+                    processData: false,
+                    contentType: false,
                     success: function (response) {
                         $('#addSinger').modal('hide');
                         $('.modal-backdrop').remove();
@@ -204,7 +207,7 @@
                         $('.modal-backdrop').remove();
                         toastr.error("Tạo mới không thành công");
                     }
-                })
+                });
             });
         });
     </script>
