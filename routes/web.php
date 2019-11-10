@@ -16,8 +16,8 @@ Route::get('/', 'IndexController@index')->name('index');
 
 Auth::routes(['verify'=>true]);
 
-Route::get('profile', 'UserController@show')->name('profile');
-Route::post('profile', 'UserController@update_avatar');
+Route::get('profile', 'UserController@show')->middleware('login')->name('profile');
+Route::post('profile', 'UserController@update_avatar')->middleware('login');
 
 Route::get('/like/vote', 'LikeController@vote')->middleware('auth');
 
