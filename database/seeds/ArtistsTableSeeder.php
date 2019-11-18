@@ -12,10 +12,6 @@ class ArtistsTableSeeder extends Seeder
      */
     public function run()
     {
-        $artist = new Artist();
-        $artist->name = 'Huy Tuấn';
-        $artist->dob = '1990/01/02';
-        $artist->story = 'quê ở đâu đó';
-        $artist->save();
+        factory(Artist::class,10)->create();
     }
 }

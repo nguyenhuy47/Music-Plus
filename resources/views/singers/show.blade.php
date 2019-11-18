@@ -1,5 +1,6 @@
 @extends ('../index')
 @section('content')
+    @include('includes.facebookSDK')
     <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
@@ -9,9 +10,11 @@
                         <thead class="thead-light">
                         <tr>
                             <th colspan="2" style="text-align: center"><b>{{strtoupper($singer->name) }}</b></th>
+                        <tr style="text-align: left">
                         </tr>
                         </thead>
-                        <tr style="text-align: left">
+                    </table>
+                    <table>
                             <td COLSPAN="2"><b>THÔNG TIN</b></td>
                         </tr>
 
@@ -25,6 +28,10 @@
                             <td>Tiểu sử</td>
                             <td>{{$singer->story}}</td>
                         </tr>
+                        </tbody>
+
+                    </table>
+                    <table>
                         <tr style="text-align: left">
                             <td COLSPAN="2"><b>DANH SÁCH BÀI HÁT</b></td>
                         </tr>
@@ -34,12 +41,15 @@
                         </tr>
                         @foreach($singer->songs as $key => $song)
                             <tr>
-                                <td>{{$key+1}}</td>
+                                <td><img src="{{asset('/storage/public/images/'.$song->image)}}"></td>
                                 <td style="text-align: left"><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+                <div class="comment">
+                    @include('includes.commentfb', ['commentItem' => 'singer-'.$singer->id])
                 </div>
             </div>
             @include('pages.newsong')

@@ -26,6 +26,19 @@ class SingerValidate extends FormRequest
         return [
             'name' => 'required',
             'dob' => 'required',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên ca sỹ',
+            'dob.required' => 'Bạn chưa chọn ngày sinh của ca sỹ',
+            'image.image' => 'Không phải file ảnh',
+            'image.mimes' => 'Định dạng ảnh phải là :jpeg,png,jpg,gif,svg',
+            'image.max' => 'Dung lượng ảnh không quá 2M',
         ];
     }
 }

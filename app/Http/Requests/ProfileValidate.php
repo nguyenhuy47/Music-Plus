@@ -24,7 +24,19 @@ class ProfileValidate extends FormRequest
     public function rules()
     {
         return [
+            'name' => 'required|min:3|max:30',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Bạn chưa nhập tên người dùng',
+            'name.min' => 'Tên người dùng có tối thiểu 3 kí tự',
+            'name.max' => 'Tên người dùng có tối đa 30 kí tự',
+            'avatar.image' => 'Ảnh đại diện phải là một ảnh',
+            'avatar.mimes' => 'Ảnh đại diện phải là :jpeg,png,jpg,gif,svg',
         ];
     }
 }

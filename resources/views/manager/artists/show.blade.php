@@ -1,32 +1,38 @@
-@extends('pages.index')
+@extends('layouts.master')
 @section('content')
-    <div  class="container pt-5">
+    <div class="container pt-5">
         <div class="row">
             <div class="col-md-9">
-                <div class="card" style="width: 18rem;">
-                    <div class="card-header">
-                        Featured
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">{{$artist->name}}</li>
-                        <li class="list-group-item">{{$artist->dob}}</li>
-                        <li class="list-group-item">{{$artist->story}}</li>
-                    </ul>
-                    <td><a href="{{route('artists.edit', $artist->id)}}">Thay đổi hông tin nhạc sĩ</a></td>
-
-                </div>
                 <table class="table">
-                    <thead>
+                    <thead class="thead-light">
                     <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Ten bài hát</th>
-                        <th scope="col">ten ca sĩ</th>
-                    </tr>
+                        <th colspan="3" style="text-align: center"><b>{{strtoupper($artist->name) }}</b></th>
                     </thead>
+                    <td colspan="3"><b>THÔNG TIN</b>
+                        <a class="btn btn-primary float-right" href="{{route('artists.edit', $artist->id)}}">CHỈNH SỬA</a>
+                    </td>
+                    </tr>
                     <tbody>
+                    <tr>
+                        <td>Ngày sinh</td>
+                        <td colspan="3">{{$artist->dob}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tiểu sử</td>
+                        <td>{{$artist->story}}</td>
+                    </tr>
+
+                    <tr style="text-align: left">
+                        <td colspan="3"><b>DANH SÁCH BÀI HÁT</b></td>
+                    </tr>
+                    <tr>
+                        <td>#</td>
+                        <td>TÊN BÀI HÁT</td>
+                        <td>TÊN CA SĨ</td>
+                    </tr>
                     @foreach($artist->songs as $key => $song)
                         <tr>
-                            <th scope="row">{{$key+1}}</th>
+                            <td>{{$key+1}}</td>
                             <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a></td>
                             <td>
                                 @foreach($song->singers as $singer)
@@ -37,17 +43,7 @@
                     @endforeach
                     </tbody>
                 </table>
-
             </div>
-            @include('pages.newsong')
-        </div>
-        <div class="row">
-            @include('pages.album')
-            @include('pages.topic')
-        </div>
-        <div class="row">
-            @include('pages.mv')
-            @include('pages.media')
         </div>
     </div>
 @endsection

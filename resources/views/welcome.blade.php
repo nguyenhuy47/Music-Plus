@@ -1,113 +1,49 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Laravel</title>
-
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-    <!-- Styles -->
-    <style>
-        html, body {
-            background-color: #fff;
-            color: #636b6f;
-            font-family: 'Nunito', sans-serif;
-            font-weight: 200;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .full-height {
-            height: 100vh;
-        }
-
-        .flex-center {
-            align-items: center;
-            display: flex;
-            justify-content: center;
-        }
-
-        .position-ref {
-            position: relative;
-        }
-
-        .top-right {
-            position: absolute;
-            right: 10px;
-            top: 18px;
-        }
-
-        .content {
-            text-align: center;
-        }
-
-        .title {
-            font-size: 84px;
-        }
-
-        .links > a {
-            color: #636b6f;
-            padding: 0 25px;
-            font-size: 13px;
-            font-weight: 600;
-            letter-spacing: .1rem;
-            text-decoration: none;
-            text-transform: uppercase;
-        }
-
-        .m-b-md {
-            margin-bottom: 30px;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="{{asset('css/player.css')}}">
 </head>
 <body>
-<div class="flex-center position-ref full-height">
-    @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-                <a href="{{ url('/home') }}">Home</a>
-            @else
-                <a href="{{ route('login') }}">Login</a>
-
-                @if (Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
-                @endif
-            @endauth
+<div class="col-md-12">
+    <audio class="audio" preload="none"></audio>
+    <div class="player paused">
+        <div id="project-container">
+            <div id="overlay"></div>
+            <div id="content">
+                <h2 class="title">Throne</h2>
+                <h3>Bring Me The Horizon</h3>
+                <div class="time">
+                    <span class="current-time">0:00</span>/
+                    <span class="duration">0:00</span>
+                </div>
+                <div class="process">
+                    <input class="process-bar" type="range" step="0.1" min="0">
+                </div>
+                <div id="controls">
+                    <div class="button loop-btn"><i class="fa fa-refresh" aria-hidden="true"></i></div>
+                    <div class="button prev-btn"><i class="fa fa-step-backward" aria-hidden="true"></i>
+                    </div>
+                    <div class="button"><i class="fa fa-play play-btn fa-fw" aria-hidden="true"></i>
+                    </div>
+                    <div class="button next-btn"><i class="fa fa-step-forward" aria-hidden="true"></i>
+                    </div>
+                    <div class="button random-btn"><i class="fa fa-random" aria-hidden="true"></i></div>
+                    <div class="button"><i class="fa fa-volume-up mute-btn" aria-hidden="true"></i>
+                    </div>
+                    <div class="button"><input class="volume-bar" type="range" step="0.1" min="0"
+                                               max="1"></div>
+                </div>
+            </div>
         </div>
-    @endif
-
-    <div class="content">
-        <div class="title m-b-md">
-            Laravel
-        </div>
-
-        <div class="links">
-            <a href="https://laravel.com/docs">Docs</a>
-            <a href="https://laracasts.com">Laracasts</a>
-            <a href="https://laravel-news.com">News</a>
-            <a href="https://blog.laravel.com">Blog</a>
-            <a href="https://nova.laravel.com">Nova</a>
-            <a href="https://forge.laravel.com">Forge</a>
-            <a href="https://vapor.laravel.com">Vapor</a>
-            <a href="https://github.com/laravel/laravel">GitHub</a>
-        </div>
-
-        <div>
-            <table border="1px">
-                <tr>
-                    <th>Ten bai hat  ten ca si</th>
-                </tr>
-                @foreach($songs as $key => $song)
-                    <tr >
-                        <td><a href="{{route('songs.play', $song->id)}}">{{$song->name}}</a>
-                            <a href="#">{{$song->singer->name}}</a></td>
-                    </tr>
-                    @endforeach
-            </table>
-        </div>
+    </div>
+    <div id="plwrap">
+        <ul id="plList"></ul>
     </div>
 </div>
 </body>
