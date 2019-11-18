@@ -33,8 +33,11 @@
                     <div class="form-group">
                         <label>Ca sĩ</label>
                         <input type="text" id="list_singer" class="form-control" name="singer_ids"
-                               placeholder="Tên ca sĩ"
-                               value="">
+                               value="
+{{--                                        @foreach($song->singers as $singer)--}}
+{{--                                   {{$singer->name}}--}}
+{{--                                   @endforeach--}}
+                                   " >
                     </div>
                     <div class="form-group">
                         <label>Nhạc sĩ</label>
@@ -59,7 +62,7 @@
                     </div>
                     <div class="form-group">
                         <label>Lời bài hát</label>
-                        <textarea class="form-control" name="lyric" rows="4">{{$song->lyric}}</textarea>
+                        <textarea class="form-control" name="editor" rows="4">{{$song->lyric}}</textarea>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Lưu</button>
@@ -123,8 +126,12 @@
     </div>
 @endsection
 @section('script')
+    <script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
     <script src="{{asset('js/jquery.tokeninput.js')}}"></script>
+    <script>
+        CKEDITOR.replace( 'editor' );
+    </script>
     <script>
         $(document).ready(function () {
             $("#list_singer").tokenInput("{{asset('api/singers?q=singer')}}", {

@@ -49,6 +49,7 @@ class IndexController extends Controller
          * playlist-nghe-nhieu
          */
         $popularPlaylists = Playlist::all()->sortByDesc('listen_count')->take(8);
+
         $popularPlaylistsArr = [];
         foreach ($popularPlaylists as $popularPlaylist) {
             array_push($popularPlaylistsArr, $popularPlaylist);

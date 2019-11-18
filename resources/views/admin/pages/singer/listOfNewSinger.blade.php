@@ -2,7 +2,7 @@
     <div class="row mt-5">
         <div class="col-6">
                         <span class="float-left font-weight-bold ml-5">
-                            <h3>Singers</h3>
+                            <h3>Ca Sĩ</h3>
                         </span>
         </div>
     </div>
@@ -12,11 +12,12 @@
                 <div class="row ml-5 mr-5">
                     @foreach($singers[0] as $singer)
                     <div class="col-3">
+                        <a href="{{route('singers.show', $singer->id)}}">
                         <img
                             src="{{asset('/storage/images/singer/'.$singer->image)}}"
                             height="150" width="150"
                             class="border rounded-circle">
-                        <p class="mt-1">{{$singer->name}}</p>
+                        <p class="mt-1">{{$singer->name}}</p></a>
                     </div>
                     @endforeach
                 </div>
@@ -25,11 +26,12 @@
                 <div class="row ml-5 mr-5">
                     @foreach($singers[1] as $singer)
                         <div class="col-3">
+                            <a href="{{route('singers.show', $singer->id)}}">
                             <img
                                 src="{{asset('/storage/images/singer/'.$singer->image)}}"
                                 height="150" width="150"
                                 class="border rounded-circle">
-                            <p class="mt-1">{{$singer->name}}</p>
+                            <p class="mt-1">{{$singer->name}}</p></a>
                         </div>
                     @endforeach
                 </div>

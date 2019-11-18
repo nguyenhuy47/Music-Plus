@@ -15,7 +15,7 @@ class SingerController extends Controller
 {
     public function index()
     {
-        $singers = Singer::where('id', '>', 0)->orderBy('created_at', 'Desc')->paginate(8);
+        $singers = Singer::where('id', '>', 0)->orderBy('created_at', 'Desc')->paginate(12);
         return view('manager.singers.list', compact('singers'));
     }
 
