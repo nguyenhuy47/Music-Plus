@@ -27,7 +27,7 @@
                 <td> @foreach($song->singers as $singer)  {{$singer->name.""}}<br>@endforeach</td>
                 <td> @foreach($song->artists as $artist)  {{$artist->name.""}}<br>@endforeach</td>
                 <td>
-                    <a type="button" class="btn btn-default" href="{{ route('songs.edit', $song->id) }}"
+                    <a type="button" class="btn btn-primary" href="{{ route('songs.edit', $song->id) }}"
                        title="Sửa"><span class="fa fa-edit"></span></a>
                     <a type="button" class="btn btn-danger" title="Xóa" href="{{route('songs.destroy', $song->id)}}"
                        onclick="return confirm('Bạn có chắc chắn muốn xóa')"><span class="fa fa-trash"></span></a>

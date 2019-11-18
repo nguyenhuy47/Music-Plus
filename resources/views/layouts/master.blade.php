@@ -14,7 +14,7 @@
         <div>
             @yield('content')
         </div>
-        @include('layouts.admin.footer')
+{{--        @include('layouts.admin.footer')--}}
     </div>
 </div>
 @include('layouts.admin.link-script')
